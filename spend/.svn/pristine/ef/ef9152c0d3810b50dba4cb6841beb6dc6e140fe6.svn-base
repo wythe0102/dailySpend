@@ -1,0 +1,107 @@
+package spend.model;
+
+import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+/**
+ * DailySpend entity. @author MyEclipse Persistence Tools
+ */
+@Entity
+@Table(name = "daily_spend", catalog = "spend_test")
+public class DailySpend implements java.io.Serializable {
+
+	// Fields
+
+	private Long spendDetailId;
+	private Type type;
+	private Users users;
+	private Double amount;
+	private String demo;
+	private Date date;
+
+	// Constructors
+
+	/** default constructor */
+	public DailySpend() {
+	}
+
+	/** full constructor */
+	public DailySpend(Type type, Users users, Double amount, String demo, Date date) {
+		this.type = type;
+		this.users = users;
+		this.amount = amount;
+		this.demo = demo;
+		this.date = date;
+	}
+
+	// Property accessors
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "spendDetailId", unique = true, nullable = false)
+	public Long getSpendDetailId() {
+		return this.spendDetailId;
+	}
+
+	public void setSpendDetailId(Long spendDetailId) {
+		this.spendDetailId = spendDetailId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "typeId")
+	public Type getType() {
+		return this.type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "userId")
+	public Users getUsers() {
+		return this.users;
+	}
+
+	public void setUsers(Users users) {
+		this.users = users;
+	}
+
+	@Column(name = "amount", precision = 18)
+	public Double getAmount() {
+		return this.amount;
+	}
+
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
+
+	@Column(name = "demo", length = 20000)
+	public String getDemo() {
+		return this.demo;
+	}
+
+	public void setDemo(String demo) {
+		this.demo = demo;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "date", length = 10)
+	public Date getDate() {
+		return this.date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+}

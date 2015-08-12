@@ -1,0 +1,19 @@
+@charset "utf-8";
+/* CSS Document */
+
+.itemMust{
+	color:#FF0000
+	}
+input{
+	border:1px #95B8E7 solid;
+	}
+textarea{
+	border:1px #95B8E7 solid;
+	}
+form{
+	margin:10px;
+	padding:10px;
+	}
+.textStyle{
+	width:98%;
+	}

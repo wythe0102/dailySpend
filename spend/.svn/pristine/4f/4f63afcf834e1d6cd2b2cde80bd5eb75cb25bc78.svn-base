@@ -1,0 +1,10 @@
+package spend.service;
+
+import spend.pageModel.MType;
+import spend.util.DataGrid;
+
+public interface TypeServiceI {
+
+	public MType addType(MType mType);
+	public DataGrid treegrid(MType mtype);
+}
