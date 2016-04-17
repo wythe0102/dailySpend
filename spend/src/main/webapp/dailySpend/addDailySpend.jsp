@@ -103,6 +103,10 @@ $(function(){
 		},
 		success : function(result) {
 			parent.$.messager.progress("close");
+			
+			result = result.replace(/<audio.+audio>/, "");//升级chrome后，会在返回的结果后加上<audio controls="controls" style="display: none;"></audio>
+			
+			console.log(result);
 			result = $.parseJSON(result);
 			if (result.success) {
 				parent.$.modalDialog.openner_datagrid.datagrid("reload",{
