@@ -87,7 +87,7 @@ $(function(){
 				}
 				parent.$.modalDialog({
 					title : "修改类别",
-					width : 500,
+					width : 550,
 					height : 200,
 					href : "${pageContext.request.contextPath}/dailySpend/editDailySpend.jsp",
 					buttons : [ {
@@ -181,7 +181,7 @@ $(function(){
 function adddailySpend(){
 	parent.$.modalDialog({
 		title : "添加日常消费",
-		width : 1100,
+		width : 1150,
 		height : 540,
 		href : "${pageContext.request.contextPath}/dailySpend/addDailySpend.jsp",
 		buttons : [ {

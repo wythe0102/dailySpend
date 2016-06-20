@@ -32,6 +32,9 @@ $(function(){
 			{
 				$(this).combobox("select","1");
 			}
+			if(i>=6 && i<=8){
+				$(this).combobox("select","3");
+			}
 		});
 	    //设置类型
 	    $("input[name='typeIds']").each(function(i){
@@ -60,6 +63,9 @@ $(function(){
 	    		case 3: $(this).combotree("setValue", 22);break;//早饭
 	    		case 4: $(this).combotree("setValue", 23);break;//午饭
 	    		case 5: $(this).combotree("setValue", 24);break;//晚饭
+	    		case 6: $(this).combotree("setValue", 22);break;//早饭
+	    		case 7: $(this).combotree("setValue", 23);break;//午饭
+	    		case 8: $(this).combotree("setValue", 24);break;//晚饭
 	    		default:
 	    	}
 	    });

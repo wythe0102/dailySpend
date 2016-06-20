@@ -71,8 +71,8 @@ $(function(){
 		      <td><input name="amount" id="dailySpend_editDailySpend_amount" class="easyui-validatebox" data-options="required:true" /></td>
 	        </tr>
 		    <tr>
-		      <td noWrap>&nbsp;备注：</td>
-		      <td colspan="3"><input name="demo" id="dailySpend_editDailySpend_demo" size="55" /></td>
+		      <td noWrap>备注：</td>
+		      <td colspan="3"><input name="demo" id="dailySpend_editDailySpend_demo" size="54" /></td>
 	        </tr>
 	      </table>
 		</form>

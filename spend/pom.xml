@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>spend</groupId>
     <artifactId>spend</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Spend</name>
     <url>http://maven.apache.org</url>
