@@ -215,3 +215,27 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+# Package Files #
+*.jar
+*.war
+*.ear
+ 
+# ignore Maven generated target folders
+target
+ 
+# .gitignore for maven 
+target/
+*.releaseBackup
+
+# web application files
+#/web-app/WEB-INF
+
+# IDE support files
+/.classpath
+/.launch
+/.project
+/.settings
+/*.launch
+/*.tmproj
+/ivy*

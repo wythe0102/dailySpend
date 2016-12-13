@@ -1,14 +1,11 @@
 package spend.action;
 
+import com.opensymphony.xwork2.ModelDriven;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import spend.pageModel.MUser;
 import spend.service.UserServiceI;
-
-import com.opensymphony.xwork2.ModelDriven;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 @Namespace(value="/")
 @Action(value="userAction")

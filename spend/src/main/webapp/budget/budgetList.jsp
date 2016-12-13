@@ -85,7 +85,7 @@ $(function(){
 				}
 				parent.$.modalDialog({
 					title : "修改类别",
-					width : 550,
+					width : 600,
 					height : 180,
 					href : "${pageContext.request.contextPath}/budget/editBudget.jsp",
 					buttons : [ {
@@ -157,8 +157,8 @@ $(function(){
 });
 function addBudget(){
 	parent.$.modalDialog({
-		title : "添加日常消费",
-		width : 550,
+		title : "添加预算",
+		width : 600,
 		height : 180,
 		href : "${pageContext.request.contextPath}/budget/addBudget.jsp",
 		buttons : [ {

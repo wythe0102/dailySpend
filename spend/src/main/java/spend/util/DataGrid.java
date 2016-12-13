@@ -3,8 +3,6 @@ package spend.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
 public class DataGrid {
 
 	private Long total = 0L;
