@@ -1,10 +1,12 @@
 #################
-## Eclipse
+## IDE
 #################
 
 *.pydevproject
 .project
 .metadata
+.idea
+*.class
 bin/
 tmp/
 *.tmp
@@ -229,7 +231,7 @@ target/
 *.releaseBackup
 
 # web application files
-#/web-app/WEB-INF
+/spend/src/main/webapp/WEB-INF/classes
 
 # IDE support files
 /.classpath
@@ -239,3 +241,4 @@ target/
 /*.launch
 /*.tmproj
 /ivy*
+/spend/.idea

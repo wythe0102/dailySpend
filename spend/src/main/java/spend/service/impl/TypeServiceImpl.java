@@ -28,9 +28,7 @@ public class TypeServiceImpl implements TypeServiceI {
 	private BaseDaoI<Type> typeDao;
 	@Override
 	public DataGrid treegrid(MType mtype) {
-		// TODO Auto-generated method stub
-		
-		String sql="select typeId,name,code,addDate,CASE parentId WHEN 1 THEN '' ELSE parentId END as _parentId,'open' as state from type where typeId <> 1";
+		String sql="select typeId,name,code,sequence,addDate,CASE parentId WHEN 1 THEN '' ELSE parentId END as _parentId,'open' as state from type where typeId <> 1 order by sequence";
 		String totalSql="select count(*) from type where typeId <> 1";
 		
 		SQLQuery sqlQuery=sessionFactory.getCurrentSession().createSQLQuery(sql);
@@ -57,7 +55,6 @@ public class TypeServiceImpl implements TypeServiceI {
 
 	@Override
 	public Result addType(MType mType) {
-		// TODO Auto-generated method stub
 		Type type=new Type();
 		
 		BeanUtils.copyProperties(mType, type);
@@ -75,9 +72,8 @@ public class TypeServiceImpl implements TypeServiceI {
 
 	@Override
 	public List<TreeNode> tree() {
-		// TODO Auto-generated method stub
 		List<TreeNode> treeNodes=new ArrayList<TreeNode>();
-		String hql="from Type t";
+		String hql="from Type t where t.typeId <> 1 order by sequence";
 		List<Type> types=typeDao.find(hql);
 		
 		for (Type type : types) {
@@ -96,13 +92,11 @@ public class TypeServiceImpl implements TypeServiceI {
 
 	@Override
 	public void deleteType(String typeId) {
-		// TODO Auto-generated method stub
 		typeDao.delete(typeDao.get(Type.class, Long.parseLong(typeId)));
 	}
 
 	@Override
 	public Result editType(MType mType) {
-		// TODO Auto-generated method stub
 		Type tempType=typeDao.get(Type.class, mType.getTypeId());
 		Result result=new Result();
 		if (tempType!=null) {

@@ -1,41 +1,15 @@
 package spend.pageModel;
 
+import spend.model.Type;
+
 import java.sql.Timestamp;
 
-public class MType {
+public class MType extends Type {
 	
-	private Long typeId;
-	private String name;
-	private String code;
-	private Timestamp addDate;
 	private String _parentId;
 	private String iconCls;
 	private String state;
-	
-	public Long getTypeId() {
-		return typeId;
-	}
-	public void setTypeId(Long typeId) {
-		this.typeId = typeId;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getCode() {
-		return code;
-	}
-	public void setCode(String code) {
-		this.code = code;
-	}
-	public Timestamp getAddDate() {
-		return addDate;
-	}
-	public void setAddDate(Timestamp addDate) {
-		this.addDate = addDate;
-	}
+
 	public String get_parentId() {
 		return _parentId;
 	}

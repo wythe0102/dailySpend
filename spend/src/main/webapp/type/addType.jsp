@@ -49,6 +49,10 @@ $(function(){
 		      <td noWrap>类别编码：</td>
 		      <td><input type="text" name="code" id="type_addType_code" data-options="required:true"/></td>
 	        </tr>
+			  <tr>
+				  <td noWrap>显示顺序：</td>
+				  <td><input type="text" name="sequence" id="type_addType_order"/></td>
+			  </tr>
 		    <tr>
 		      <td noWrap><span class="itemMust">*</span>上级类别</td>
 		      <td><input name="_parentId" id="type_addType_parent" value="1"></td>

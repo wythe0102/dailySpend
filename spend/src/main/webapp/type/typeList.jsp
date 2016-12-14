@@ -9,7 +9,7 @@ $(function(){
 	    treeField:"name",
 	    loadMsg:"加载中。。。。",
 		rownumbers:true,
-		sortName:"typeId",
+		sortName:"sequence",
 		sortOrder:"asc",
 		fit:true,
 		remoteSort:false,
@@ -18,6 +18,7 @@ $(function(){
 			{title:"类别名称",field:"typeId",hidden:true},
 	        {title:"类别名称",field:"name",width:100},   
 	        {title:"类别编码",field:"code",width:100},   
+	        {title:"显示顺序",field:"sequence",width:100},
 	        {title:"添加时间",field:"addDate",width:100},
 	        {title:"_parentId",field:"_parentId",hidden:true}
 	    ]],
@@ -47,7 +48,7 @@ $(function(){
 				}
 				parent.$.modalDialog({
 					title : "修改类别",
-					width : 300,
+					width : 350,
 					height : 200,
 					href : "${pageContext.request.contextPath}/type/editType.jsp",
 					buttons : [ {
@@ -66,6 +67,7 @@ $(function(){
 							name:selectedRows[0].name,
 							typeId:selectedRows[0].typeId,
 							code:selectedRows[0].code,
+							sequence:selectedRows[0].sequence,
 							_parentId:selectedRows[0]._parentId
 						});
 					}
@@ -105,7 +107,7 @@ $(function(){
 function addType(){
 	parent.$.modalDialog({
 		title : "添加类别",
-		width : 300,
+		width : 350,
 		height : 200,
 		href : "${pageContext.request.contextPath}/type/addType.jsp",
 		buttons : [ {
