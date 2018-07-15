@@ -152,6 +152,13 @@ $(function(){
 					}
 				});
 			}
+		},"-",
+		{
+			text:"同步",
+			iconCls:"icon-reload",
+			handler:function(){
+				sync();
+			}
 		},"-"
 	]
 	});  
@@ -178,6 +185,17 @@ $(function(){
 			$("#dailySpend_dailySpendList_endDate").val("");
 	});
 });
+function sync() {
+    $.get("${pageContext.request.contextPath}/dailySpendAction!sync.action",function(result){
+        $.messager.show({
+            title:"消息",
+            msg:"同步成功",
+            timeout:3000,
+            showType:"fade"
+        });
+        $.messager.progress("close");
+    },"json");
+}
 function adddailySpend(){
 	parent.$.modalDialog({
 		title : "添加日常消费",

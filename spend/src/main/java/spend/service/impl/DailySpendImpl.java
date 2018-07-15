@@ -1,5 +1,6 @@
 package spend.service.impl;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -8,7 +9,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import okhttp3.*;
 import org.apache.log4j.Logger;
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
@@ -29,6 +35,7 @@ import spend.util.LineChartsData;
 import spend.util.Result;
 @Service(value="dailySpendService")
 public class DailySpendImpl implements DailySpendI {
+	private static final String SYNC_DOMAIN = "52tool.net";
 	private static final Logger logger=Logger.getLogger(DailySpendImpl.class);
 	private BaseDaoI<DailySpend> dailySpendDao;
 	private BaseDaoI<Type> typeDao;
@@ -329,6 +336,69 @@ public class DailySpendImpl implements DailySpendI {
 		lineCharts.getSeries().add(lineChartsData);
 		
 		return lineCharts;
+	}
+
+	@Override
+	public List<Long> sync() {
+		OkHttpClient httpClient = new OkHttpClient();
+		Request request = new Request.Builder()
+				.url("http://"+ SYNC_DOMAIN +"/rest/dailySpend/sync")
+				.build();
+		List<Long> dailySpendIds = new ArrayList<Long>();
+		try {
+			Response response = httpClient.newCall(request).execute();
+			String result = response.body().string();
+			JSONArray syncJson = JSONArray.parseArray(result);
+			MDailySpend mDailySpend = new MDailySpend();
+			mDailySpend.setAmounts(new String[syncJson.size()]);
+			mDailySpend.setTypeIds(new String[syncJson.size()]);
+			mDailySpend.setUserIds(new String[syncJson.size()]);
+			mDailySpend.setDemos(new String[syncJson.size()]);
+			mDailySpend.setDates(new String[syncJson.size()]);
+			for (int i=0;i<syncJson.size();i++){
+				JSONObject syncObject = syncJson.getJSONObject(i);
+				mDailySpend.getDates()[i] = syncObject.getString("date");
+				mDailySpend.getUserIds()[i] = String.valueOf(syncObject.getIntValue("userId"));
+				mDailySpend.getTypeIds()[i] = String.valueOf(syncObject.getIntValue("typeId"));
+				mDailySpend.getAmounts()[i] = String.valueOf(syncObject.getFloatValue("amount"));
+				mDailySpend.getDemos()[i] = syncObject.getString("demo");
+				dailySpendIds.add(syncObject.getLong("spendDetailId"));
+			}
+			addDailySpend(mDailySpend);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (dailySpendIds.size() > 0){
+				confirmSync(dailySpendIds);
+			}
+		}
+		return dailySpendIds;
+	}
+
+	private String confirmSync(List<Long> dailySpendIds){
+		OkHttpClient okHttpClient  = new OkHttpClient.Builder()
+				.connectTimeout(10, TimeUnit.SECONDS)
+				.writeTimeout(10,TimeUnit.SECONDS)
+				.readTimeout(20, TimeUnit.SECONDS)
+				.build();
+
+		String json = JSONArray.toJSONString(dailySpendIds);
+
+		RequestBody requestBody = FormBody.create(MediaType.parse("application/json; charset=utf-8")
+				, json);
+
+		Request request = new Request.Builder()
+				.url("http://"+ SYNC_DOMAIN +"/rest/dailySpend/confirmSync")
+				.post(requestBody)
+				.build();
+
+		try {
+			Response response = okHttpClient.newCall(request).execute();
+			return response.body().toString();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 
 }

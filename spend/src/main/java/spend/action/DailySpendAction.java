@@ -43,7 +43,11 @@ public class DailySpendAction extends BaseAction implements ModelDriven<MDailySp
 	public void delete(){
 		super.writeJson(dailySpendService.deleteDailySpend(mDailySpend));
 	}
-	
+
+	public void sync(){
+		super.writeJson(dailySpendService.sync());
+	}
+
 	@Override
 	public MDailySpend getModel() {
 		// TODO Auto-generated method stub

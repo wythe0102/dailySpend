@@ -20,27 +20,27 @@
 			<url>http://code.alibabatech.com/mvn/snapshots/</url>
 			<layout>default</layout>
 		</repository>
-		<repository>  
-		  <id>jboss</id>  
-		  <name>JBoss Repository</name>  
-		  <url>http://repository.jboss.com/maven2/</url>  
-		  <releases>  
-		    <enabled>true</enabled>  
-		  </releases>  
-		  <snapshots>  
-		    <enabled>false</enabled>  
-		  </snapshots>  
+		<repository>
+		  <id>jboss</id>
+		  <name>JBoss Repository</name>
+		  <url>http://repository.jboss.com/maven2/</url>
+		  <releases>
+		    <enabled>true</enabled>
+		  </releases>
+		  <snapshots>
+		    <enabled>false</enabled>
+		  </snapshots>
 		</repository>
-		<repository>    
-	       <id>oschinaRepository</id>    
-	       <name>local private nexus</name>    
-	       <url>http://maven.oschina.net/content/groups/public/</url>    
-	       <releases>    
-	           <enabled>true</enabled>    
-	       </releases>    
-	        <snapshots>    
-	            <enabled>true</enabled>    
-	        </snapshots>    
+		<repository>
+	       <id>oschinaRepository</id>
+	       <name>local private nexus</name>
+	       <url>http://maven.oschina.net/content/groups/public/</url>
+	       <releases>
+	           <enabled>true</enabled>
+	       </releases>
+	        <snapshots>
+	            <enabled>true</enabled>
+	        </snapshots>
 	    </repository>
 	    <repository>
 			<id>maven</id>
@@ -242,6 +242,16 @@
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-scratchpad</artifactId>
             <version>3.10-beta1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.3.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>3.6.0</version>
         </dependency>
     </dependencies>
     <build>

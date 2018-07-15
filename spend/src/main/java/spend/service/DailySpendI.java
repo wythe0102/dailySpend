@@ -5,6 +5,8 @@ import spend.util.DataGrid;
 import spend.util.LineCharts;
 import spend.util.Result;
 
+import java.util.List;
+
 public interface DailySpendI {
 
 	public DataGrid dataGrid(MDailySpend mDailySpend);
@@ -14,4 +16,5 @@ public interface DailySpendI {
 	public Result deleteDailySpend(MDailySpend mDailySpend);
 	public LineCharts dataLineCharts(MDailySpend mDailySpend);
 	public LineCharts dataLineChartsYear(MDailySpend mDailySpend);
+	public List<Long> sync();
 }

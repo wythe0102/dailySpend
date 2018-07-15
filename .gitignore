@@ -242,3 +242,6 @@ target/
 /*.tmproj
 /ivy*
 /spend/.idea
+*.class
+*.class
+*.class
