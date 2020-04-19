@@ -109,7 +109,16 @@ function yearLineChart(aa,bb){
 	    <option value="2019">2019</option>
 	    <option value="2020">2020</option>
 	    <option value="2021">2021</option>
-	</select>  
+		<option value="2022">2022</option>
+		<option value="2023">2023</option>
+		<option value="2024">2024</option>
+		<option value="2025">2025</option>
+		<option value="2026">2026</option>
+		<option value="2027">2027</option>
+		<option value="2028">2028</option>
+		<option value="2029">2029</option>
+		<option value="2030">2030</option>
+	</select>
 </div>
 </br>
 <div id="report_yearReport_container" style="min-width: 400px; height: 450px; margin: 0 auto"></div>
