@@ -388,7 +388,7 @@ public class DailySpendImpl implements DailySpendI {
 				, json);
 
 		Request request = new Request.Builder()
-				.url("http://"+ SYNC_DOMAIN +"/rest/dailySpend/confirmSync")
+				.url("https://"+ SYNC_DOMAIN +"/rest/dailySpend/confirmSync")
 				.post(requestBody)
 				.build();
 

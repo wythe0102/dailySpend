@@ -22,7 +22,7 @@ $(function(){
 	    loadMsg:"加载中。。。。",
 		rownumbers:true,
 		sortName:"date",
-		sortOrder:"asc",
+		sortOrder:"desc",
 		fit:true,
 		remoteSort:true,
 	    fitColumns:true,
