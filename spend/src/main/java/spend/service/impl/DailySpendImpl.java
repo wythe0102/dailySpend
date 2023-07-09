@@ -5,10 +5,7 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import com.alibaba.fastjson.JSON;
@@ -276,16 +273,13 @@ public class DailySpendImpl implements DailySpendI {
 			wherehql+=" and ds.date >= '"+mDailySpend.getStartDate()+"'";
 		}
 		if (mDailySpend.getEndDate()!=null && !mDailySpend.getEndDate().equals("")) {	
-			wherehql+=" and ds.date <= '"+mDailySpend.getEndDate()+"'";
+			wherehql+=" and ds.date < '"+mDailySpend.getEndDate()+"'";
 		}
 		
 		String groupHql=" GROUP BY ds.date";
 		
-		String orderHql="";
+		String orderHql=" order by ds.date";
 
-		if (mDailySpend.getSort()!=null && !mDailySpend.getSort().equals("")) {
-			orderHql+=" order by ds.date";
-		}
 		if (mDailySpend.getOrder()!=null && !mDailySpend.getOrder().equals("")) {
 			orderHql+=" asc";
 		}
