@@ -314,17 +314,28 @@ const handleDelete = async (row) => {
 const handleSubmit = async () => {
   try {
     await formRef.value.validate()
+    
+    // 处理表单数据格式
+    const submitData = {
+      ...form,
+      date: form.date instanceof Date ? form.date.toISOString().split('T')[0] : form.date,
+      // 确保typeId是数字类型，处理级联选择器可能返回数组的情况
+      typeId: Array.isArray(form.typeId) ? form.typeId[form.typeId.length - 1] : form.typeId,
+      userId: Number(form.userId)
+    }
+    
     if (dialogType.value === 'add') {
-      await dailySpendApi.create(form)
+      await dailySpendApi.create(submitData)
       ElMessage.success('添加成功')
     } else {
-      await dailySpendApi.update(form.spendDetailId, form)
+      await dailySpendApi.update(form.spendDetailId, submitData)
       ElMessage.success('更新成功')
     }
     dialogVisible.value = false
     loadData()
   } catch (error) {
-    ElMessage.error('操作失败')
+    console.error('操作失败:', error)
+    ElMessage.error('操作失败: ' + (error.response?.data?.message || error.message))
   }
 }
 
