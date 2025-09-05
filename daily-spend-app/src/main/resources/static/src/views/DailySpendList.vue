@@ -19,6 +19,22 @@
             @change="handleSearch"
           />
         </el-form-item>
+        <el-form-item label="消费人员">
+          <el-select
+            v-model="searchForm.userId"
+            placeholder="选择消费人员"
+            clearable
+            @change="handleSearch"
+            style="width: 120px"
+          >
+            <el-option
+              v-for="user in users"
+              :key="user.userId"
+              :label="user.name"
+              :value="user.userId"
+            />
+          </el-select>
+        </el-form-item>
         <el-form-item label="类别" prop="typeIds">
           <el-cascader
           ref="cascaderRef"
@@ -155,7 +171,7 @@ const cascaderRef = ref()
 
 const searchForm = reactive({
   typeIds: [],
-  userId: 1 // 默认用户ID
+  userId: null // 默认为空，显示所有用户数据
 })
 
 const dateRange = ref([])
@@ -179,9 +195,13 @@ const rules = {
 const loadData = async () => {
   try {
     const params = {
-      userId: searchForm.userId,
       page: currentPage.value - 1,
       size: pageSize.value
+    }
+    
+    // 只在选择了具体用户时才添加userId参数
+    if (searchForm.userId) {
+      params.userId = searchForm.userId
     }
     
     // 处理日期范围
@@ -272,6 +292,7 @@ const handleSearch = () => {
 
 const handleReset = () => {
   searchForm.typeIds = []
+  searchForm.userId = null
   dateRange.value = []
   currentPage.value = 1
   loadData()

@@ -49,6 +49,30 @@ public class DailySpendService {
         return dailySpendRepository.findByUser_UserIdAndType_TypeIdInAndDateBetween(userId, typeIds, startDate, endDate, pageable);
     }
     
+    public Page<DailySpend> findAll(Pageable pageable) {
+        return dailySpendRepository.findAll(pageable);
+    }
+    
+    public Page<DailySpend> findByTypeId(Long typeId, Pageable pageable) {
+        return dailySpendRepository.findByType_TypeId(typeId, pageable);
+    }
+    
+    public Page<DailySpend> findByTypeIds(List<Long> typeIds, Pageable pageable) {
+        return dailySpendRepository.findByType_TypeIdIn(typeIds, pageable);
+    }
+    
+    public Page<DailySpend> findByDateBetween(LocalDate startDate, LocalDate endDate, Pageable pageable) {
+        return dailySpendRepository.findByDateBetween(startDate, endDate, pageable);
+    }
+    
+    public Page<DailySpend> findByTypeIdAndDateBetween(Long typeId, LocalDate startDate, LocalDate endDate, Pageable pageable) {
+        return dailySpendRepository.findByType_TypeIdAndDateBetween(typeId, startDate, endDate, pageable);
+    }
+    
+    public Page<DailySpend> findByTypeIdsAndDateBetween(List<Long> typeIds, LocalDate startDate, LocalDate endDate, Pageable pageable) {
+        return dailySpendRepository.findByType_TypeIdInAndDateBetween(typeIds, startDate, endDate, pageable);
+    }
+    
     public List<DailySpend> findByUserIdAndDateRange(Long userId, LocalDate startDate, LocalDate endDate) {
         return dailySpendRepository.findByUser_UserIdAndDateBetweenOrderByDateDesc(userId, startDate, endDate);
     }

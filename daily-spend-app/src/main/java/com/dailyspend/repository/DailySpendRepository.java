@@ -38,4 +38,16 @@ public interface DailySpendRepository extends JpaRepository<DailySpend, Long> {
     
     @Query("SELECT SUM(d.amount) FROM DailySpend d WHERE d.user.userId = :userId AND d.date BETWEEN :startDate AND :endDate")
     BigDecimal sumAmountByUserAndDateBetween(@Param("userId") Long userId, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+    
+    Page<DailySpend> findAll(Pageable pageable);
+    
+    Page<DailySpend> findByType_TypeId(Long typeId, Pageable pageable);
+    
+    Page<DailySpend> findByType_TypeIdIn(List<Long> typeIds, Pageable pageable);
+    
+    Page<DailySpend> findByDateBetween(LocalDate startDate, LocalDate endDate, Pageable pageable);
+    
+    Page<DailySpend> findByType_TypeIdAndDateBetween(Long typeId, LocalDate startDate, LocalDate endDate, Pageable pageable);
+    
+    Page<DailySpend> findByType_TypeIdInAndDateBetween(List<Long> typeIds, LocalDate startDate, LocalDate endDate, Pageable pageable);
 }

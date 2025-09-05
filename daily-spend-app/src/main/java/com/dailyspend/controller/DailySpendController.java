@@ -44,7 +44,7 @@ public class DailySpendController {
     
     @GetMapping("/page")
     public ResponseEntity<Page<DailySpend>> getDailySpendsByPage(
-            @RequestParam Long userId,
+            @RequestParam(required = false) Long userId,
             @RequestParam(required = false) Long typeId,
             @RequestParam(required = false) String typeIds,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
@@ -54,6 +54,36 @@ public class DailySpendController {
 
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "date"));
 
+        // 处理用户ID为空的情况（查询所有用户数据）
+        if (userId == null) {
+            if (startDate != null && endDate != null) {
+                if (typeIds != null && !typeIds.trim().isEmpty()) {
+                    List<Long> typeIdList = java.util.Arrays.stream(typeIds.split(","))
+                            .map(String::trim)
+                            .map(Long::parseLong)
+                            .collect(java.util.stream.Collectors.toList());
+                    return ResponseEntity.ok(dailySpendService.findByTypeIdsAndDateBetween(typeIdList, startDate, endDate, pageable));
+                } else if (typeId != null) {
+                    return ResponseEntity.ok(dailySpendService.findByTypeIdAndDateBetween(typeId, startDate, endDate, pageable));
+                } else {
+                    return ResponseEntity.ok(dailySpendService.findByDateBetween(startDate, endDate, pageable));
+                }
+            } else {
+                if (typeIds != null && !typeIds.trim().isEmpty()) {
+                    List<Long> typeIdList = java.util.Arrays.stream(typeIds.split(","))
+                            .map(String::trim)
+                            .map(Long::parseLong)
+                            .collect(java.util.stream.Collectors.toList());
+                    return ResponseEntity.ok(dailySpendService.findByTypeIds(typeIdList, pageable));
+                } else if (typeId != null) {
+                    return ResponseEntity.ok(dailySpendService.findByTypeId(typeId, pageable));
+                } else {
+                    return ResponseEntity.ok(dailySpendService.findAll(pageable));
+                }
+            }
+        }
+
+        // 原有逻辑：按用户ID查询
         if (startDate != null && endDate != null) {
             if (typeIds != null && !typeIds.trim().isEmpty()) {
                 List<Long> typeIdList = java.util.Arrays.stream(typeIds.split(","))
