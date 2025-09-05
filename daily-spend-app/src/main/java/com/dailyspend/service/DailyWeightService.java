@@ -38,6 +38,10 @@ public class DailyWeightService {
         return dailyWeightRepository.save(dailyWeight);
     }
     
+    public java.util.Optional<DailyWeight> findById(Long id) {
+        return dailyWeightRepository.findById(id);
+    }
+    
     public void deleteById(Long id) {
         dailyWeightRepository.deleteById(id);
     }

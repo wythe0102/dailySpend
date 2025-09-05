@@ -2,7 +2,9 @@ package com.dailyspend.controller;
 
 import com.dailyspend.dto.DailyWeightDTO;
 import com.dailyspend.entity.DailyWeight;
+import com.dailyspend.entity.User;
 import com.dailyspend.service.DailyWeightService;
+import com.dailyspend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import java.util.List;
 public class DailyWeightController {
     
     private final DailyWeightService dailyWeightService;
+    private final UserService userService;
     
     @GetMapping
     public List<DailyWeightDTO> getAll() {
@@ -38,14 +41,42 @@ public class DailyWeightController {
     }
     
     @PostMapping
-    public DailyWeight create(@RequestBody DailyWeight dailyWeight) {
-        return dailyWeightService.save(dailyWeight);
+    public DailyWeightDTO create(@RequestBody DailyWeightDTO dailyWeightDTO) {
+        DailyWeight dailyWeight = new DailyWeight();
+        dailyWeight.setWeightAmount(dailyWeightDTO.getWeightAmount());
+        dailyWeight.setTime(dailyWeightDTO.getTime());
+        
+        // 设置关联用户
+        User user = userService.findById(dailyWeightDTO.getUserId())
+            .orElseThrow(() -> new RuntimeException("用户不存在"));
+        dailyWeight.setUser(user);
+        
+        DailyWeight saved = dailyWeightService.save(dailyWeight);
+        return dailyWeightService.findAll().stream()
+            .filter(dto -> dto.getWeightId().equals(saved.getWeightId()))
+            .findFirst()
+            .orElse(null);
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<DailyWeight> update(@PathVariable Long id, @RequestBody DailyWeight dailyWeight) {
-        dailyWeight.setWeightId(id);
-        return ResponseEntity.ok(dailyWeightService.save(dailyWeight));
+    public ResponseEntity<DailyWeightDTO> update(@PathVariable Long id, @RequestBody DailyWeightDTO dailyWeightDTO) {
+        DailyWeight dailyWeight = dailyWeightService.findById(id)
+            .orElseThrow(() -> new RuntimeException("记录不存在"));
+        
+        dailyWeight.setWeightAmount(dailyWeightDTO.getWeightAmount());
+        dailyWeight.setTime(dailyWeightDTO.getTime());
+        
+        // 更新关联用户
+        User user = userService.findById(dailyWeightDTO.getUserId())
+            .orElseThrow(() -> new RuntimeException("用户不存在"));
+        dailyWeight.setUser(user);
+        
+        DailyWeight saved = dailyWeightService.save(dailyWeight);
+        return dailyWeightService.findAll().stream()
+            .filter(dto -> dto.getWeightId().equals(saved.getWeightId()))
+            .findFirst()
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
     }
     
     @DeleteMapping("/{id}")

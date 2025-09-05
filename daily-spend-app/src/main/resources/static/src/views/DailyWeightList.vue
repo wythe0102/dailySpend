@@ -182,17 +182,27 @@ const handleDelete = async (row) => {
 const handleSubmit = async () => {
   try {
     await formRef.value.validate()
+    
+    // 处理表单数据格式
+    const submitData = {
+      ...form,
+      time: form.time instanceof Date ? form.time.toISOString() : form.time,
+      userId: Number(form.userId), // 确保userId是数字类型
+      weightAmount: Number(form.weightAmount)
+    }
+    
     if (dialogType.value === 'add') {
-      await dailyWeightApi.create(form)
+      await dailyWeightApi.create(submitData)
       ElMessage.success('添加成功')
     } else {
-      await dailyWeightApi.update(form.weightId, form)
+      await dailyWeightApi.update(form.weightId, submitData)
       ElMessage.success('更新成功')
     }
     dialogVisible.value = false
     loadData()
   } catch (error) {
-    ElMessage.error('操作失败')
+    console.error('操作失败:', error)
+    ElMessage.error('操作失败: ' + (error.response?.data?.message || error.message))
   }
 }
 
