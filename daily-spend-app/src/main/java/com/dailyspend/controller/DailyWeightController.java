@@ -6,6 +6,10 @@ import com.dailyspend.entity.User;
 import com.dailyspend.service.DailyWeightService;
 import com.dailyspend.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,21 +27,54 @@ public class DailyWeightController {
     private final UserService userService;
     
     @GetMapping
-    public List<DailyWeightDTO> getAll() {
-        return dailyWeightService.findAll();
+    public ResponseEntity<List<DailyWeightDTO>> getAll() {
+        return ResponseEntity.ok(dailyWeightService.findAll());
     }
-    
+
+    @GetMapping("/page")
+    public ResponseEntity<Page<DailyWeightDTO>> getAllPageable(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startTime,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endTime) {
+        
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "time"));
+        
+        if (startTime != null && endTime != null) {
+            return ResponseEntity.ok(dailyWeightService.findByTimeRange(startTime, endTime, pageable));
+        } else {
+            return ResponseEntity.ok(dailyWeightService.findAll(pageable));
+        }
+    }
+
     @GetMapping("/user/{userId}")
-    public List<DailyWeightDTO> getByUserId(@PathVariable Long userId) {
-        return dailyWeightService.findByUserId(userId);
+    public ResponseEntity<List<DailyWeightDTO>> getByUserId(@PathVariable Long userId) {
+        return ResponseEntity.ok(dailyWeightService.findByUserId(userId));
     }
-    
+
+    @GetMapping("/user/{userId}/page")
+    public ResponseEntity<Page<DailyWeightDTO>> getByUserIdPageable(
+            @PathVariable Long userId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startTime,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endTime) {
+        
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "time"));
+        
+        if (startTime != null && endTime != null) {
+            return ResponseEntity.ok(dailyWeightService.findByUserIdAndTimeRange(userId, startTime, endTime, pageable));
+        } else {
+            return ResponseEntity.ok(dailyWeightService.findByUserId(userId, pageable));
+        }
+    }
+
     @GetMapping("/user/{userId}/time-range")
-    public List<DailyWeightDTO> getByUserIdAndTimeRange(
+    public ResponseEntity<List<DailyWeightDTO>> getByUserIdAndTimeRange(
             @PathVariable Long userId,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startTime,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endTime) {
-        return dailyWeightService.findByUserIdAndTimeRange(userId, startTime, endTime);
+        return ResponseEntity.ok(dailyWeightService.findByUserIdAndTimeRange(userId, startTime, endTime));
     }
     
     @PostMapping

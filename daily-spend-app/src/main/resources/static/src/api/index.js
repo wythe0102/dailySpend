@@ -32,7 +32,9 @@ export const typeApi = {
 // 体重API
 export const dailyWeightApi = {
   getAll: () => api.get('/daily-weights'),
+  getPage: (params) => api.get('/daily-weights/page', { params }),
   getByUserId: (userId) => api.get(`/daily-weights/user/${userId}`),
+  getByUserIdPage: (userId, params) => api.get(`/daily-weights/user/${userId}/page`, { params }),
   getByUserIdAndTimeRange: (userId, startTime, endTime) => 
     api.get(`/daily-weights/user/${userId}/time-range`, { params: { startTime, endTime } }),
   create: (data) => api.post('/daily-weights', data),

@@ -117,9 +117,19 @@ const rules = {
 
 const loadData = async () => {
   try {
-    const response = await dailyWeightApi.getAll()
-    tableData.value = response.data
-    total.value = response.data.length
+    const params = {
+      page: currentPage.value - 1,
+      size: pageSize.value
+    }
+    
+    if (dateRange.value && dateRange.value.length === 2) {
+      params.startTime = new Date(dateRange.value[0]).toISOString()
+      params.endTime = new Date(dateRange.value[1]).toISOString()
+    }
+    
+    const response = await dailyWeightApi.getPage(params)
+    tableData.value = response.data.content
+    total.value = response.data.totalElements
   } catch (error) {
     ElMessage.error('加载数据失败')
   }
@@ -136,11 +146,13 @@ const loadUsers = async () => {
 }
 
 const handleSearch = () => {
+  currentPage.value = 1
   loadData()
 }
 
 const handleReset = () => {
   dateRange.value = []
+  currentPage.value = 1
   loadData()
 }
 

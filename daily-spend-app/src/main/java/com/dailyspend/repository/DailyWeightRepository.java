@@ -1,6 +1,8 @@
 package com.dailyspend.repository;
 
 import com.dailyspend.entity.DailyWeight;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +15,8 @@ public interface DailyWeightRepository extends JpaRepository<DailyWeight, Long> 
     List<DailyWeight> findAllByOrderByTimeDesc();
     
     List<DailyWeight> findByUser_UserIdOrderByTimeDesc(Long userId);
-    
+    Page<DailyWeight> findByUser_UserIdOrderByTimeDesc(Long userId, Pageable pageable);
     List<DailyWeight> findByUser_UserIdAndTimeBetweenOrderByTimeDesc(Long userId, LocalDateTime startTime, LocalDateTime endTime);
+    Page<DailyWeight> findByUser_UserIdAndTimeBetweenOrderByTimeDesc(Long userId, LocalDateTime startTime, LocalDateTime endTime, Pageable pageable);
+    Page<DailyWeight> findByTimeBetweenOrderByTimeDesc(LocalDateTime startTime, LocalDateTime endTime, Pageable pageable);
 }
