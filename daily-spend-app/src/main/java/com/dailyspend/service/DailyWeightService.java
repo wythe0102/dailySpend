@@ -17,7 +17,7 @@ public class DailyWeightService {
     private final DailyWeightRepository dailyWeightRepository;
     
     public List<DailyWeightDTO> findAll() {
-        return dailyWeightRepository.findAll().stream()
+        return dailyWeightRepository.findAllByOrderByTimeDesc().stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }

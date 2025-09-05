@@ -10,6 +10,8 @@ import java.util.List;
 @Repository
 public interface DailyWeightRepository extends JpaRepository<DailyWeight, Long> {
     
+    List<DailyWeight> findAllByOrderByTimeDesc();
+    
     List<DailyWeight> findByUser_UserIdOrderByTimeDesc(Long userId);
     
     List<DailyWeight> findByUser_UserIdAndTimeBetweenOrderByTimeDesc(Long userId, LocalDateTime startTime, LocalDateTime endTime);
