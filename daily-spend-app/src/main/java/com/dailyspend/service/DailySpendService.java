@@ -37,6 +37,18 @@ public class DailySpendService {
         return dailySpendRepository.findByUser_UserIdAndType_TypeIdIn(userId, typeIds, pageable);
     }
     
+    public Page<DailySpend> findByUserIdAndDateBetween(Long userId, LocalDate startDate, LocalDate endDate, Pageable pageable) {
+        return dailySpendRepository.findByUser_UserIdAndDateBetween(userId, startDate, endDate, pageable);
+    }
+    
+    public Page<DailySpend> findByUserIdAndTypeIdAndDateBetween(Long userId, Long typeId, LocalDate startDate, LocalDate endDate, Pageable pageable) {
+        return dailySpendRepository.findByUser_UserIdAndType_TypeIdAndDateBetween(userId, typeId, startDate, endDate, pageable);
+    }
+    
+    public Page<DailySpend> findByUserIdAndTypeIdsAndDateBetween(Long userId, List<Long> typeIds, LocalDate startDate, LocalDate endDate, Pageable pageable) {
+        return dailySpendRepository.findByUser_UserIdAndType_TypeIdInAndDateBetween(userId, typeIds, startDate, endDate, pageable);
+    }
+    
     public List<DailySpend> findByUserIdAndDateRange(Long userId, LocalDate startDate, LocalDate endDate) {
         return dailySpendRepository.findByUser_UserIdAndDateBetweenOrderByDateDesc(userId, startDate, endDate);
     }
@@ -53,6 +65,10 @@ public class DailySpendService {
     
     public DailySpend save(DailySpend dailySpend) {
         return dailySpendRepository.save(dailySpend);
+    }
+    
+    public java.util.Optional<DailySpend> findById(Long id) {
+        return dailySpendRepository.findById(id);
     }
     
     public void deleteById(Long id) {

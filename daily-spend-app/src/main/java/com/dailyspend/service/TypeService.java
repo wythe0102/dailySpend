@@ -29,6 +29,10 @@ public class TypeService {
         return typeRepository.save(type);
     }
     
+    public java.util.Optional<Type> findById(Long id) {
+        return typeRepository.findById(id);
+    }
+    
     public void deleteById(Long id) {
         typeRepository.deleteById(id);
     }

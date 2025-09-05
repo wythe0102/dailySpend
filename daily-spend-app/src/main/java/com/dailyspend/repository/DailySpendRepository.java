@@ -23,6 +23,12 @@ public interface DailySpendRepository extends JpaRepository<DailySpend, Long> {
     
     Page<DailySpend> findByUser_UserIdAndType_TypeIdIn(Long userId, List<Long> typeIds, Pageable pageable);
     
+    Page<DailySpend> findByUser_UserIdAndDateBetween(Long userId, LocalDate startDate, LocalDate endDate, Pageable pageable);
+    
+    Page<DailySpend> findByUser_UserIdAndType_TypeIdAndDateBetween(Long userId, Long typeId, LocalDate startDate, LocalDate endDate, Pageable pageable);
+    
+    Page<DailySpend> findByUser_UserIdAndType_TypeIdInAndDateBetween(Long userId, List<Long> typeIds, LocalDate startDate, LocalDate endDate, Pageable pageable);
+    
     List<DailySpend> findByUser_UserIdAndDateBetweenOrderByDateDesc(Long userId, LocalDate startDate, LocalDate endDate);
     
     List<DailySpend> findByType_TypeIdAndDateBetween(Long typeId, LocalDate startDate, LocalDate endDate);

@@ -1,7 +1,12 @@
 package com.dailyspend.controller;
 
+import com.dailyspend.dto.DailySpendDTO;
 import com.dailyspend.entity.DailySpend;
+import com.dailyspend.entity.Type;
+import com.dailyspend.entity.User;
 import com.dailyspend.service.DailySpendService;
+import com.dailyspend.service.TypeService;
+import com.dailyspend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,6 +29,8 @@ import java.util.stream.Collectors;
 public class DailySpendController {
     
     private final DailySpendService dailySpendService;
+    private final TypeService typeService;
+    private final UserService userService;
     
     @GetMapping
     public List<DailySpend> getAll() {
@@ -40,21 +47,37 @@ public class DailySpendController {
             @RequestParam Long userId,
             @RequestParam(required = false) Long typeId,
             @RequestParam(required = false) String typeIds,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
 
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "date"));
 
-        if (typeIds != null && !typeIds.trim().isEmpty()) {
-            List<Long> typeIdList = java.util.Arrays.stream(typeIds.split(","))
-                    .map(String::trim)
-                    .map(Long::parseLong)
-                    .collect(java.util.stream.Collectors.toList());
-            return ResponseEntity.ok(dailySpendService.findByUserIdAndTypeIds(userId, typeIdList, pageable));
-        } else if (typeId != null) {
-            return ResponseEntity.ok(dailySpendService.findByUserIdAndTypeId(userId, typeId, pageable));
+        if (startDate != null && endDate != null) {
+            if (typeIds != null && !typeIds.trim().isEmpty()) {
+                List<Long> typeIdList = java.util.Arrays.stream(typeIds.split(","))
+                        .map(String::trim)
+                        .map(Long::parseLong)
+                        .collect(java.util.stream.Collectors.toList());
+                return ResponseEntity.ok(dailySpendService.findByUserIdAndTypeIdsAndDateBetween(userId, typeIdList, startDate, endDate, pageable));
+            } else if (typeId != null) {
+                return ResponseEntity.ok(dailySpendService.findByUserIdAndTypeIdAndDateBetween(userId, typeId, startDate, endDate, pageable));
+            } else {
+                return ResponseEntity.ok(dailySpendService.findByUserIdAndDateBetween(userId, startDate, endDate, pageable));
+            }
         } else {
-            return ResponseEntity.ok(dailySpendService.findByUserId(userId, pageable));
+            if (typeIds != null && !typeIds.trim().isEmpty()) {
+                List<Long> typeIdList = java.util.Arrays.stream(typeIds.split(","))
+                        .map(String::trim)
+                        .map(Long::parseLong)
+                        .collect(java.util.stream.Collectors.toList());
+                return ResponseEntity.ok(dailySpendService.findByUserIdAndTypeIds(userId, typeIdList, pageable));
+            } else if (typeId != null) {
+                return ResponseEntity.ok(dailySpendService.findByUserIdAndTypeId(userId, typeId, pageable));
+            } else {
+                return ResponseEntity.ok(dailySpendService.findByUserId(userId, pageable));
+            }
         }
     }
     
@@ -75,13 +98,42 @@ public class DailySpendController {
     }
     
     @PostMapping
-    public DailySpend create(@RequestBody DailySpend dailySpend) {
+    public DailySpend create(@RequestBody DailySpendDTO dailySpendDTO) {
+        DailySpend dailySpend = new DailySpend();
+        dailySpend.setAmount(dailySpendDTO.getAmount());
+        dailySpend.setDate(dailySpendDTO.getDate());
+        dailySpend.setDemo(dailySpendDTO.getDemo());
+        
+        // 设置关联对象
+        Type type = typeService.findById(dailySpendDTO.getTypeId())
+            .orElseThrow(() -> new RuntimeException("类型不存在"));
+        User user = userService.findById(dailySpendDTO.getUserId())
+            .orElseThrow(() -> new RuntimeException("用户不存在"));
+        
+        dailySpend.setType(type);
+        dailySpend.setUser(user);
+        
         return dailySpendService.save(dailySpend);
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<DailySpend> update(@PathVariable Long id, @RequestBody DailySpend dailySpend) {
-        dailySpend.setSpendDetailId(id);
+    public ResponseEntity<DailySpend> update(@PathVariable Long id, @RequestBody DailySpendDTO dailySpendDTO) {
+        DailySpend dailySpend = dailySpendService.findById(id)
+            .orElseThrow(() -> new RuntimeException("记录不存在"));
+        
+        dailySpend.setAmount(dailySpendDTO.getAmount());
+        dailySpend.setDate(dailySpendDTO.getDate());
+        dailySpend.setDemo(dailySpendDTO.getDemo());
+        
+        // 更新关联对象
+        Type type = typeService.findById(dailySpendDTO.getTypeId())
+            .orElseThrow(() -> new RuntimeException("类型不存在"));
+        User user = userService.findById(dailySpendDTO.getUserId())
+            .orElseThrow(() -> new RuntimeException("用户不存在"));
+        
+        dailySpend.setType(type);
+        dailySpend.setUser(user);
+        
         return ResponseEntity.ok(dailySpendService.save(dailySpend));
     }
     
