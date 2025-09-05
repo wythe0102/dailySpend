@@ -114,19 +114,32 @@ let incomeChart = null
 
 const loadData = async () => {
   try {
-    const startDate = dateRange.value?.[0] || new Date(new Date().getFullYear(), new Date().getMonth(), 1)
-    const endDate = dateRange.value?.[1] || new Date()
+    let startDate, endDate
+    
+    if (dateRange.value && dateRange.value.length === 2) {
+      startDate = dateRange.value[0]
+      endDate = dateRange.value[1]
+    } else {
+      // 默认显示当月数据
+      startDate = new Date(new Date().getFullYear(), new Date().getMonth(), 1)
+      endDate = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0)
+    }
+    
+    // 确保日期格式正确
+    const startStr = startDate instanceof Date ? startDate.toISOString().split('T')[0] : startDate
+    const endStr = endDate instanceof Date ? endDate.toISOString().split('T')[0] : endDate
     
     const response = await dailySpendApi.getByUserIdAndDateRange(
       searchForm.userId,
-      startDate.toISOString().split('T')[0],
-      endDate.toISOString().split('T')[0]
+      startStr,
+      endStr
     )
     
     const data = response.data
     processData(data)
   } catch (error) {
     ElMessage.error('加载数据失败')
+    console.error('加载数据失败:', error)
   }
 }
 
@@ -254,6 +267,11 @@ const handleReset = () => {
 }
 
 onMounted(() => {
+  loadData()
+})
+
+// 监听日期范围变化
+watch(dateRange, () => {
   loadData()
 })
 

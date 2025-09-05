@@ -44,7 +44,9 @@
         <el-table-column prop="type.name" label="类别" width="120" />
         <el-table-column prop="amount" label="金额" width="100">
           <template #default="{ row }">
-            <span :style="{ color: row.amount > 100 ? '#f56c6c' : '' }">
+            <span :style="{ 
+              color: row.amount > 500 ? '#f56c6c' : (row.amount > 100 ? '#e6a23c' : '') 
+            }">
               {{ row.amount }}
             </span>
           </template>
@@ -165,14 +167,28 @@ const loadData = async () => {
       page: currentPage.value - 1,
       size: pageSize.value
     }
+    
+    // 处理日期范围
+    if (dateRange.value && dateRange.value.length === 2) {
+      const startDate = dateRange.value[0]
+      const endDate = dateRange.value[1]
+      
+      if (startDate && endDate) {
+        params.startDate = startDate.toISOString().split('T')[0]
+        params.endDate = endDate.toISOString().split('T')[0]
+      }
+    }
+    
     if (searchForm.typeIds && searchForm.typeIds.length > 0) {
       params.typeIds = searchForm.typeIds.join(',')
     }
+    
     const response = await dailySpendApi.getPage(params)
     tableData.value = response.data.content
     total.value = response.data.totalElements
   } catch (error) {
     ElMessage.error('加载数据失败')
+    console.error('加载数据失败:', error)
   }
 }
 
