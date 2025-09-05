@@ -26,9 +26,13 @@
       </el-form>
       
       <el-table :data="tableData" style="width: 100%">
-        <el-table-column prop="date" label="日期" width="120" />
-        <el-table-column prop="weight" label="体重(kg)" width="100" />
-        <el-table-column prop="note" label="备注" />
+        <el-table-column prop="time" label="日期" width="120">
+          <template #default="{ row }">
+            {{ new Date(row.time).toLocaleDateString() }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="weightAmount" label="体重(kg)" width="100" />
+        <el-table-column prop="userName" label="用户" width="100" />
         <el-table-column label="操作" width="150">
           <template #default="{ row }">
             <el-button type="primary" size="small" @click="handleEdit(row)">编辑</el-button>
@@ -53,14 +57,14 @@
       width="500px"
     >
       <el-form :model="form" :rules="rules" ref="formRef" label-width="80px">
-        <el-form-item label="日期" prop="date">
-          <el-date-picker v-model="form.date" type="date" placeholder="选择日期" />
+        <el-form-item label="日期" prop="time">
+          <el-date-picker v-model="form.time" type="date" placeholder="选择日期" />
         </el-form-item>
-        <el-form-item label="体重" prop="weight">
-          <el-input-number v-model="form.weight" :min="0" :max="200" :precision="2" :step="0.1" />
+        <el-form-item label="体重" prop="weightAmount">
+          <el-input-number v-model="form.weightAmount" :min="0" :max="200" :precision="2" :step="0.1" />
         </el-form-item>
-        <el-form-item label="备注" prop="note">
-          <el-input v-model="form.note" type="textarea" :rows="3" />
+        <el-form-item label="用户ID" prop="userId">
+          <el-input-number v-model="form.userId" :min="1" :max="100" />
         </el-form-item>
       </el-form>
       <template #footer>
@@ -92,15 +96,15 @@ const dateRange = ref([])
 
 const form = reactive({
   weightId: null,
-  date: new Date(),
-  weight: 0,
-  note: '',
+  time: new Date(),
+  weightAmount: 0,
   userId: 1 // 新增记录时默认用户ID
 })
 
 const rules = {
-  date: [{ required: true, message: '请选择日期', trigger: 'change' }],
-  weight: [{ required: true, message: '请输入体重', trigger: 'blur' }]
+  time: [{ required: true, message: '请选择日期', trigger: 'change' }],
+  weightAmount: [{ required: true, message: '请输入体重', trigger: 'blur' }],
+  userId: [{ required: true, message: '请输入用户ID', trigger: 'blur' }]
 }
 
 const loadData = async () => {
@@ -126,9 +130,8 @@ const handleAdd = () => {
   dialogType.value = 'add'
   Object.assign(form, {
     weightId: null,
-    date: new Date(),
-    weight: 0,
-    note: '',
+    time: new Date(),
+    weightAmount: 0,
     userId: 1
   })
   dialogVisible.value = true
@@ -138,7 +141,7 @@ const handleEdit = (row) => {
   dialogType.value = 'edit'
   Object.assign(form, {
     ...row,
-    date: new Date(row.date)
+    time: new Date(row.time)
   })
   dialogVisible.value = true
 }

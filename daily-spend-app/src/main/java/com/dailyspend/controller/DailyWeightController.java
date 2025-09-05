@@ -1,5 +1,6 @@
 package com.dailyspend.controller;
 
+import com.dailyspend.dto.DailyWeightDTO;
 import com.dailyspend.entity.DailyWeight;
 import com.dailyspend.service.DailyWeightService;
 import lombok.RequiredArgsConstructor;
@@ -19,17 +20,17 @@ public class DailyWeightController {
     private final DailyWeightService dailyWeightService;
     
     @GetMapping
-    public List<DailyWeight> getAll() {
+    public List<DailyWeightDTO> getAll() {
         return dailyWeightService.findAll();
     }
     
     @GetMapping("/user/{userId}")
-    public List<DailyWeight> getByUserId(@PathVariable Long userId) {
+    public List<DailyWeightDTO> getByUserId(@PathVariable Long userId) {
         return dailyWeightService.findByUserId(userId);
     }
     
     @GetMapping("/user/{userId}/time-range")
-    public List<DailyWeight> getByUserIdAndTimeRange(
+    public List<DailyWeightDTO> getByUserIdAndTimeRange(
             @PathVariable Long userId,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startTime,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endTime) {
