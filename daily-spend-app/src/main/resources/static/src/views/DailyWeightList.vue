@@ -63,8 +63,15 @@
         <el-form-item label="体重" prop="weightAmount">
           <el-input-number v-model="form.weightAmount" :min="0" :max="200" :precision="2" :step="0.1" />
         </el-form-item>
-        <el-form-item label="用户ID" prop="userId">
-          <el-input-number v-model="form.userId" :min="1" :max="100" />
+        <el-form-item label="用户" prop="userId">
+          <el-select v-model="form.userId" placeholder="选择用户">
+            <el-option
+              v-for="user in users"
+              :key="user.userId"
+              :label="user.name"
+              :value="user.userId"
+            />
+          </el-select>
         </el-form-item>
       </el-form>
       <template #footer>
@@ -78,9 +85,10 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { dailyWeightApi } from '../api'
+import { dailyWeightApi, userApi } from '../api'
 
 const tableData = ref([])
+const users = ref([])
 const currentPage = ref(1)
 const pageSize = ref(10)
 const total = ref(0)
@@ -104,7 +112,7 @@ const form = reactive({
 const rules = {
   time: [{ required: true, message: '请选择日期', trigger: 'change' }],
   weightAmount: [{ required: true, message: '请输入体重', trigger: 'blur' }],
-  userId: [{ required: true, message: '请输入用户ID', trigger: 'blur' }]
+  userId: [{ required: true, message: '请选择用户', trigger: 'change' }]
 }
 
 const loadData = async () => {
@@ -114,6 +122,16 @@ const loadData = async () => {
     total.value = response.data.length
   } catch (error) {
     ElMessage.error('加载数据失败')
+  }
+}
+
+// 获取用户数据
+const loadUsers = async () => {
+  try {
+    const response = await userApi.getAll()
+    users.value = response.data
+  } catch (error) {
+    ElMessage.error('获取用户数据失败')
   }
 }
 
@@ -185,6 +203,7 @@ const handlePageChange = (page) => {
 
 onMounted(() => {
   loadData()
+  loadUsers()
 })
 </script>
 
