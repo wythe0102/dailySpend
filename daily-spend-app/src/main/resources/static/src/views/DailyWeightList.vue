@@ -85,7 +85,7 @@ const dialogType = ref('add')
 const formRef = ref()
 
 const searchForm = reactive({
-  userId: 1 // 默认用户ID
+  // 不再限制用户ID，获取所有用户数据
 })
 
 const dateRange = ref([])
@@ -95,7 +95,7 @@ const form = reactive({
   date: new Date(),
   weight: 0,
   note: '',
-  userId: 1
+  userId: 1 // 新增记录时默认用户ID
 })
 
 const rules = {
@@ -105,7 +105,7 @@ const rules = {
 
 const loadData = async () => {
   try {
-    const response = await dailyWeightApi.getByUserId(searchForm.userId)
+    const response = await dailyWeightApi.getAll()
     tableData.value = response.data
     total.value = response.data.length
   } catch (error) {
