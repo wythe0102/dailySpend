@@ -1,0 +1,70 @@
+{
+  "timestamp": "2025-09-04 21:46:39.496619",
+  "mysql_connection": true,
+  "current_data": {},
+  "binlog_analysis": [],
+  "restore_points": [],
+  "backup_files": [
+    {
+      "path": "C:\\Users\\wythe\\AppData\\Roaming\\Trae CN\\User\\workspaceStorage\\ed26a061bf036e9bd9e2227199b5770e\\redhat.java\\ss_ws\\dailySpend_4d4d2f18\\bin\\doc\\spend.sql",
+      "size": 6870,
+      "modified": "2020-04-12 15:04:41"
+    },
+    {
+      "path": "C:\\Users\\wythe\\Desktop\\spend.sql",
+      "size": 5178,
+      "modified": "2025-09-04 21:05:41.696242"
+    },
+    {
+      "path": "C:\\Users\\wythe\\Documents\\dumps\\Spend20220313.sql",
+      "size": 348681,
+      "modified": "2022-03-13 00:08:03.130562"
+    },
+    {
+      "path": "D:\\spend-backup-.sql",
+      "size": 0,
+      "modified": "2025-09-04 21:43:16.559227"
+    },
+    {
+      "path": "D:\\github\\dailySpend\\doc\\spend.sql",
+      "size": 6870,
+      "modified": "2020-04-12 15:04:41"
+    },
+    {
+      "path": "C:\\Users\\wythe\\AppData\\Roaming\\Trae CN\\User\\workspaceStorage\\ed26a061bf036e9bd9e2227199b5770e\\redhat.java\\ss_ws\\dailySpend_4d4d2f18\\bin\\doc\\spend.sql",
+      "size": 6870,
+      "modified": "2020-04-12 15:04:41"
+    },
+    {
+      "path": "C:\\Users\\wythe\\Desktop\\spend.sql",
+      "size": 5178,
+      "modified": "2025-09-04 21:05:41.696242"
+    },
+    {
+      "path": "C:\\Users\\wythe\\Documents\\dumps\\Spend20220313.sql",
+      "size": 348681,
+      "modified": "2022-03-13 00:08:03.130562"
+    },
+    {
+      "path": "C:\\Users\\wythe\\AppData\\Roaming\\Trae CN\\User\\workspaceStorage\\ed26a061bf036e9bd9e2227199b5770e\\redhat.java\\ss_ws\\dailySpend_4d4d2f18\\bin\\doc\\spend.sql",
+      "size": 6870,
+      "modified": "2020-04-12 15:04:41"
+    },
+    {
+      "path": "C:\\Users\\wythe\\Desktop\\spend.sql",
+      "size": 5178,
+      "modified": "2025-09-04 21:05:41.696242"
+    },
+    {
+      "path": "C:\\Users\\wythe\\Documents\\dumps\\Spend20220313.sql",
+      "size": 348681,
+      "modified": "2022-03-13 00:08:03.130562"
+    }
+  ],
+  "recommendations": [
+    "daily_spend表记录数异常少，建议恢复",
+    "找到备份文件: C:\\Users\\wythe\\Documents\\dumps\\Spend20220313.sql (348681 bytes)",
+    "找到备份文件: C:\\Users\\wythe\\Documents\\dumps\\Spend20220313.sql (348681 bytes)",
+    "找到备份文件: C:\\Users\\wythe\\Documents\\dumps\\Spend20220313.sql (348681 bytes)"
+  ]
+}

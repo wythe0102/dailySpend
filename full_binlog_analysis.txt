@@ -1,0 +1,1760 @@
+# The proper term is pseudo_replica_mode, but we use this compatibility alias
+# to make the statement usable on server versions 8.0.24 and older.
+/*!50530 SET @@SESSION.PSEUDO_SLAVE_MODE=1*/;
+/*!50003 SET @OLD_COMPLETION_TYPE=@@COMPLETION_TYPE,COMPLETION_TYPE=0*/;
+DELIMITER /*!*/;
+# at 4
+#250805 19:27:49 server id 1  end_log_pos 125 CRC32 0x480bf224 	Start: binlog v 4, server v 8.0.26 created 250805 19:27:49 at startup
+ROLLBACK/*!*/;
+BINLOG '
+teqRaA8BAAAAeQAAAH0AAAAAAAQAOC4wLjI2AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAC16pFoEwANAAgAAAAABAAEAAAAYQAEGggAAAAICAgCAAAACgoKKioAEjQA
+CigBJPILSA==
+'/*!*/;
+# at 125
+#250805 19:27:49 server id 1  end_log_pos 156 CRC32 0xf8c1aa70 	Previous-GTIDs
+# [empty]
+# at 156
+#250805 20:05:19 server id 1  end_log_pos 235 CRC32 0xc09f7a9a 	Anonymous_GTID	last_committed=0	sequence_number=1	rbr_only=yes	original_committed_timestamp=1754395519780850	immediate_commit_timestamp=1754395519780850	transaction_length=418
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395519780850 (2025-08-05 20:05:19.780850 中国标准时间)
+# immediate_commit_timestamp=1754395519780850 (2025-08-05 20:05:19.780850 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395519780850*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 235
+#250805 20:05:19 server id 1  end_log_pos 311 CRC32 0x119f76c8 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395519/*!*/;
+SET @@session.pseudo_thread_id=10/*!*/;
+SET @@session.foreign_key_checks=1, @@session.sql_auto_is_null=0, @@session.unique_checks=1, @@session.autocommit=1/*!*/;
+SET @@session.sql_mode=1075838976/*!*/;
+SET @@session.auto_increment_increment=1, @@session.auto_increment_offset=1/*!*/;
+/*!\C utf8mb4 *//*!*/;
+SET @@session.character_set_client=255,@@session.collation_connection=255,@@session.collation_server=255/*!*/;
+SET @@session.lc_time_names=0/*!*/;
+SET @@session.collation_database=DEFAULT/*!*/;
+/*!80011 SET @@session.default_collation_for_utf8mb4=255*//*!*/;
+BEGIN
+/*!*/;
+# at 311
+#250805 20:05:19 server id 1  end_log_pos 381 CRC32 0x2ffac427 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 381
+#250805 20:05:19 server id 1  end_log_pos 456 CRC32 0xe114d351 	Table_map: `spend`.`budget` mapped to number 99
+# at 456
+#250805 20:05:19 server id 1  end_log_pos 543 CRC32 0xd4901bf0 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+f/ORaBMBAAAARgAAAH0BAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhJ8T6Lw==
+f/ORaBMBAAAASwAAAMgBAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASFR0xTh
+f/ORaB4BAAAAVwAAAB8CAAAAAF8AAAAAAAEAAgAG/wAdAAAAAAAAAIAAAAAAAAAVFw0A55+/5rOJ
+5rC0MueusQEAAAAAAAAA8tIPRTAAAAAAAADwG5DU
+'/*!*/;
+# at 543
+#250805 20:05:19 server id 1  end_log_pos 574 CRC32 0x8bf772d4 	Xid = 58
+COMMIT/*!*/;
+# at 574
+#250805 20:05:19 server id 1  end_log_pos 653 CRC32 0xe6952bf0 	Anonymous_GTID	last_committed=1	sequence_number=2	rbr_only=yes	original_committed_timestamp=1754395519868147	immediate_commit_timestamp=1754395519868147	transaction_length=405
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395519868147 (2025-08-05 20:05:19.868147 中国标准时间)
+# immediate_commit_timestamp=1754395519868147 (2025-08-05 20:05:19.868147 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395519868147*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 653
+#250805 20:05:19 server id 1  end_log_pos 729 CRC32 0x9b69da07 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395519/*!*/;
+BEGIN
+/*!*/;
+# at 729
+#250805 20:05:19 server id 1  end_log_pos 799 CRC32 0xb6921e45 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 799
+#250805 20:05:19 server id 1  end_log_pos 874 CRC32 0xa737d8e1 	Table_map: `spend`.`budget` mapped to number 99
+# at 874
+#250805 20:05:19 server id 1  end_log_pos 948 CRC32 0x8dcadaff 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+f/ORaBMBAAAARgAAAB8DAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhRR6Stg==
+f/ORaBMBAAAASwAAAGoDAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASHh2Den
+f/ORaB4BAAAASgAAALQDAAAAAF8AAAAAAAEAAgAG/wAXAAAAAAAAAIAAAAAAAAASAAAAAgAAAAAA
+AADy0g9GMAAAAAAAAP/ayo0=
+'/*!*/;
+# at 948
+#250805 20:05:19 server id 1  end_log_pos 979 CRC32 0x918031e4 	Xid = 66
+COMMIT/*!*/;
+# at 979
+#250805 20:05:19 server id 1  end_log_pos 1058 CRC32 0xd893de3b 	Anonymous_GTID	last_committed=2	sequence_number=3	rbr_only=yes	original_committed_timestamp=1754395520126169	immediate_commit_timestamp=1754395520126169	transaction_length=414
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395520126169 (2025-08-05 20:05:20.126169 中国标准时间)
+# immediate_commit_timestamp=1754395520126169 (2025-08-05 20:05:20.126169 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395520126169*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 1058
+#250805 20:05:19 server id 1  end_log_pos 1134 CRC32 0x1a0309bf 	Query	thread_id=10	exec_time=1	error_code=0
+SET TIMESTAMP=1754395519/*!*/;
+BEGIN
+/*!*/;
+# at 1134
+#250805 20:05:19 server id 1  end_log_pos 1204 CRC32 0xb17a7321 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 1204
+#250805 20:05:19 server id 1  end_log_pos 1279 CRC32 0x2dca55c7 	Table_map: `spend`.`budget` mapped to number 99
+# at 1279
+#250805 20:05:19 server id 1  end_log_pos 1362 CRC32 0xd5f5a532 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+f/ORaBMBAAAARgAAALQEAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhIXN6sQ==
+f/ORaBMBAAAASwAAAP8EAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASHHVcot
+f/ORaB4BAAAAUwAAAFIFAAAAAF8AAAAAAAEAAgAG/wAdAAAAAAAAAIAAAAAAAAAYAAkA55+/5rOJ
+5rC0AgAAAAAAAADz0g9HMAAAAAAAADKl9dU=
+'/*!*/;
+# at 1362
+#250805 20:05:19 server id 1  end_log_pos 1393 CRC32 0x0fdca166 	Xid = 72
+COMMIT/*!*/;
+# at 1393
+#250805 20:05:20 server id 1  end_log_pos 1472 CRC32 0x7cc95053 	Anonymous_GTID	last_committed=3	sequence_number=4	rbr_only=yes	original_committed_timestamp=1754395520233042	immediate_commit_timestamp=1754395520233042	transaction_length=423
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395520233042 (2025-08-05 20:05:20.233042 中国标准时间)
+# immediate_commit_timestamp=1754395520233042 (2025-08-05 20:05:20.233042 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395520233042*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 1472
+#250805 20:05:20 server id 1  end_log_pos 1548 CRC32 0x33633742 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395520/*!*/;
+BEGIN
+/*!*/;
+# at 1548
+#250805 20:05:20 server id 1  end_log_pos 1618 CRC32 0x965ec677 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 1618
+#250805 20:05:20 server id 1  end_log_pos 1693 CRC32 0xa98cdc62 	Table_map: `spend`.`budget` mapped to number 99
+# at 1693
+#250805 20:05:20 server id 1  end_log_pos 1785 CRC32 0xebec9a9a 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gPORaBMBAAAARgAAAFIGAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhd8Zelg==
+gPORaBMBAAAASwAAAJ0GAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASFi3Iyp
+gPORaB4BAAAAXAAAAPkGAAAAAF8AAAAAAAEAAgAG/wAgAAAAAAAAAIAAAAAAAABVABIA5YS/56ul
+5oSP5aSn5Yip6Z2iAgAAAAAAAADz0g9IMAAAAAAAAJqa7Os=
+'/*!*/;
+# at 1785
+#250805 20:05:20 server id 1  end_log_pos 1816 CRC32 0x8991fbd0 	Xid = 79
+COMMIT/*!*/;
+# at 1816
+#250805 20:05:20 server id 1  end_log_pos 1895 CRC32 0x1ebb6863 	Anonymous_GTID	last_committed=4	sequence_number=5	rbr_only=yes	original_committed_timestamp=1754395520337915	immediate_commit_timestamp=1754395520337915	transaction_length=411
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395520337915 (2025-08-05 20:05:20.337915 中国标准时间)
+# immediate_commit_timestamp=1754395520337915 (2025-08-05 20:05:20.337915 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395520337915*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 1895
+#250805 20:05:20 server id 1  end_log_pos 1971 CRC32 0xeef7c05b 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395520/*!*/;
+BEGIN
+/*!*/;
+# at 1971
+#250805 20:05:20 server id 1  end_log_pos 2041 CRC32 0x3e6da57c 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 2041
+#250805 20:05:20 server id 1  end_log_pos 2116 CRC32 0x3361eacf 	Table_map: `spend`.`budget` mapped to number 99
+# at 2116
+#250805 20:05:20 server id 1  end_log_pos 2196 CRC32 0xd0f0375c 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gPORaBMBAAAARgAAAPkHAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhfKVtPg==
+gPORaBMBAAAASwAAAEQIAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASHP6mEz
+gPORaB4BAAAAUAAAAJQIAAAAAF8AAAAAAAEAAgAG/wAgAAAAAAAAAIAAAAAAAAAUAAYA5Z2a5p6c
+AgAAAAAAAADz0g9JMAAAAAAAAFw38NA=
+'/*!*/;
+# at 2196
+#250805 20:05:20 server id 1  end_log_pos 2227 CRC32 0x42b5afd1 	Xid = 85
+COMMIT/*!*/;
+# at 2227
+#250805 20:05:20 server id 1  end_log_pos 2306 CRC32 0x095ab31a 	Anonymous_GTID	last_committed=5	sequence_number=6	rbr_only=yes	original_committed_timestamp=1754395520443062	immediate_commit_timestamp=1754395520443062	transaction_length=405
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395520443062 (2025-08-05 20:05:20.443062 中国标准时间)
+# immediate_commit_timestamp=1754395520443062 (2025-08-05 20:05:20.443062 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395520443062*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 2306
+#250805 20:05:20 server id 1  end_log_pos 2382 CRC32 0x7ca16317 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395520/*!*/;
+BEGIN
+/*!*/;
+# at 2382
+#250805 20:05:20 server id 1  end_log_pos 2452 CRC32 0xc09ffc8d 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 2452
+#250805 20:05:20 server id 1  end_log_pos 2527 CRC32 0xb42adbc1 	Table_map: `spend`.`budget` mapped to number 99
+# at 2527
+#250805 20:05:20 server id 1  end_log_pos 2601 CRC32 0xc5d8d3c9 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gPORaBMBAAAARgAAAJQJAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhjfyfwA==
+gPORaBMBAAAASwAAAN8JAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASHB2yq0
+gPORaB4BAAAASgAAACkKAAAAAF8AAAAAAAEAAgAG/wAYAAAAAAAAAIAAAAAAAAAQAAAAAQAAAAAA
+AADz0g9KMAAAAAAAAMnT2MU=
+'/*!*/;
+# at 2601
+#250805 20:05:20 server id 1  end_log_pos 2632 CRC32 0x1b8266fb 	Xid = 92
+COMMIT/*!*/;
+# at 2632
+#250805 20:05:20 server id 1  end_log_pos 2711 CRC32 0x2be4b455 	Anonymous_GTID	last_committed=6	sequence_number=7	rbr_only=yes	original_committed_timestamp=1754395520611171	immediate_commit_timestamp=1754395520611171	transaction_length=405
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395520611171 (2025-08-05 20:05:20.611171 中国标准时间)
+# immediate_commit_timestamp=1754395520611171 (2025-08-05 20:05:20.611171 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395520611171*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 2711
+#250805 20:05:20 server id 1  end_log_pos 2787 CRC32 0xc456c09f 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395520/*!*/;
+BEGIN
+/*!*/;
+# at 2787
+#250805 20:05:20 server id 1  end_log_pos 2857 CRC32 0x8f142142 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 2857
+#250805 20:05:20 server id 1  end_log_pos 2932 CRC32 0x8365a9b9 	Table_map: `spend`.`budget` mapped to number 99
+# at 2932
+#250805 20:05:20 server id 1  end_log_pos 3006 CRC32 0xc07ffc22 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gPORaBMBAAAARgAAACkLAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhQiEUjw==
+gPORaBMBAAAASwAAAHQLAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASG5qWWD
+gPORaB4BAAAASgAAAL4LAAAAAF8AAAAAAAEAAgAG/wAgAAAAAAAAAIAAAAAAAAAcOgAAAQAAAAAA
+AAD00g9LMAAAAAAAACL8f8A=
+'/*!*/;
+# at 3006
+#250805 20:05:20 server id 1  end_log_pos 3037 CRC32 0x373143d2 	Xid = 98
+COMMIT/*!*/;
+# at 3037
+#250805 20:05:20 server id 1  end_log_pos 3116 CRC32 0x866a50a0 	Anonymous_GTID	last_committed=7	sequence_number=8	rbr_only=yes	original_committed_timestamp=1754395520717011	immediate_commit_timestamp=1754395520717011	transaction_length=415
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395520717011 (2025-08-05 20:05:20.717011 中国标准时间)
+# immediate_commit_timestamp=1754395520717011 (2025-08-05 20:05:20.717011 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395520717011*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 3116
+#250805 20:05:20 server id 1  end_log_pos 3192 CRC32 0x0c4d8e11 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395520/*!*/;
+BEGIN
+/*!*/;
+# at 3192
+#250805 20:05:20 server id 1  end_log_pos 3262 CRC32 0xb3682494 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 3262
+#250805 20:05:20 server id 1  end_log_pos 3337 CRC32 0xce4b8467 	Table_map: `spend`.`budget` mapped to number 99
+# at 3337
+#250805 20:05:20 server id 1  end_log_pos 3421 CRC32 0x36918de5 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gPORaBMBAAAARgAAAL4MAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhlCRosw==
+gPORaBMBAAAASwAAAAkNAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASFnhEvO
+gPORaB4BAAAAVAAAAF0NAAAAAF8AAAAAAAEAAgAG/wAdAAAAAAAAAIAAAAAAAAAkAAoA5aW26Iy2
+NOadrwIAAAAAAAAA9NIPTDAAAAAAAADljZE2
+'/*!*/;
+# at 3421
+#250805 20:05:20 server id 1  end_log_pos 3452 CRC32 0xd50cf68b 	Xid = 104
+COMMIT/*!*/;
+# at 3452
+#250805 20:05:20 server id 1  end_log_pos 3531 CRC32 0x6fee0886 	Anonymous_GTID	last_committed=8	sequence_number=9	rbr_only=yes	original_committed_timestamp=1754395520824057	immediate_commit_timestamp=1754395520824057	transaction_length=414
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395520824057 (2025-08-05 20:05:20.824057 中国标准时间)
+# immediate_commit_timestamp=1754395520824057 (2025-08-05 20:05:20.824057 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395520824057*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 3531
+#250805 20:05:20 server id 1  end_log_pos 3607 CRC32 0x6deb2c55 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395520/*!*/;
+BEGIN
+/*!*/;
+# at 3607
+#250805 20:05:20 server id 1  end_log_pos 3677 CRC32 0x8d86b391 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 3677
+#250805 20:05:20 server id 1  end_log_pos 3752 CRC32 0x4f8b4d06 	Table_map: `spend`.`budget` mapped to number 99
+# at 3752
+#250805 20:05:20 server id 1  end_log_pos 3835 CRC32 0x7d2cf5ed 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gPORaBMBAAAARgAAAF0OAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhkbOGjQ==
+gPORaBMBAAAASwAAAKgOAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASEGTYtP
+gPORaB4BAAAAUwAAAPsOAAAAAF8AAAAAAAEAAgAG/wAdAAAAAAAAAIAAAAAAAAAJAAkA5Yaw5r+A
+5YeMAgAAAAAAAAD00g9NMAAAAAAAAO31LH0=
+'/*!*/;
+# at 3835
+#250805 20:05:20 server id 1  end_log_pos 3866 CRC32 0x07208ed8 	Xid = 110
+COMMIT/*!*/;
+# at 3866
+#250805 20:05:20 server id 1  end_log_pos 3945 CRC32 0x59572456 	Anonymous_GTID	last_committed=9	sequence_number=10	rbr_only=yes	original_committed_timestamp=1754395520950464	immediate_commit_timestamp=1754395520950464	transaction_length=416
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395520950464 (2025-08-05 20:05:20.950464 中国标准时间)
+# immediate_commit_timestamp=1754395520950464 (2025-08-05 20:05:20.950464 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395520950464*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 3945
+#250805 20:05:20 server id 1  end_log_pos 4021 CRC32 0x7985ac67 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395520/*!*/;
+BEGIN
+/*!*/;
+# at 4021
+#250805 20:05:20 server id 1  end_log_pos 4091 CRC32 0x3b592914 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 4091
+#250805 20:05:20 server id 1  end_log_pos 4166 CRC32 0x326546c8 	Table_map: `spend`.`budget` mapped to number 99
+# at 4166
+#250805 20:05:20 server id 1  end_log_pos 4251 CRC32 0x5df47035 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gPORaBMBAAAARgAAAPsPAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhFClZOw==
+gPORaBMBAAAASwAAAEYQAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASHIRmUy
+gPORaB4BAAAAVQAAAJsQAAAAAF8AAAAAAAEAAgAG/wAYAAAAAAAAAIAAAAAAAAAVAAsAMTDkuKrl
+jIXlrZACAAAAAAAAAPPSD04wAAAAAAAANXD0XQ==
+'/*!*/;
+# at 4251
+#250805 20:05:20 server id 1  end_log_pos 4282 CRC32 0x373b47ee 	Xid = 116
+COMMIT/*!*/;
+# at 4282
+#250805 20:05:20 server id 1  end_log_pos 4361 CRC32 0x41786460 	Anonymous_GTID	last_committed=10	sequence_number=11	rbr_only=yes	original_committed_timestamp=1754395521017159	immediate_commit_timestamp=1754395521017159	transaction_length=414
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395521017159 (2025-08-05 20:05:21.017159 中国标准时间)
+# immediate_commit_timestamp=1754395521017159 (2025-08-05 20:05:21.017159 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395521017159*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 4361
+#250805 20:05:20 server id 1  end_log_pos 4437 CRC32 0x557f94b6 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395520/*!*/;
+BEGIN
+/*!*/;
+# at 4437
+#250805 20:05:20 server id 1  end_log_pos 4507 CRC32 0xf13d56fe 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 4507
+#250805 20:05:20 server id 1  end_log_pos 4582 CRC32 0xc83724f2 	Table_map: `spend`.`budget` mapped to number 99
+# at 4582
+#250805 20:05:20 server id 1  end_log_pos 4665 CRC32 0xcf25e747 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gPORaBMBAAAARgAAAJsRAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEh/lY98Q==
+gPORaBMBAAAASwAAAOYRAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASHyJDfI
+gPORaB4BAAAAUwAAADkSAAAAAF8AAAAAAAEAAgAG/wAcAAAAAAAAAIAAAAAAAAAGAAkA54Gr6b6Z
+5p6cAgAAAAAAAAD00g9PMAAAAAAAAEfnJc8=
+'/*!*/;
+# at 4665
+#250805 20:05:20 server id 1  end_log_pos 4696 CRC32 0x6087446f 	Xid = 123
+COMMIT/*!*/;
+# at 4696
+#250805 20:05:21 server id 1  end_log_pos 4775 CRC32 0x53d81eb3 	Anonymous_GTID	last_committed=11	sequence_number=12	rbr_only=yes	original_committed_timestamp=1754395521081094	immediate_commit_timestamp=1754395521081094	transaction_length=405
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395521081094 (2025-08-05 20:05:21.081094 中国标准时间)
+# immediate_commit_timestamp=1754395521081094 (2025-08-05 20:05:21.081094 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395521081094*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 4775
+#250805 20:05:21 server id 1  end_log_pos 4851 CRC32 0x04d549b3 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395521/*!*/;
+BEGIN
+/*!*/;
+# at 4851
+#250805 20:05:21 server id 1  end_log_pos 4921 CRC32 0x944da236 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 4921
+#250805 20:05:21 server id 1  end_log_pos 4996 CRC32 0x5e522c01 	Table_map: `spend`.`budget` mapped to number 99
+# at 4996
+#250805 20:05:21 server id 1  end_log_pos 5070 CRC32 0xfed30354 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gfORaBMBAAAARgAAADkTAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhNqJNlA==
+gfORaBMBAAAASwAAAIQTAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASEBLFJe
+gfORaB4BAAAASgAAAM4TAAAAAF8AAAAAAAEAAgAG/wAdAAAAAAAAAIAAAAAAAAALUAAAAQAAAAAA
+AAD00g9QMAAAAAAAAFQD0/4=
+'/*!*/;
+# at 5070
+#250805 20:05:21 server id 1  end_log_pos 5101 CRC32 0x11304b12 	Xid = 129
+COMMIT/*!*/;
+# at 5101
+#250805 20:05:21 server id 1  end_log_pos 5180 CRC32 0x87935f45 	Anonymous_GTID	last_committed=12	sequence_number=13	rbr_only=yes	original_committed_timestamp=1754395521185032	immediate_commit_timestamp=1754395521185032	transaction_length=405
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395521185032 (2025-08-05 20:05:21.185032 中国标准时间)
+# immediate_commit_timestamp=1754395521185032 (2025-08-05 20:05:21.185032 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395521185032*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 5180
+#250805 20:05:21 server id 1  end_log_pos 5256 CRC32 0xc92a822a 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395521/*!*/;
+BEGIN
+/*!*/;
+# at 5256
+#250805 20:05:21 server id 1  end_log_pos 5326 CRC32 0x1f71e51a 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 5326
+#250805 20:05:21 server id 1  end_log_pos 5401 CRC32 0xf7ae0518 	Table_map: `spend`.`budget` mapped to number 99
+# at 5401
+#250805 20:05:21 server id 1  end_log_pos 5475 CRC32 0xc2bf77f0 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gfORaBMBAAAARgAAAM4UAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhGuVxHw==
+gfORaBMBAAAASwAAABkVAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASEYBa73
+gfORaB4BAAAASgAAAGMVAAAAAF8AAAAAAAEAAgAG/wAXAAAAAAAAAIAAAAAAAAALCgAAAQAAAAAA
+AAD10g9RMAAAAAAAAPB3v8I=
+'/*!*/;
+# at 5475
+#250805 20:05:21 server id 1  end_log_pos 5506 CRC32 0xadf3a697 	Xid = 135
+COMMIT/*!*/;
+# at 5506
+#250805 20:05:21 server id 1  end_log_pos 5585 CRC32 0x4891af9c 	Anonymous_GTID	last_committed=13	sequence_number=14	rbr_only=yes	original_committed_timestamp=1754395521289001	immediate_commit_timestamp=1754395521289001	transaction_length=405
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395521289001 (2025-08-05 20:05:21.289001 中国标准时间)
+# immediate_commit_timestamp=1754395521289001 (2025-08-05 20:05:21.289001 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395521289001*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 5585
+#250805 20:05:21 server id 1  end_log_pos 5661 CRC32 0xa107cdc4 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395521/*!*/;
+BEGIN
+/*!*/;
+# at 5661
+#250805 20:05:21 server id 1  end_log_pos 5731 CRC32 0xd0b525c1 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 5731
+#250805 20:05:21 server id 1  end_log_pos 5806 CRC32 0x64db07e4 	Table_map: `spend`.`budget` mapped to number 99
+# at 5806
+#250805 20:05:21 server id 1  end_log_pos 5880 CRC32 0x4cc09a03 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gfORaBMBAAAARgAAAGMWAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhwSW10A==
+gfORaBMBAAAASwAAAK4WAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASHkB9tk
+gfORaB4BAAAASgAAAPgWAAAAAF8AAAAAAAEAAgAG/wAXAAAAAAAAAIAAAAAAAAAMAAAAAQAAAAAA
+AAD20g9SMAAAAAAAAAOawEw=
+'/*!*/;
+# at 5880
+#250805 20:05:21 server id 1  end_log_pos 5911 CRC32 0x3d0db2f7 	Xid = 141
+COMMIT/*!*/;
+# at 5911
+#250805 20:05:21 server id 1  end_log_pos 5990 CRC32 0x8c102e9f 	Anonymous_GTID	last_committed=14	sequence_number=15	rbr_only=yes	original_committed_timestamp=1754395521394088	immediate_commit_timestamp=1754395521394088	transaction_length=405
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395521394088 (2025-08-05 20:05:21.394088 中国标准时间)
+# immediate_commit_timestamp=1754395521394088 (2025-08-05 20:05:21.394088 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395521394088*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 5990
+#250805 20:05:21 server id 1  end_log_pos 6066 CRC32 0x5ee67a88 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395521/*!*/;
+BEGIN
+/*!*/;
+# at 6066
+#250805 20:05:21 server id 1  end_log_pos 6136 CRC32 0x232667b7 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 6136
+#250805 20:05:21 server id 1  end_log_pos 6211 CRC32 0x97a03c9e 	Table_map: `spend`.`budget` mapped to number 99
+# at 6211
+#250805 20:05:21 server id 1  end_log_pos 6285 CRC32 0x8a5a42ec 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gfORaBMBAAAARgAAAPgXAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEht2cmIw==
+gfORaBMBAAAASwAAAEMYAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASGePKCX
+gfORaB4BAAAASgAAAI0YAAAAAF8AAAAAAAEAAgAG/wAdAAAAAAAAAIAAAAAAAAAHEQAAAQAAAAAA
+AAD20g9TMAAAAAAAAOxCWoo=
+'/*!*/;
+# at 6285
+#250805 20:05:21 server id 1  end_log_pos 6316 CRC32 0x14d1d460 	Xid = 147
+COMMIT/*!*/;
+# at 6316
+#250805 20:05:21 server id 1  end_log_pos 6395 CRC32 0xbcf15500 	Anonymous_GTID	last_committed=15	sequence_number=16	rbr_only=yes	original_committed_timestamp=1754395521572988	immediate_commit_timestamp=1754395521572988	transaction_length=405
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395521572988 (2025-08-05 20:05:21.572988 中国标准时间)
+# immediate_commit_timestamp=1754395521572988 (2025-08-05 20:05:21.572988 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395521572988*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 6395
+#250805 20:05:21 server id 1  end_log_pos 6471 CRC32 0x3032face 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395521/*!*/;
+BEGIN
+/*!*/;
+# at 6471
+#250805 20:05:21 server id 1  end_log_pos 6541 CRC32 0x1dbcadd8 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 6541
+#250805 20:05:21 server id 1  end_log_pos 6616 CRC32 0x10eb0d90 	Table_map: `spend`.`budget` mapped to number 99
+# at 6616
+#250805 20:05:21 server id 1  end_log_pos 6690 CRC32 0x9be71cf4 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gfORaBMBAAAARgAAAI0ZAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEh2K28HQ==
+gfORaBMBAAAASwAAANgZAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASGQDesQ
+gfORaB4BAAAASgAAACIaAAAAAF8AAAAAAAEAAgAG/wAgAAAAAAAAAIAAAAAAAAAULgAAAQAAAAAA
+AAD20g9UMAAAAAAAAPQc55s=
+'/*!*/;
+# at 6690
+#250805 20:05:21 server id 1  end_log_pos 6721 CRC32 0x5d196d73 	Xid = 153
+COMMIT/*!*/;
+# at 6721
+#250805 20:05:21 server id 1  end_log_pos 6800 CRC32 0x7b1f27c4 	Anonymous_GTID	last_committed=16	sequence_number=17	rbr_only=yes	original_committed_timestamp=1754395521677087	immediate_commit_timestamp=1754395521677087	transaction_length=411
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395521677087 (2025-08-05 20:05:21.677087 中国标准时间)
+# immediate_commit_timestamp=1754395521677087 (2025-08-05 20:05:21.677087 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395521677087*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 6800
+#250805 20:05:21 server id 1  end_log_pos 6876 CRC32 0x428383de 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395521/*!*/;
+BEGIN
+/*!*/;
+# at 6876
+#250805 20:05:21 server id 1  end_log_pos 6946 CRC32 0x2fc90d81 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 6946
+#250805 20:05:21 server id 1  end_log_pos 7021 CRC32 0x0ebac22e 	Table_map: `spend`.`budget` mapped to number 99
+# at 7021
+#250805 20:05:21 server id 1  end_log_pos 7101 CRC32 0x0867a691 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gfORaBMBAAAARgAAACIbAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhgQ3JLw==
+gfORaBMBAAAASwAAAG0bAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASEuwroO
+gfORaB4BAAAAUAAAAL0bAAAAAF8AAAAAAAEAAgAG/wAdAAAAAAAAAIAAAAAAAABjAAYA5ZWk6YWS
+AQAAAAAAAAD20g9VMAAAAAAAAJGmZwg=
+'/*!*/;
+# at 7101
+#250805 20:05:21 server id 1  end_log_pos 7132 CRC32 0x14db1ea4 	Xid = 159
+COMMIT/*!*/;
+# at 7132
+#250805 20:05:21 server id 1  end_log_pos 7211 CRC32 0x33d926fd 	Anonymous_GTID	last_committed=17	sequence_number=18	rbr_only=yes	original_committed_timestamp=1754395521781905	immediate_commit_timestamp=1754395521781905	transaction_length=405
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395521781905 (2025-08-05 20:05:21.781905 中国标准时间)
+# immediate_commit_timestamp=1754395521781905 (2025-08-05 20:05:21.781905 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395521781905*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 7211
+#250805 20:05:21 server id 1  end_log_pos 7287 CRC32 0xec070daf 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395521/*!*/;
+BEGIN
+/*!*/;
+# at 7287
+#250805 20:05:21 server id 1  end_log_pos 7357 CRC32 0x539286dd 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 7357
+#250805 20:05:21 server id 1  end_log_pos 7432 CRC32 0x0f69751d 	Table_map: `spend`.`budget` mapped to number 99
+# at 7432
+#250805 20:05:21 server id 1  end_log_pos 7506 CRC32 0x63bb5d1e 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gfORaBMBAAAARgAAAL0cAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEh3YaSUw==
+gfORaBMBAAAASwAAAAgdAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASEddWkP
+gfORaB4BAAAASgAAAFIdAAAAAF8AAAAAAAEAAgAG/wAXAAAAAAAAAIAAAAAAAAALAAAAAgAAAAAA
+AAD20g9WMAAAAAAAAB5du2M=
+'/*!*/;
+# at 7506
+#250805 20:05:21 server id 1  end_log_pos 7537 CRC32 0x59de69ad 	Xid = 165
+COMMIT/*!*/;
+# at 7537
+#250805 20:05:21 server id 1  end_log_pos 7616 CRC32 0xdd7b4589 	Anonymous_GTID	last_committed=18	sequence_number=19	rbr_only=yes	original_committed_timestamp=1754395521906869	immediate_commit_timestamp=1754395521906869	transaction_length=420
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395521906869 (2025-08-05 20:05:21.906869 中国标准时间)
+# immediate_commit_timestamp=1754395521906869 (2025-08-05 20:05:21.906869 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395521906869*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 7616
+#250805 20:05:21 server id 1  end_log_pos 7692 CRC32 0xd195fe3b 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395521/*!*/;
+BEGIN
+/*!*/;
+# at 7692
+#250805 20:05:21 server id 1  end_log_pos 7762 CRC32 0x0d485817 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 7762
+#250805 20:05:21 server id 1  end_log_pos 7837 CRC32 0xe73fb1ab 	Table_map: `spend`.`budget` mapped to number 99
+# at 7837
+#250805 20:05:21 server id 1  end_log_pos 7926 CRC32 0xdca0f619 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gfORaBMBAAAARgAAAFIeAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhF1hIDQ==
+gfORaBMBAAAASwAAAJ0eAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASGrsT/n
+gfORaB4BAAAAWQAAAPYeAAAAAF8AAAAAAAEAAgAG/wAkAAAAAAAAAIAAAAAAAAAKAA8A5a+E5bGF
+6J+56aOf54mpAgAAAAAAAAD20g9XMAAAAAAAABn2oNw=
+'/*!*/;
+# at 7926
+#250805 20:05:21 server id 1  end_log_pos 7957 CRC32 0xb3bcc7ff 	Xid = 172
+COMMIT/*!*/;
+# at 7957
+#250805 20:05:21 server id 1  end_log_pos 8036 CRC32 0xca1126d6 	Anonymous_GTID	last_committed=19	sequence_number=20	rbr_only=yes	original_committed_timestamp=1754395522033832	immediate_commit_timestamp=1754395522033832	transaction_length=411
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395522033832 (2025-08-05 20:05:22.033832 中国标准时间)
+# immediate_commit_timestamp=1754395522033832 (2025-08-05 20:05:22.033832 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395522033832*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 8036
+#250805 20:05:21 server id 1  end_log_pos 8112 CRC32 0xb7d50731 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395521/*!*/;
+BEGIN
+/*!*/;
+# at 8112
+#250805 20:05:21 server id 1  end_log_pos 8182 CRC32 0x4626a210 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 8182
+#250805 20:05:21 server id 1  end_log_pos 8257 CRC32 0x351cd09b 	Table_map: `spend`.`budget` mapped to number 99
+# at 8257
+#250805 20:05:21 server id 1  end_log_pos 8337 CRC32 0x240e4a29 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gfORaBMBAAAARgAAAPYfAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhEKImRg==
+gfORaBMBAAAASwAAAEEgAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASGb0Bw1
+gfORaB4BAAAAUAAAAJEgAAAAAF8AAAAAAAEAAgAG/wAIAAAAAAAAAIAAAAAAAAA6AAYA55+t6KKW
+AgAAAAAAAAD20g9YMAAAAAAAAClKDiQ=
+'/*!*/;
+# at 8337
+#250805 20:05:21 server id 1  end_log_pos 8368 CRC32 0xfc9a2535 	Xid = 179
+COMMIT/*!*/;
+# at 8368
+#250805 20:05:22 server id 1  end_log_pos 8447 CRC32 0x5a947ff2 	Anonymous_GTID	last_committed=20	sequence_number=21	rbr_only=yes	original_committed_timestamp=1754395522141123	immediate_commit_timestamp=1754395522141123	transaction_length=414
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395522141123 (2025-08-05 20:05:22.141123 中国标准时间)
+# immediate_commit_timestamp=1754395522141123 (2025-08-05 20:05:22.141123 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395522141123*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 8447
+#250805 20:05:22 server id 1  end_log_pos 8523 CRC32 0x39cd793d 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395522/*!*/;
+BEGIN
+/*!*/;
+# at 8523
+#250805 20:05:22 server id 1  end_log_pos 8593 CRC32 0xa1f78277 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 8593
+#250805 20:05:22 server id 1  end_log_pos 8668 CRC32 0x628fa3c7 	Table_map: `spend`.`budget` mapped to number 99
+# at 8668
+#250805 20:05:22 server id 1  end_log_pos 8751 CRC32 0x338572dc 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gvORaBMBAAAARgAAAJEhAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhd4L3oQ==
+gvORaBMBAAAASwAAANwhAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASHHo49i
+gvORaB4BAAAAUwAAAC8iAAAAAF8AAAAAAAEAAgAG/wAkAAAAAAAAAIAAAAAAAAAiAAkA5rm/57q4
+5be+AgAAAAAAAAD20g9ZMAAAAAAAANxyhTM=
+'/*!*/;
+# at 8751
+#250805 20:05:22 server id 1  end_log_pos 8782 CRC32 0x1c15a852 	Xid = 185
+COMMIT/*!*/;
+# at 8782
+#250805 20:05:22 server id 1  end_log_pos 8861 CRC32 0x0d4aa8c1 	Anonymous_GTID	last_committed=21	sequence_number=22	rbr_only=yes	original_committed_timestamp=1754395522227617	immediate_commit_timestamp=1754395522227617	transaction_length=405
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395522227617 (2025-08-05 20:05:22.227617 中国标准时间)
+# immediate_commit_timestamp=1754395522227617 (2025-08-05 20:05:22.227617 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395522227617*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 8861
+#250805 20:05:22 server id 1  end_log_pos 8937 CRC32 0xb82de629 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395522/*!*/;
+BEGIN
+/*!*/;
+# at 8937
+#250805 20:05:22 server id 1  end_log_pos 9007 CRC32 0x6d158f7b 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 9007
+#250805 20:05:22 server id 1  end_log_pos 9082 CRC32 0xd4c1907a 	Table_map: `spend`.`budget` mapped to number 99
+# at 9082
+#250805 20:05:22 server id 1  end_log_pos 9156 CRC32 0x512f7b19 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gvORaBMBAAAARgAAAC8jAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhe48VbQ==
+gvORaBMBAAAASwAAAHojAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASF6kMHU
+gvORaB4BAAAASgAAAMQjAAAAAF8AAAAAAAEAAgAG/wAXAAAAAAAAAIAAAAAAAAAKKAAAAQAAAAAA
+AAD30g9aMAAAAAAAABl7L1E=
+'/*!*/;
+# at 9156
+#250805 20:05:22 server id 1  end_log_pos 9187 CRC32 0xfe019f31 	Xid = 191
+COMMIT/*!*/;
+# at 9187
+#250805 20:05:22 server id 1  end_log_pos 9266 CRC32 0x981806b5 	Anonymous_GTID	last_committed=22	sequence_number=23	rbr_only=yes	original_committed_timestamp=1754395522292060	immediate_commit_timestamp=1754395522292060	transaction_length=405
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395522292060 (2025-08-05 20:05:22.292060 中国标准时间)
+# immediate_commit_timestamp=1754395522292060 (2025-08-05 20:05:22.292060 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395522292060*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 9266
+#250805 20:05:22 server id 1  end_log_pos 9342 CRC32 0xf2f59a28 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395522/*!*/;
+BEGIN
+/*!*/;
+# at 9342
+#250805 20:05:22 server id 1  end_log_pos 9412 CRC32 0x06529c8c 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 9412
+#250805 20:05:22 server id 1  end_log_pos 9487 CRC32 0xa244cbff 	Table_map: `spend`.`budget` mapped to number 99
+# at 9487
+#250805 20:05:22 server id 1  end_log_pos 9561 CRC32 0x0f719bd8 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gvORaBMBAAAARgAAAMQkAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhjJxSBg==
+gvORaBMBAAAASwAAAA8lAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASH/y0Si
+gvORaB4BAAAASgAAAFklAAAAAF8AAAAAAAEAAgAG/wAdAAAAAAAAAIAAAAAAAAAHMgAAAQAAAAAA
+AAD30g9bMAAAAAAAANibcQ8=
+'/*!*/;
+# at 9561
+#250805 20:05:22 server id 1  end_log_pos 9592 CRC32 0xc98d25d7 	Xid = 197
+COMMIT/*!*/;
+# at 9592
+#250805 20:05:22 server id 1  end_log_pos 9671 CRC32 0xbe2ee94b 	Anonymous_GTID	last_committed=23	sequence_number=24	rbr_only=yes	original_committed_timestamp=1754395522396784	immediate_commit_timestamp=1754395522396784	transaction_length=405
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395522396784 (2025-08-05 20:05:22.396784 中国标准时间)
+# immediate_commit_timestamp=1754395522396784 (2025-08-05 20:05:22.396784 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395522396784*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 9671
+#250805 20:05:22 server id 1  end_log_pos 9747 CRC32 0x41cb338e 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395522/*!*/;
+BEGIN
+/*!*/;
+# at 9747
+#250805 20:05:22 server id 1  end_log_pos 9817 CRC32 0x92367d2a 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 9817
+#250805 20:05:22 server id 1  end_log_pos 9892 CRC32 0x8da16be3 	Table_map: `spend`.`budget` mapped to number 99
+# at 9892
+#250805 20:05:22 server id 1  end_log_pos 9966 CRC32 0x742a7f58 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gvORaBMBAAAARgAAAFkmAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhKn02kg==
+gvORaBMBAAAASwAAAKQmAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASHja6GN
+gvORaB4BAAAASgAAAO4mAAAAAF8AAAAAAAEAAgAG/wAXAAAAAAAAAIAAAAAAAAB2MgAAAwAAAAAA
+AAD40g9cMAAAAAAAAFh/KnQ=
+'/*!*/;
+# at 9966
+#250805 20:05:22 server id 1  end_log_pos 9997 CRC32 0xd852569f 	Xid = 204
+COMMIT/*!*/;
+# at 9997
+#250805 20:05:22 server id 1  end_log_pos 10076 CRC32 0x58c37de0 	Anonymous_GTID	last_committed=24	sequence_number=25	rbr_only=yes	original_committed_timestamp=1754395522524121	immediate_commit_timestamp=1754395522524121	transaction_length=411
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395522524121 (2025-08-05 20:05:22.524121 中国标准时间)
+# immediate_commit_timestamp=1754395522524121 (2025-08-05 20:05:22.524121 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395522524121*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 10076
+#250805 20:05:22 server id 1  end_log_pos 10152 CRC32 0xe21ed512 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395522/*!*/;
+BEGIN
+/*!*/;
+# at 10152
+#250805 20:05:22 server id 1  end_log_pos 10222 CRC32 0xda7e4afa 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 10222
+#250805 20:05:22 server id 1  end_log_pos 10297 CRC32 0xe10bd1da 	Table_map: `spend`.`budget` mapped to number 99
+# at 10297
+#250805 20:05:22 server id 1  end_log_pos 10377 CRC32 0xf1f439c7 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gvORaBMBAAAARgAAAO4nAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEh+kp+2g==
+gvORaBMBAAAASwAAADkoAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASHa0Qvh
+gvORaB4BAAAAUAAAAIkoAAAAAF8AAAAAAAEAAgAG/wAgAAAAAAAAAIAAAAAAAAAbAAYA5Yaw5qOS
+AgAAAAAAAAD30g9dMAAAAAAAAMc59PE=
+'/*!*/;
+# at 10377
+#250805 20:05:22 server id 1  end_log_pos 10408 CRC32 0x5ca759e4 	Xid = 210
+COMMIT/*!*/;
+# at 10408
+#250805 20:05:22 server id 1  end_log_pos 10487 CRC32 0xe27aa964 	Anonymous_GTID	last_committed=25	sequence_number=26	rbr_only=yes	original_committed_timestamp=1754395522662902	immediate_commit_timestamp=1754395522662902	transaction_length=405
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395522662902 (2025-08-05 20:05:22.662902 中国标准时间)
+# immediate_commit_timestamp=1754395522662902 (2025-08-05 20:05:22.662902 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395522662902*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 10487
+#250805 20:05:22 server id 1  end_log_pos 10563 CRC32 0xfee42c6c 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395522/*!*/;
+BEGIN
+/*!*/;
+# at 10563
+#250805 20:05:22 server id 1  end_log_pos 10633 CRC32 0x991afd03 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 10633
+#250805 20:05:22 server id 1  end_log_pos 10708 CRC32 0x9c7246bc 	Table_map: `spend`.`budget` mapped to number 99
+# at 10708
+#250805 20:05:22 server id 1  end_log_pos 10782 CRC32 0x124cd73d 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gvORaBMBAAAARgAAAIkpAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhA/0amQ==
+gvORaBMBAAAASwAAANQpAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASG8RnKc
+gvORaB4BAAAASgAAAB4qAAAAAF8AAAAAAAEAAgAG/wAXAAAAAAAAAIAAAAAAAAAMAAAAAgAAAAAA
+AAD40g9eMAAAAAAAAD3XTBI=
+'/*!*/;
+# at 10782
+#250805 20:05:22 server id 1  end_log_pos 10813 CRC32 0xcc594d84 	Xid = 216
+COMMIT/*!*/;
+# at 10813
+#250805 20:05:22 server id 1  end_log_pos 10892 CRC32 0x1b656c73 	Anonymous_GTID	last_committed=26	sequence_number=27	rbr_only=yes	original_committed_timestamp=1754395522748516	immediate_commit_timestamp=1754395522748516	transaction_length=411
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395522748516 (2025-08-05 20:05:22.748516 中国标准时间)
+# immediate_commit_timestamp=1754395522748516 (2025-08-05 20:05:22.748516 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395522748516*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 10892
+#250805 20:05:22 server id 1  end_log_pos 10968 CRC32 0x8c55557c 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395522/*!*/;
+BEGIN
+/*!*/;
+# at 10968
+#250805 20:05:22 server id 1  end_log_pos 11038 CRC32 0xb0e8f2ad 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 11038
+#250805 20:05:22 server id 1  end_log_pos 11113 CRC32 0xb988ff59 	Table_map: `spend`.`budget` mapped to number 99
+# at 11113
+#250805 20:05:22 server id 1  end_log_pos 11193 CRC32 0xc5d40bb1 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gvORaBMBAAAARgAAAB4rAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhrfLosA==
+gvORaBMBAAAASwAAAGkrAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASFZ/4i5
+gvORaB4BAAAAUAAAALkrAAAAAF8AAAAAAAEAAgAG/wAIAAAAAAAAAIAAAAAAAAAYAAYA55+t6KOk
+AgAAAAAAAAD40g9fMAAAAAAAALEL1MU=
+'/*!*/;
+# at 11193
+#250805 20:05:22 server id 1  end_log_pos 11224 CRC32 0x5cad9320 	Xid = 222
+COMMIT/*!*/;
+# at 11224
+#250805 20:05:22 server id 1  end_log_pos 11303 CRC32 0x2117b363 	Anonymous_GTID	last_committed=27	sequence_number=28	rbr_only=yes	original_committed_timestamp=1754395522815597	immediate_commit_timestamp=1754395522815597	transaction_length=411
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395522815597 (2025-08-05 20:05:22.815597 中国标准时间)
+# immediate_commit_timestamp=1754395522815597 (2025-08-05 20:05:22.815597 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395522815597*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 11303
+#250805 20:05:22 server id 1  end_log_pos 11379 CRC32 0x22d1db0d 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395522/*!*/;
+BEGIN
+/*!*/;
+# at 11379
+#250805 20:05:22 server id 1  end_log_pos 11449 CRC32 0xd734d606 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 11449
+#250805 20:05:22 server id 1  end_log_pos 11524 CRC32 0x83f03e31 	Table_map: `spend`.`budget` mapped to number 99
+# at 11524
+#250805 20:05:22 server id 1  end_log_pos 11604 CRC32 0x7b543694 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gvORaBMBAAAARgAAALksAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhBtY01w==
+gvORaBMBAAAASwAAAAQtAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASExPvCD
+gvORaB4BAAAAUAAAAFQtAAAAAF8AAAAAAAEAAgAG/wAkAAAAAAAAAIAAAAAAAAAnWgYA5Y6V57q4
+AgAAAAAAAAD50g9gMAAAAAAAAJQ2VHs=
+'/*!*/;
+# at 11604
+#250805 20:05:22 server id 1  end_log_pos 11635 CRC32 0xe96aaf9f 	Xid = 228
+COMMIT/*!*/;
+# at 11635
+#250805 20:05:22 server id 1  end_log_pos 11714 CRC32 0x1b800c87 	Anonymous_GTID	last_committed=28	sequence_number=29	rbr_only=yes	original_committed_timestamp=1754395522926196	immediate_commit_timestamp=1754395522926196	transaction_length=405
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395522926196 (2025-08-05 20:05:22.926196 中国标准时间)
+# immediate_commit_timestamp=1754395522926196 (2025-08-05 20:05:22.926196 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395522926196*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 11714
+#250805 20:05:22 server id 1  end_log_pos 11790 CRC32 0xb39a32fe 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395522/*!*/;
+BEGIN
+/*!*/;
+# at 11790
+#250805 20:05:22 server id 1  end_log_pos 11860 CRC32 0x745f684e 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 11860
+#250805 20:05:22 server id 1  end_log_pos 11935 CRC32 0x35eeabf7 	Table_map: `spend`.`budget` mapped to number 99
+# at 11935
+#250805 20:05:22 server id 1  end_log_pos 12009 CRC32 0xa4179e86 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gvORaBMBAAAARgAAAFQuAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhTmhfdA==
+gvORaBMBAAAASwAAAJ8uAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASH3q+41
+gvORaB4BAAAASgAAAOkuAAAAAF8AAAAAAAEAAgAG/wAXAAAAAAAAAIAAAAAAAAAJAAAAAgAAAAAA
+AAD50g9hMAAAAAAAAIaeF6Q=
+'/*!*/;
+# at 12009
+#250805 20:05:22 server id 1  end_log_pos 12040 CRC32 0x39eb804e 	Xid = 234
+COMMIT/*!*/;
+# at 12040
+#250805 20:05:22 server id 1  end_log_pos 12119 CRC32 0x0ef1d168 	Anonymous_GTID	last_committed=29	sequence_number=30	rbr_only=yes	original_committed_timestamp=1754395523030990	immediate_commit_timestamp=1754395523030990	transaction_length=421
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395523030990 (2025-08-05 20:05:23.030990 中国标准时间)
+# immediate_commit_timestamp=1754395523030990 (2025-08-05 20:05:23.030990 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395523030990*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 12119
+#250805 20:05:22 server id 1  end_log_pos 12195 CRC32 0x9ee38e50 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395522/*!*/;
+BEGIN
+/*!*/;
+# at 12195
+#250805 20:05:22 server id 1  end_log_pos 12265 CRC32 0x8181b196 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 12265
+#250805 20:05:22 server id 1  end_log_pos 12340 CRC32 0xf480233e 	Table_map: `spend`.`budget` mapped to number 99
+# at 12340
+#250805 20:05:22 server id 1  end_log_pos 12430 CRC32 0xd7505235 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+gvORaBMBAAAARgAAAOkvAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhlrGBgQ==
+gvORaBMBAAAASwAAADQwAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASE+I4D0
+gvORaB4BAAAAWgAAAI4wAAAAAF8AAAAAAAEAAgAG/wAcAAAAAAAAAIAAAAAAAAAWABAA54Gr6b6Z
+5p6cIOWwj+ahgwIAAAAAAAAA+dIPYjAAAAAAAAA1UlDX
+'/*!*/;
+# at 12430
+#250805 20:05:22 server id 1  end_log_pos 12461 CRC32 0x8d532715 	Xid = 240
+COMMIT/*!*/;
+# at 12461
+#250805 20:05:23 server id 1  end_log_pos 12540 CRC32 0xe7cee6b3 	Anonymous_GTID	last_committed=30	sequence_number=31	rbr_only=yes	original_committed_timestamp=1754395523152667	immediate_commit_timestamp=1754395523152667	transaction_length=418
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395523152667 (2025-08-05 20:05:23.152667 中国标准时间)
+# immediate_commit_timestamp=1754395523152667 (2025-08-05 20:05:23.152667 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395523152667*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 12540
+#250805 20:05:23 server id 1  end_log_pos 12616 CRC32 0x5b44c80c 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395523/*!*/;
+BEGIN
+/*!*/;
+# at 12616
+#250805 20:05:23 server id 1  end_log_pos 12686 CRC32 0xa17674e5 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 12686
+#250805 20:05:23 server id 1  end_log_pos 12761 CRC32 0x53c06ab0 	Table_map: `spend`.`budget` mapped to number 99
+# at 12761
+#250805 20:05:23 server id 1  end_log_pos 12848 CRC32 0x88dc3544 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+g/ORaBMBAAAARgAAAI4xAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEh5XR2oQ==
+g/ORaBMBAAAASwAAANkxAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASGwasBT
+g/ORaB4BAAAAVwAAADAyAAAAAF8AAAAAAAEAAgAG/wAcAAAAAAAAAIAAAAAAAAAwAA0A6JGh6JCE
+IOilv+eTnAIAAAAAAAAA+dIPYzAAAAAAAABENdyI
+'/*!*/;
+# at 12848
+#250805 20:05:23 server id 1  end_log_pos 12879 CRC32 0xab2c24fe 	Xid = 246
+COMMIT/*!*/;
+# at 12879
+#250805 20:05:23 server id 1  end_log_pos 12958 CRC32 0xa1338c37 	Anonymous_GTID	last_committed=31	sequence_number=32	rbr_only=yes	original_committed_timestamp=1754395523218198	immediate_commit_timestamp=1754395523218198	transaction_length=411
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395523218198 (2025-08-05 20:05:23.218198 中国标准时间)
+# immediate_commit_timestamp=1754395523218198 (2025-08-05 20:05:23.218198 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395523218198*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 12958
+#250805 20:05:23 server id 1  end_log_pos 13034 CRC32 0xdaa45718 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395523/*!*/;
+BEGIN
+/*!*/;
+# at 13034
+#250805 20:05:23 server id 1  end_log_pos 13104 CRC32 0x6d9479e9 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 13104
+#250805 20:05:23 server id 1  end_log_pos 13179 CRC32 0x15e36100 	Table_map: `spend`.`budget` mapped to number 99
+# at 13179
+#250805 20:05:23 server id 1  end_log_pos 13259 CRC32 0xa2f0acfe 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+g/ORaBMBAAAARgAAADAzAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEh6XmUbQ==
+g/ORaBMBAAAASwAAAHszAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASEAYeMV
+g/ORaB4BAAAAUAAAAMszAAAAAF8AAAAAAAEAAgAG/wAdAAAAAAAAAIAAAAAAAABYAAYA6YW45aW2
+AwAAAAAAAAD50g9kMAAAAAAAAP6s8KI=
+'/*!*/;
+# at 13259
+#250805 20:05:23 server id 1  end_log_pos 13290 CRC32 0x2dce18e4 	Xid = 252
+COMMIT/*!*/;
+# at 13290
+#250805 20:05:23 server id 1  end_log_pos 13369 CRC32 0x80de01c8 	Anonymous_GTID	last_committed=32	sequence_number=33	rbr_only=yes	original_committed_timestamp=1754395523363071	immediate_commit_timestamp=1754395523363071	transaction_length=428
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395523363071 (2025-08-05 20:05:23.363071 中国标准时间)
+# immediate_commit_timestamp=1754395523363071 (2025-08-05 20:05:23.363071 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395523363071*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 13369
+#250805 20:05:23 server id 1  end_log_pos 13445 CRC32 0x4b6fcd51 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395523/*!*/;
+BEGIN
+/*!*/;
+# at 13445
+#250805 20:05:23 server id 1  end_log_pos 13515 CRC32 0x869c770a 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 13515
+#250805 20:05:23 server id 1  end_log_pos 13590 CRC32 0x2f9ba068 	Table_map: `spend`.`budget` mapped to number 99
+# at 13590
+#250805 20:05:23 server id 1  end_log_pos 13687 CRC32 0x63e65c5f 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+g/ORaBMBAAAARgAAAMs0AAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhCnechg==
+g/ORaBMBAAAASwAAABY1AAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASFooJsv
+g/ORaB4BAAAAYQAAAHc1AAAAAF8AAAAAAAEAAgAG/wAYAAAAAAAAAIAAAAAAAAI6ABcAMTDmlqTn
+iZvogonlkozniZvlpLTogokCAAAAAAAAAP3SD2UwAAAAAAAAX1zmYw==
+'/*!*/;
+# at 13687
+#250805 20:05:23 server id 1  end_log_pos 13718 CRC32 0x0127e89d 	Xid = 258
+COMMIT/*!*/;
+# at 13718
+#250805 20:05:23 server id 1  end_log_pos 13797 CRC32 0x33c24f2c 	Anonymous_GTID	last_committed=33	sequence_number=34	rbr_only=yes	original_committed_timestamp=1754395523471664	immediate_commit_timestamp=1754395523471664	transaction_length=420
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395523471664 (2025-08-05 20:05:23.471664 中国标准时间)
+# immediate_commit_timestamp=1754395523471664 (2025-08-05 20:05:23.471664 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395523471664*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 13797
+#250805 20:05:23 server id 1  end_log_pos 13873 CRC32 0x0ee407e4 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395523/*!*/;
+BEGIN
+/*!*/;
+# at 13873
+#250805 20:05:23 server id 1  end_log_pos 13943 CRC32 0xb7cf1a84 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 13943
+#250805 20:05:23 server id 1  end_log_pos 14018 CRC32 0x8b20dfd4 	Table_map: `spend`.`budget` mapped to number 99
+# at 14018
+#250805 20:05:23 server id 1  end_log_pos 14107 CRC32 0x8e49fffe 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+g/ORaBMBAAAARgAAAHc2AAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhhBrPtw==
+g/ORaBMBAAAASwAAAMI2AAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASHU3yCL
+g/ORaB4BAAAAWQAAABs3AAAAAF8AAAAAAAEAAgAG/wAhAAAAAAAAAIAAAAAAAAAcAA8A5oq95aWW
+5Y+R5YWJ55CDAwAAAAAAAAD90g9mMAAAAAAAAP7/SY4=
+'/*!*/;
+# at 14107
+#250805 20:05:23 server id 1  end_log_pos 14138 CRC32 0x58f34797 	Xid = 265
+COMMIT/*!*/;
+# at 14138
+#250805 20:05:23 server id 1  end_log_pos 14217 CRC32 0x30d77506 	Anonymous_GTID	last_committed=34	sequence_number=35	rbr_only=yes	original_committed_timestamp=1754395523679071	immediate_commit_timestamp=1754395523679071	transaction_length=405
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395523679071 (2025-08-05 20:05:23.679071 中国标准时间)
+# immediate_commit_timestamp=1754395523679071 (2025-08-05 20:05:23.679071 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395523679071*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 14217
+#250805 20:05:23 server id 1  end_log_pos 14293 CRC32 0x3f869ce5 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395523/*!*/;
+BEGIN
+/*!*/;
+# at 14293
+#250805 20:05:23 server id 1  end_log_pos 14363 CRC32 0x37e5f334 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 14363
+#250805 20:05:23 server id 1  end_log_pos 14438 CRC32 0x0f1d29ff 	Table_map: `spend`.`budget` mapped to number 99
+# at 14438
+#250805 20:05:23 server id 1  end_log_pos 14512 CRC32 0x638f2f45 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+g/ORaBMBAAAARgAAABs4AAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhNPPlNw==
+g/ORaBMBAAAASwAAAGY4AAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASH/KR0P
+g/ORaB4BAAAASgAAALA4AAAAAF8AAAAAAAEAAgAG/wAXAAAAAAAAAIAAAAAAAAAOAAAAAgAAAAAA
+AAD80g9nMAAAAAAAAEUvj2M=
+'/*!*/;
+# at 14512
+#250805 20:05:23 server id 1  end_log_pos 14543 CRC32 0x5453a9ef 	Xid = 271
+COMMIT/*!*/;
+# at 14543
+#250805 20:05:23 server id 1  end_log_pos 14622 CRC32 0x7c2cc8ae 	Anonymous_GTID	last_committed=35	sequence_number=36	rbr_only=yes	original_committed_timestamp=1754395523785257	immediate_commit_timestamp=1754395523785257	transaction_length=405
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395523785257 (2025-08-05 20:05:23.785257 中国标准时间)
+# immediate_commit_timestamp=1754395523785257 (2025-08-05 20:05:23.785257 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395523785257*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 14622
+#250805 20:05:23 server id 1  end_log_pos 14698 CRC32 0xf69d351f 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395523/*!*/;
+BEGIN
+/*!*/;
+# at 14698
+#250805 20:05:23 server id 1  end_log_pos 14768 CRC32 0x9fd6903f 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 14768
+#250805 20:05:23 server id 1  end_log_pos 14843 CRC32 0xedb53fda 	Table_map: `spend`.`budget` mapped to number 99
+# at 14843
+#250805 20:05:23 server id 1  end_log_pos 14917 CRC32 0xecdd1696 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+g/ORaBMBAAAARgAAALA5AAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhP5DWnw==
+g/ORaBMBAAAASwAAAPs5AAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASHaP7Xt
+g/ORaB4BAAAASgAAAEU6AAAAAF8AAAAAAAEAAgAG/wAXAAAAAAAAAIAAAAAAAAALUAAAAQAAAAAA
+AAD90g9oMAAAAAAAAJYW3ew=
+'/*!*/;
+# at 14917
+#250805 20:05:23 server id 1  end_log_pos 14948 CRC32 0xd85b9d90 	Xid = 277
+COMMIT/*!*/;
+# at 14948
+#250805 20:05:23 server id 1  end_log_pos 15027 CRC32 0xeafd0542 	Anonymous_GTID	last_committed=36	sequence_number=37	rbr_only=yes	original_committed_timestamp=1754395523969819	immediate_commit_timestamp=1754395523969819	transaction_length=405
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395523969819 (2025-08-05 20:05:23.969819 中国标准时间)
+# immediate_commit_timestamp=1754395523969819 (2025-08-05 20:05:23.969819 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395523969819*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 15027
+#250805 20:05:23 server id 1  end_log_pos 15103 CRC32 0xd4777562 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395523/*!*/;
+BEGIN
+/*!*/;
+# at 15103
+#250805 20:05:23 server id 1  end_log_pos 15173 CRC32 0xfcd5bde9 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 15173
+#250805 20:05:23 server id 1  end_log_pos 15248 CRC32 0xd0859009 	Table_map: `spend`.`budget` mapped to number 99
+# at 15248
+#250805 20:05:23 server id 1  end_log_pos 15322 CRC32 0xd392db43 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+g/ORaBMBAAAARgAAAEU7AAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEh6b3V/A==
+g/ORaBMBAAAASwAAAJA7AAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASEJkIXQ
+g/ORaB4BAAAASgAAANo7AAAAAF8AAAAAAAEAAgAG/wAjAAAAAAAAAIAAAAAAAAApAAAAAQAAAAAA
+AAD90g9pMAAAAAAAAEPbktM=
+'/*!*/;
+# at 15322
+#250805 20:05:23 server id 1  end_log_pos 15353 CRC32 0x48b9fceb 	Xid = 284
+COMMIT/*!*/;
+# at 15353
+#250805 20:05:24 server id 1  end_log_pos 15432 CRC32 0x7589f024 	Anonymous_GTID	last_committed=37	sequence_number=38	rbr_only=yes	original_committed_timestamp=1754395524152831	immediate_commit_timestamp=1754395524152831	transaction_length=405
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395524152831 (2025-08-05 20:05:24.152831 中国标准时间)
+# immediate_commit_timestamp=1754395524152831 (2025-08-05 20:05:24.152831 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395524152831*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 15432
+#250805 20:05:24 server id 1  end_log_pos 15508 CRC32 0xc72f48c0 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395524/*!*/;
+BEGIN
+/*!*/;
+# at 15508
+#250805 20:05:24 server id 1  end_log_pos 15578 CRC32 0xa66373a9 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 15578
+#250805 20:05:24 server id 1  end_log_pos 15653 CRC32 0xc741047c 	Table_map: `spend`.`budget` mapped to number 99
+# at 15653
+#250805 20:05:24 server id 1  end_log_pos 15727 CRC32 0x719e41a4 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+hPORaBMBAAAARgAAANo8AAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhqXNjpg==
+hPORaBMBAAAASwAAACU9AAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASF8BEHH
+hPORaB4BAAAASgAAAG89AAAAAF8AAAAAAAEAAgAG/wAXAAAAAAAAAIAAAAAAAAAQAAAAAQAAAAAA
+AAD+0g9qMAAAAAAAAKRBnnE=
+'/*!*/;
+# at 15727
+#250805 20:05:24 server id 1  end_log_pos 15758 CRC32 0x256c3d7a 	Xid = 290
+COMMIT/*!*/;
+# at 15758
+#250805 20:05:24 server id 1  end_log_pos 15837 CRC32 0xe7b6624a 	Anonymous_GTID	last_committed=38	sequence_number=39	rbr_only=yes	original_committed_timestamp=1754395524295586	immediate_commit_timestamp=1754395524295586	transaction_length=405
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395524295586 (2025-08-05 20:05:24.295586 中国标准时间)
+# immediate_commit_timestamp=1754395524295586 (2025-08-05 20:05:24.295586 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395524295586*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 15837
+#250805 20:05:24 server id 1  end_log_pos 15913 CRC32 0x176aa48e 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395524/*!*/;
+BEGIN
+/*!*/;
+# at 15913
+#250805 20:05:24 server id 1  end_log_pos 15983 CRC32 0xa9cf20ec 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 15983
+#250805 20:05:24 server id 1  end_log_pos 16058 CRC32 0x8132a9b7 	Table_map: `spend`.`budget` mapped to number 99
+# at 16058
+#250805 20:05:24 server id 1  end_log_pos 16132 CRC32 0xf658c3f6 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+hPORaBMBAAAARgAAAG8+AAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEh7CDPqQ==
+hPORaBMBAAAASwAAALo+AAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASG3qTKB
+hPORaB4BAAAASgAAAAQ/AAAAAF8AAAAAAAEAAgAG/wAXAAAAAAAAAIAAAAAAAAAQAAAAAgAAAAAA
+AAD+0g9rMAAAAAAAAPbDWPY=
+'/*!*/;
+# at 16132
+#250805 20:05:24 server id 1  end_log_pos 16163 CRC32 0x2d1d7398 	Xid = 296
+COMMIT/*!*/;
+# at 16163
+#250805 20:05:24 server id 1  end_log_pos 16242 CRC32 0xd1453d11 	Anonymous_GTID	last_committed=39	sequence_number=40	rbr_only=yes	original_committed_timestamp=1754395524400939	immediate_commit_timestamp=1754395524400939	transaction_length=405
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395524400939 (2025-08-05 20:05:24.400939 中国标准时间)
+# immediate_commit_timestamp=1754395524400939 (2025-08-05 20:05:24.400939 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395524400939*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 16242
+#250805 20:05:24 server id 1  end_log_pos 16318 CRC32 0x7296f037 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395524/*!*/;
+BEGIN
+/*!*/;
+# at 16318
+#250805 20:05:24 server id 1  end_log_pos 16388 CRC32 0x5dfbc031 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 16388
+#250805 20:05:24 server id 1  end_log_pos 16463 CRC32 0x50d1ee66 	Table_map: `spend`.`budget` mapped to number 99
+# at 16463
+#250805 20:05:24 server id 1  end_log_pos 16537 CRC32 0x3872df60 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+hPORaBMBAAAARgAAAARAAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhMcD7XQ==
+hPORaBMBAAAASwAAAE9AAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASFm7tFQ
+hPORaB4BAAAASgAAAJlAAAAAAF8AAAAAAAEAAgAG/wAdAAAAAAAAAIAAAAAAAABOEgAAAQAAAAAA
+AAD/0g9sMAAAAAAAAGDfcjg=
+'/*!*/;
+# at 16537
+#250805 20:05:24 server id 1  end_log_pos 16568 CRC32 0xdc0f3bcd 	Xid = 302
+COMMIT/*!*/;
+# at 16568
+#250805 20:05:24 server id 1  end_log_pos 16647 CRC32 0x3217f5ee 	Anonymous_GTID	last_committed=40	sequence_number=41	rbr_only=yes	original_committed_timestamp=1754395524506041	immediate_commit_timestamp=1754395524506041	transaction_length=405
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395524506041 (2025-08-05 20:05:24.506041 中国标准时间)
+# immediate_commit_timestamp=1754395524506041 (2025-08-05 20:05:24.506041 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395524506041*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 16647
+#250805 20:05:24 server id 1  end_log_pos 16723 CRC32 0x5d64926d 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395524/*!*/;
+BEGIN
+/*!*/;
+# at 16723
+#250805 20:05:24 server id 1  end_log_pos 16793 CRC32 0x73ca2580 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 16793
+#250805 20:05:24 server id 1  end_log_pos 16868 CRC32 0x4e61eab2 	Table_map: `spend`.`budget` mapped to number 99
+# at 16868
+#250805 20:05:24 server id 1  end_log_pos 16942 CRC32 0x107a14a4 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+hPORaBMBAAAARgAAAJlBAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhgCXKcw==
+hPORaBMBAAAASwAAAORBAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASGy6mFO
+hPORaB4BAAAASgAAAC5CAAAAAF8AAAAAAAEAAgAG/wAjAAAAAAAAAIAAAAAAAAEiAAAAAQAAAAAA
+AAAC0w9tMAAAAAAAAKQUehA=
+'/*!*/;
+# at 16942
+#250805 20:05:24 server id 1  end_log_pos 16973 CRC32 0xbc9791af 	Xid = 308
+COMMIT/*!*/;
+# at 16973
+#250805 20:05:24 server id 1  end_log_pos 17052 CRC32 0x5eb8c38a 	Anonymous_GTID	last_committed=41	sequence_number=42	rbr_only=yes	original_committed_timestamp=1754395524652946	immediate_commit_timestamp=1754395524652946	transaction_length=418
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395524652946 (2025-08-05 20:05:24.652946 中国标准时间)
+# immediate_commit_timestamp=1754395524652946 (2025-08-05 20:05:24.652946 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395524652946*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 17052
+#250805 20:05:24 server id 1  end_log_pos 17128 CRC32 0x6b3f6bd7 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395524/*!*/;
+BEGIN
+/*!*/;
+# at 17128
+#250805 20:05:24 server id 1  end_log_pos 17198 CRC32 0x81d71647 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 17198
+#250805 20:05:24 server id 1  end_log_pos 17273 CRC32 0x85368a3b 	Table_map: `spend`.`budget` mapped to number 99
+# at 17273
+#250805 20:05:24 server id 1  end_log_pos 17360 CRC32 0x7cd53487 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+hPORaBMBAAAARgAAAC5DAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhRxbXgQ==
+hPORaBMBAAAASwAAAHlDAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASE7ijaF
+hPORaB4BAAAAVwAAANBDAAAAAF8AAAAAAAEAAgAG/wAXAAAAAAAAAIAAAAAAAAA3AA0A6IKJ5aS5
+6aaNIOmdogIAAAAAAAAAAtMPbjAAAAAAAACHNNV8
+'/*!*/;
+# at 17360
+#250805 20:05:24 server id 1  end_log_pos 17391 CRC32 0xdbf2098f 	Xid = 314
+COMMIT/*!*/;
+# at 17391
+#250805 20:05:24 server id 1  end_log_pos 17470 CRC32 0x1c1dae3a 	Anonymous_GTID	last_committed=42	sequence_number=43	rbr_only=yes	original_committed_timestamp=1754395524822005	immediate_commit_timestamp=1754395524822005	transaction_length=405
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395524822005 (2025-08-05 20:05:24.822005 中国标准时间)
+# immediate_commit_timestamp=1754395524822005 (2025-08-05 20:05:24.822005 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395524822005*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 17470
+#250805 20:05:24 server id 1  end_log_pos 17546 CRC32 0x117bc6e0 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395524/*!*/;
+BEGIN
+/*!*/;
+# at 17546
+#250805 20:05:24 server id 1  end_log_pos 17616 CRC32 0x34146fa0 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 17616
+#250805 20:05:24 server id 1  end_log_pos 17691 CRC32 0xabc115b0 	Table_map: `spend`.`budget` mapped to number 99
+# at 17691
+#250805 20:05:24 server id 1  end_log_pos 17765 CRC32 0x0eb4c56d 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+hPORaBMBAAAARgAAANBEAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhoG8UNA==
+hPORaBMBAAAASwAAABtFAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASGwFcGr
+hPORaB4BAAAASgAAAGVFAAAAAF8AAAAAAAEAAgAG/wAXAAAAAAAAAIAAAAAAAAALAAAAAgAAAAAA
+AAAB0w9vMAAAAAAAAG3FtA4=
+'/*!*/;
+# at 17765
+#250805 20:05:24 server id 1  end_log_pos 17796 CRC32 0x8562efce 	Xid = 320
+COMMIT/*!*/;
+# at 17796
+#250805 20:05:24 server id 1  end_log_pos 17875 CRC32 0x0b39e858 	Anonymous_GTID	last_committed=43	sequence_number=44	rbr_only=yes	original_committed_timestamp=1754395525005921	immediate_commit_timestamp=1754395525005921	transaction_length=436
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395525005921 (2025-08-05 20:05:25.005921 中国标准时间)
+# immediate_commit_timestamp=1754395525005921 (2025-08-05 20:05:25.005921 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395525005921*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 17875
+#250805 20:05:24 server id 1  end_log_pos 17951 CRC32 0x7956890e 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395524/*!*/;
+BEGIN
+/*!*/;
+# at 17951
+#250805 20:05:24 server id 1  end_log_pos 18021 CRC32 0x3bb83ce5 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 18021
+#250805 20:05:24 server id 1  end_log_pos 18096 CRC32 0x8424b5ac 	Table_map: `spend`.`budget` mapped to number 99
+# at 18096
+#250805 20:05:24 server id 1  end_log_pos 18201 CRC32 0xa09f016a 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+hPORaBMBAAAARgAAAGVGAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEh5Ty4Ow==
+hPORaBMBAAAASwAAALBGAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASGstSSE
+hPORaB4BAAAAaQAAABlHAAAAAF8AAAAAAAEAAgAG/wAhAAAAAAAAAIAAAAAAAAAhAB8A5Zub5bm0
+57qn54q25YWD56yU6K6wIOaWh+S7tuiiiwMAAAAAAAAAAtMPcDAAAAAAAABqAZ+g
+'/*!*/;
+# at 18201
+#250805 20:05:24 server id 1  end_log_pos 18232 CRC32 0x21016979 	Xid = 326
+COMMIT/*!*/;
+# at 18232
+#250805 20:05:25 server id 1  end_log_pos 18311 CRC32 0xfaf373b9 	Anonymous_GTID	last_committed=44	sequence_number=45	rbr_only=yes	original_committed_timestamp=1754395525215045	immediate_commit_timestamp=1754395525215045	transaction_length=414
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395525215045 (2025-08-05 20:05:25.215045 中国标准时间)
+# immediate_commit_timestamp=1754395525215045 (2025-08-05 20:05:25.215045 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395525215045*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 18311
+#250805 20:05:25 server id 1  end_log_pos 18387 CRC32 0x5e57e23b 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395525/*!*/;
+BEGIN
+/*!*/;
+# at 18387
+#250805 20:05:25 server id 1  end_log_pos 18457 CRC32 0x7234655e 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 18457
+#250805 20:05:25 server id 1  end_log_pos 18532 CRC32 0x45f11c2c 	Table_map: `spend`.`budget` mapped to number 99
+# at 18532
+#250805 20:05:25 server id 1  end_log_pos 18615 CRC32 0xaea60dea 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+hfORaBMBAAAARgAAABlIAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhXmU0cg==
+hfORaBMBAAAASwAAAGRIAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASEsHPFF
+hfORaB4BAAAAUwAAALdIAAAAAF8AAAAAAAEAAgAG/wAXAAAAAAAAAIAAAAAAAAAkWgkA546J57Gz
+5rK5AQAAAAAAAAAD0w9xMAAAAAAAAOoNpq4=
+'/*!*/;
+# at 18615
+#250805 20:05:25 server id 1  end_log_pos 18646 CRC32 0x3d088e8e 	Xid = 332
+COMMIT/*!*/;
+# at 18646
+#250805 20:05:25 server id 1  end_log_pos 18725 CRC32 0x917f917a 	Anonymous_GTID	last_committed=45	sequence_number=46	rbr_only=yes	original_committed_timestamp=1754395525340955	immediate_commit_timestamp=1754395525340955	transaction_length=414
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395525340955 (2025-08-05 20:05:25.340955 中国标准时间)
+# immediate_commit_timestamp=1754395525340955 (2025-08-05 20:05:25.340955 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395525340955*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 18725
+#250805 20:05:25 server id 1  end_log_pos 18801 CRC32 0x5eb63cea 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395525/*!*/;
+BEGIN
+/*!*/;
+# at 18801
+#250805 20:05:25 server id 1  end_log_pos 18871 CRC32 0x84cc7151 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 18871
+#250805 20:05:25 server id 1  end_log_pos 18946 CRC32 0xf9c0f23a 	Table_map: `spend`.`budget` mapped to number 99
+# at 18946
+#250805 20:05:25 server id 1  end_log_pos 19029 CRC32 0x518c62c5 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+hfORaBMBAAAARgAAALdJAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhUXHMhA==
+hfORaBMBAAAASwAAAAJKAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASE68sD5
+hfORaB4BAAAAUwAAAFVKAAAAAF8AAAAAAAEAAgAG/wAcAAAAAAAAAIAAAAAAAABJAAkA5Y675LiK
+5rW3AgAAAAAAAAAC0w9yMAAAAAAAAMVijFE=
+'/*!*/;
+# at 19029
+#250805 20:05:25 server id 1  end_log_pos 19060 CRC32 0x9b1c4b4b 	Xid = 338
+COMMIT/*!*/;
+# at 19060
+#250805 20:05:25 server id 1  end_log_pos 19139 CRC32 0x870e7bf9 	Anonymous_GTID	last_committed=46	sequence_number=47	rbr_only=yes	original_committed_timestamp=1754395525588925	immediate_commit_timestamp=1754395525588925	transaction_length=405
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395525588925 (2025-08-05 20:05:25.588925 中国标准时间)
+# immediate_commit_timestamp=1754395525588925 (2025-08-05 20:05:25.588925 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395525588925*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 19139
+#250805 20:05:25 server id 1  end_log_pos 19215 CRC32 0x7429db0a 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395525/*!*/;
+BEGIN
+/*!*/;
+# at 19215
+#250805 20:05:25 server id 1  end_log_pos 19285 CRC32 0xc4fa5615 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 19285
+#250805 20:05:25 server id 1  end_log_pos 19360 CRC32 0x961c8f26 	Table_map: `spend`.`budget` mapped to number 99
+# at 19360
+#250805 20:05:25 server id 1  end_log_pos 19434 CRC32 0x5af817f3 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+hfORaBMBAAAARgAAAFVLAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhFVb6xA==
+hfORaBMBAAAASwAAAKBLAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASEmjxyW
+hfORaB4BAAAASgAAAOpLAAAAAF8AAAAAAAEAAgAG/wAgAAAAAAAAAIAAAAAAAAAjAAAAAQAAAAAA
+AAAD0w9zMAAAAAAAAPMX+Fo=
+'/*!*/;
+# at 19434
+#250805 20:05:25 server id 1  end_log_pos 19465 CRC32 0xf7ac4b40 	Xid = 344
+COMMIT/*!*/;
+# at 19465
+#250805 20:05:25 server id 1  end_log_pos 19544 CRC32 0x399f93db 	Anonymous_GTID	last_committed=47	sequence_number=48	rbr_only=yes	original_committed_timestamp=1754395525691039	immediate_commit_timestamp=1754395525691039	transaction_length=414
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395525691039 (2025-08-05 20:05:25.691039 中国标准时间)
+# immediate_commit_timestamp=1754395525691039 (2025-08-05 20:05:25.691039 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395525691039*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 19544
+#250805 20:05:25 server id 1  end_log_pos 19620 CRC32 0x906a5ae8 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395525/*!*/;
+BEGIN
+/*!*/;
+# at 19620
+#250805 20:05:25 server id 1  end_log_pos 19690 CRC32 0x634ee120 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 19690
+#250805 20:05:25 server id 1  end_log_pos 19765 CRC32 0x044bd064 	Table_map: `spend`.`budget` mapped to number 99
+# at 19765
+#250805 20:05:25 server id 1  end_log_pos 19848 CRC32 0xcfd683e4 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+hfORaBMBAAAARgAAAOpMAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhIOFOYw==
+hfORaBMBAAAASwAAADVNAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASFk0EsE
+hfORaB4BAAAAUwAAAIhNAAAAAF8AAAAAAAEAAgAG/wAYAAAAAAAAAIAAAAAAAABMQgkA546J57Gz
+5rK5AQAAAAAAAAAD0w90MAAAAAAAAOSD1s8=
+'/*!*/;
+# at 19848
+#250805 20:05:25 server id 1  end_log_pos 19879 CRC32 0x69d959f8 	Xid = 350
+COMMIT/*!*/;
+# at 19879
+#250805 20:05:25 server id 1  end_log_pos 19958 CRC32 0xe15afe69 	Anonymous_GTID	last_committed=48	sequence_number=49	rbr_only=yes	original_committed_timestamp=1754395525795776	immediate_commit_timestamp=1754395525795776	transaction_length=429
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395525795776 (2025-08-05 20:05:25.795776 中国标准时间)
+# immediate_commit_timestamp=1754395525795776 (2025-08-05 20:05:25.795776 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395525795776*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 19958
+#250805 20:05:25 server id 1  end_log_pos 20034 CRC32 0xacd9dabe 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395525/*!*/;
+BEGIN
+/*!*/;
+# at 20034
+#250805 20:05:25 server id 1  end_log_pos 20104 CRC32 0xfa263b42 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 20104
+#250805 20:05:25 server id 1  end_log_pos 20179 CRC32 0xac858524 	Table_map: `spend`.`budget` mapped to number 99
+# at 20179
+#250805 20:05:25 server id 1  end_log_pos 20277 CRC32 0x1f068083 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+hfORaBMBAAAARgAAAIhOAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhQjsm+g==
+hfORaBMBAAAASwAAANNOAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASEkhYWs
+hfORaB4BAAAAYgAAADVPAAAAAF8AAAAAAAEAAgAG/wAnAAAAAAAAAIAAAAAAAAB1ABgA5Y675LiK
+5rW35Z2Q5YWs5Lqk5Zyw6ZOBAwAAAAAAAAAD0w91MAAAAAAAAIOABh8=
+'/*!*/;
+# at 20277
+#250805 20:05:25 server id 1  end_log_pos 20308 CRC32 0xc45fdae4 	Xid = 357
+COMMIT/*!*/;
+# at 20308
+#250805 20:05:25 server id 1  end_log_pos 20387 CRC32 0xebdf8c05 	Anonymous_GTID	last_committed=49	sequence_number=50	rbr_only=yes	original_committed_timestamp=1754395526003800	immediate_commit_timestamp=1754395526003800	transaction_length=411
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395526003800 (2025-08-05 20:05:26.003800 中国标准时间)
+# immediate_commit_timestamp=1754395526003800 (2025-08-05 20:05:26.003800 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395526003800*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 20387
+#250805 20:05:25 server id 1  end_log_pos 20463 CRC32 0x81a06610 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395525/*!*/;
+BEGIN
+/*!*/;
+# at 20463
+#250805 20:05:25 server id 1  end_log_pos 20533 CRC32 0x1b102387 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 20533
+#250805 20:05:25 server id 1  end_log_pos 20608 CRC32 0xc5c493c7 	Table_map: `spend`.`budget` mapped to number 99
+# at 20608
+#250805 20:05:25 server id 1  end_log_pos 20688 CRC32 0xdc1a7475 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+hfORaBMBAAAARgAAADVQAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhhyMQGw==
+hfORaBMBAAAASwAAAIBQAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASHHk8TF
+hfORaB4BAAAAUAAAANBQAAAAAF8AAAAAAAEAAgAG/wAkAAAAAAAAAIAAAAAAAAAWAAYA5p6V5aS0
+AgAAAAAAAAAD0w92MAAAAAAAAHV0Gtw=
+'/*!*/;
+# at 20688
+#250805 20:05:25 server id 1  end_log_pos 20719 CRC32 0x253f2b82 	Xid = 363
+COMMIT/*!*/;
+# at 20719
+#250805 20:05:26 server id 1  end_log_pos 20798 CRC32 0x541f2ba7 	Anonymous_GTID	last_committed=50	sequence_number=51	rbr_only=yes	original_committed_timestamp=1754395526272061	immediate_commit_timestamp=1754395526272061	transaction_length=405
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395526272061 (2025-08-05 20:05:26.272061 中国标准时间)
+# immediate_commit_timestamp=1754395526272061 (2025-08-05 20:05:26.272061 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395526272061*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 20798
+#250805 20:05:26 server id 1  end_log_pos 20874 CRC32 0x5be0bca1 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395526/*!*/;
+BEGIN
+/*!*/;
+# at 20874
+#250805 20:05:26 server id 1  end_log_pos 20944 CRC32 0x9833e073 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 20944
+#250805 20:05:26 server id 1  end_log_pos 21019 CRC32 0xde4bb11c 	Table_map: `spend`.`budget` mapped to number 99
+# at 21019
+#250805 20:05:26 server id 1  end_log_pos 21093 CRC32 0xa23e89fd 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+hvORaBMBAAAARgAAANBRAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhc+AzmA==
+hvORaBMBAAAASwAAABtSAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASEcsUve
+hvORaB4BAAAASgAAAGVSAAAAAF8AAAAAAAEAAgAG/wAkAAAAAAAAAIAAAAAAAAApRAAAAQAAAAAA
+AAAE0w93MAAAAAAAAP2JPqI=
+'/*!*/;
+# at 21093
+#250805 20:05:26 server id 1  end_log_pos 21124 CRC32 0xd8692a2d 	Xid = 369
+COMMIT/*!*/;
+# at 21124
+#250805 20:05:26 server id 1  end_log_pos 21203 CRC32 0xba7cec0f 	Anonymous_GTID	last_committed=51	sequence_number=52	rbr_only=yes	original_committed_timestamp=1754395526356878	immediate_commit_timestamp=1754395526356878	transaction_length=405
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395526356878 (2025-08-05 20:05:26.356878 中国标准时间)
+# immediate_commit_timestamp=1754395526356878 (2025-08-05 20:05:26.356878 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395526356878*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 21203
+#250805 20:05:26 server id 1  end_log_pos 21279 CRC32 0x33cdf34f 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395526/*!*/;
+BEGIN
+/*!*/;
+# at 21279
+#250805 20:05:26 server id 1  end_log_pos 21349 CRC32 0x979fb336 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 21349
+#250805 20:05:26 server id 1  end_log_pos 21424 CRC32 0xc0fbb5c8 	Table_map: `spend`.`budget` mapped to number 99
+# at 21424
+#250805 20:05:26 server id 1  end_log_pos 21498 CRC32 0x25a8489f 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+hvORaBMBAAAARgAAAGVTAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhNrOflw==
+hvORaBMBAAAASwAAALBTAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASHItfvA
+hvORaB4BAAAASgAAAPpTAAAAAF8AAAAAAAEAAgAG/wAXAAAAAAAAAIAAAAAAAAAJHgAAAQAAAAAA
+AAAF0w94MAAAAAAAAJ9IqCU=
+'/*!*/;
+# at 21498
+#250805 20:05:26 server id 1  end_log_pos 21529 CRC32 0xecd85fa2 	Xid = 375
+COMMIT/*!*/;
+# at 21529
+#250805 20:05:26 server id 1  end_log_pos 21608 CRC32 0xfe879f50 	Anonymous_GTID	last_committed=52	sequence_number=53	rbr_only=yes	original_committed_timestamp=1754395526443084	immediate_commit_timestamp=1754395526443084	transaction_length=405
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395526443084 (2025-08-05 20:05:26.443084 中国标准时间)
+# immediate_commit_timestamp=1754395526443084 (2025-08-05 20:05:26.443084 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395526443084*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 21608
+#250805 20:05:26 server id 1  end_log_pos 21684 CRC32 0xd78e72ad 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395526/*!*/;
+BEGIN
+/*!*/;
+# at 21684
+#250805 20:05:26 server id 1  end_log_pos 21754 CRC32 0xebc4386a 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 21754
+#250805 20:05:26 server id 1  end_log_pos 21829 CRC32 0xba2b877f 	Table_map: `spend`.`budget` mapped to number 99
+# at 21829
+#250805 20:05:26 server id 1  end_log_pos 21903 CRC32 0x0625117e 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+hvORaBMBAAAARgAAAPpUAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEhajjE6w==
+hvORaBMBAAAASwAAAEVVAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASF/hyu6
+hvORaB4BAAAASgAAAI9VAAAAAF8AAAAAAAEAAgAG/wAXAAAAAAAAAIAAAAAAAAASAAAAAgAAAAAA
+AAAF0w95MAAAAAAAAH4RJQY=
+'/*!*/;
+# at 21903
+#250805 20:05:26 server id 1  end_log_pos 21934 CRC32 0xede69b79 	Xid = 381
+COMMIT/*!*/;
+# at 21934
+#250805 20:05:46 server id 1  end_log_pos 22013 CRC32 0xc509de14 	Anonymous_GTID	last_committed=53	sequence_number=54	rbr_only=yes	original_committed_timestamp=1754395546797387	immediate_commit_timestamp=1754395546797387	transaction_length=423
+/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
+# original_commit_timestamp=1754395546797387 (2025-08-05 20:05:46.797387 中国标准时间)
+# immediate_commit_timestamp=1754395546797387 (2025-08-05 20:05:46.797387 中国标准时间)
+/*!80001 SET @@session.original_commit_timestamp=1754395546797387*//*!*/;
+/*!80014 SET @@session.original_server_version=80026*//*!*/;
+/*!80014 SET @@session.immediate_server_version=80026*//*!*/;
+SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
+# at 22013
+#250805 20:05:46 server id 1  end_log_pos 22089 CRC32 0xcbb64a8d 	Query	thread_id=10	exec_time=0	error_code=0
+SET TIMESTAMP=1754395546/*!*/;
+BEGIN
+/*!*/;
+# at 22089
+#250805 20:05:46 server id 1  end_log_pos 22159 CRC32 0xca2cfcea 	Table_map: `spend`.`daily_spend` mapped to number 95
+# at 22159
+#250805 20:05:46 server id 1  end_log_pos 22234 CRC32 0x8bd16599 	Table_map: `spend`.`budget` mapped to number 99
+# at 22234
+#250805 20:05:46 server id 1  end_log_pos 22326 CRC32 0xd610b3b8 	Write_rows: table id 95 flags: STMT_END_F
+
+BINLOG '
+mvORaBMBAAAARgAAAI9WAAAAAF8AAAAAAAEABXNwZW5kAAtkYWlseV9zcGVuZAAGCPYPCAoIBBIC
+YOofAQEAAgEh6vwsyg==
+mvORaBMBAAAASwAAANpWAAAAAGMAAAAAAAEABXNwZW5kAAZidWRnZXQACggICgr29vYSBfwJEgIS
+AhICAAgC/gMBAQACASGZZdGL
+mvORaB4BAAAAXAAAADZXAAAAAF8AAAAAAAEAAgAG/wAqAAAAAAAAAIAAAAAAAACAABIA5Y6f56We
+5aSn5bCP5pyI5Y2hAQAAAAAAAAAF0w96MAAAAAAAALizENY=
+'/*!*/;
+# at 22326
+#250805 20:05:46 server id 1  end_log_pos 22357 CRC32 0xcb313c2f 	Xid = 416
+COMMIT/*!*/;
+# at 22357
+#250805 23:36:16 server id 1  end_log_pos 22380 CRC32 0xe18fc2c1 	Stop
+SET @@SESSION.GTID_NEXT= 'AUTOMATIC' /* added by mysqlbinlog */ /*!*/;
+DELIMITER ;
+# End of log file
+/*!50003 SET COMPLETION_TYPE=@OLD_COMPLETION_TYPE*/;
+/*!50530 SET @@SESSION.PSEUDO_SLAVE_MODE=0*/;

@@ -12,6 +12,7 @@
     <list default="true" id="3ebbed83-2c84-4d1d-9966-04e015564b7c" name="Default" comment="升级数据库连接MySQL8">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/spend/service/impl/DailySpendImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/spend/service/impl/DailySpendImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/classes/spend/service/impl/DailySpendImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/classes/spend/service/impl/DailySpendImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/report/monthReport.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/report/monthReport.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/report/yearReport.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/report/yearReport.jsp" afterDir="false" />
     </list>
@@ -357,7 +358,7 @@
       <workItem from="1673174262311" duration="339000" />
       <workItem from="1673174697998" duration="1791000" />
       <workItem from="1673751530313" duration="4000" />
-      <workItem from="1688888399740" duration="6314000" />
+      <workItem from="1688888399740" duration="6663000" />
     </task>
     <task id="LOCAL-00001" summary="年报表增加年限">
       <created>1587286441218</created>
@@ -380,7 +381,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647101428928</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="升级数据库连接MySQL8">
+      <created>1688907712838</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1688907712838</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
