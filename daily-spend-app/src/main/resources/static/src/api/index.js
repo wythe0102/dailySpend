@@ -50,3 +50,9 @@ export const budgetApi = {
   update: (id, data) => api.put(`/budgets/${id}`, data),
   delete: (id) => api.delete(`/budgets/${id}`)
 }
+
+// 用户API
+export const userApi = {
+  getAll: () => api.get('/users'),
+  getById: (id) => api.get(`/users/${id}`)
+}

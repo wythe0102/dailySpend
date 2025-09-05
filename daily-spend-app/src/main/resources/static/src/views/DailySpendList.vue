@@ -97,9 +97,12 @@
         </el-form-item>
         <el-form-item label="用户" prop="userId">
           <el-select v-model="form.userId" placeholder="选择用户">
-            <el-option label="用户1" :value="1" />
-            <el-option label="用户2" :value="2" />
-            <el-option label="用户3" :value="3" />
+            <el-option
+              v-for="user in users"
+              :key="user.userId"
+              :label="user.name"
+              :value="user.userId"
+            />
           </el-select>
         </el-form-item>
       </el-form>
@@ -114,10 +117,11 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { dailySpendApi, typeApi } from '../api'
+import { dailySpendApi, typeApi, userApi } from '../api'
 
 const tableData = ref([])
 const types = ref([])
+const users = ref([])
 const currentPage = ref(1)
 const pageSize = ref(10)
 const total = ref(0)
@@ -199,6 +203,16 @@ const loadTypes = async () => {
     types.value = buildTree(allTypes)
   } catch (error) {
     ElMessage.error('加载类别失败')
+  }
+}
+
+// 获取用户数据
+const loadUsers = async () => {
+  try {
+    const response = await userApi.getAll()
+    users.value = response.data
+  } catch (error) {
+    ElMessage.error('获取用户数据失败')
   }
 }
 
@@ -322,6 +336,7 @@ const handlePageChange = (page) => {
 onMounted(() => {
   loadData()
   loadTypes()
+  loadUsers()
 })
 </script>
 
