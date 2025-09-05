@@ -28,7 +28,7 @@
       <el-table :data="tableData" style="width: 100%">
         <el-table-column prop="time" label="日期" width="120">
           <template #default="{ row }">
-            {{ new Date(row.time).toLocaleDateString() }}
+            {{ new Date(row.time).toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' }) }}
           </template>
         </el-table-column>
         <el-table-column prop="weightAmount" label="体重(kg)" width="100" />
@@ -123,8 +123,15 @@ const loadData = async () => {
     }
     
     if (dateRange.value && dateRange.value.length === 2) {
-      params.startTime = new Date(dateRange.value[0]).toISOString()
-      params.endTime = new Date(dateRange.value[1]).toISOString()
+      // 处理日期范围时区问题
+      const startDate = new Date(dateRange.value[0])
+      const endDate = new Date(dateRange.value[1])
+      
+      const startLocal = new Date(startDate.getTime() - startDate.getTimezoneOffset() * 60000)
+      const endLocal = new Date(endDate.getTime() - endDate.getTimezoneOffset() * 60000)
+      
+      params.startTime = startLocal.toISOString()
+      params.endTime = endLocal.toISOString()
     }
     
     const response = await dailyWeightApi.getPage(params)
@@ -195,10 +202,13 @@ const handleSubmit = async () => {
   try {
     await formRef.value.validate()
     
-    // 处理表单数据格式
+    // 处理表单数据格式 - 使用本地时间避免时区问题
+    const selectedDate = new Date(form.time)
+    const localDate = new Date(selectedDate.getTime() - selectedDate.getTimezoneOffset() * 60000)
+    
     const submitData = {
       ...form,
-      time: form.time instanceof Date ? form.time.toISOString() : form.time,
+      time: localDate.toISOString(),
       userId: Number(form.userId), // 确保userId是数字类型
       weightAmount: Number(form.weightAmount)
     }
