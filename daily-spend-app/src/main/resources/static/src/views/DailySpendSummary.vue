@@ -24,68 +24,29 @@
         </el-form-item>
       </el-form>
       
-      <el-row :gutter="20" class="summary-cards">
-        <el-col :span="8">
-          <el-card class="summary-card">
-            <div class="card-content">
-              <div class="card-title">总支出</div>
-              <div class="card-value">¥{{ summary.totalExpense }}</div>
-            </div>
-          </el-card>
-        </el-col>
-        <el-col :span="8">
-          <el-card class="summary-card">
-            <div class="card-content">
-              <div class="card-title">总收入</div>
-              <div class="card-value">¥{{ summary.totalIncome }}</div>
-            </div>
-          </el-card>
-        </el-col>
-        <el-col :span="8">
-          <el-card class="summary-card">
-            <div class="card-content">
-              <div class="card-title">净收入</div>
-              <div class="card-value" :class="{ 'text-success': summary.netIncome >= 0, 'text-danger': summary.netIncome < 0 }">
-                ¥{{ summary.netIncome }}
-              </div>
-            </div>
-          </el-card>
-        </el-col>
-      </el-row>
-      
-      <el-row :gutter="20" class="charts">
-        <el-col :span="12">
-          <el-card>
-            <template #header>
-              <span>支出分类统计</span>
-            </template>
-            <div id="expense-chart" style="height: 300px;"></div>
-          </el-card>
-        </el-col>
-        <el-col :span="12">
-          <el-card>
-            <template #header>
-              <span>收入分类统计</span>
-            </template>
-            <div id="income-chart" style="height: 300px;"></div>
-          </el-card>
-        </el-col>
-      </el-row>
+
       
       <el-table :data="tableData" style="width: 100%">
-        <el-table-column prop="type" label="类别" />
-        <el-table-column prop="totalAmount" label="总金额">
+        <el-table-column prop="date" label="日期" width="120">
           <template #default="{ row }">
-            ¥{{ row.totalAmount }}
+            {{ formatDate(row.date) }}
           </template>
         </el-table-column>
-        <el-table-column prop="count" label="笔数" />
-        <el-table-column prop="percentage" label="占比">
+        <el-table-column prop="totalAmount" label="总金额" width="150">
           <template #default="{ row }">
-            {{ row.percentage }}%
+            ¥{{ row.totalAmount.toFixed(2) }}
           </template>
         </el-table-column>
+        <el-table-column prop="count" label="笔数" width="100" />
       </el-table>
+      
+      <el-pagination
+        v-model:current-page="currentPage"
+        :page-size="pageSize"
+        :total="total"
+        layout="total, prev, pager, next"
+        @current-change="handlePageChange"
+      />
     </el-card>
   </div>
 </template>
@@ -94,175 +55,98 @@
 import { ref, reactive, onMounted, watch } from 'vue'
 import { ElMessage } from 'element-plus'
 import { dailySpendApi } from '../api'
-import * as echarts from 'echarts'
 
 const tableData = ref([])
-const summary = reactive({
-  totalExpense: 0,
-  totalIncome: 0,
-  netIncome: 0
-})
+const currentPage = ref(1)
+const pageSize = ref(10)
+const total = ref(0)
 
 const searchForm = reactive({
-  userId: 1 // 默认用户ID
+  // 不再限制用户ID，获取所有用户数据
 })
 
 const dateRange = ref([])
 
-let expenseChart = null
-let incomeChart = null
-
 const loadData = async () => {
   try {
-    let startDate, endDate
-    
-    if (dateRange.value && dateRange.value.length === 2) {
-      startDate = dateRange.value[0]
-      endDate = dateRange.value[1]
-    } else {
-      // 默认显示当月数据
-      startDate = new Date(new Date().getFullYear(), new Date().getMonth(), 1)
-      endDate = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0)
+    const params = {
+      // 不再使用分页参数，获取所有数据进行前端汇总
+      size: 10000  // 设置一个大数字获取所有数据
     }
     
-    // 确保日期格式正确
-    const startStr = startDate instanceof Date ? startDate.toISOString().split('T')[0] : startDate
-    const endStr = endDate instanceof Date ? endDate.toISOString().split('T')[0] : endDate
+    // 处理日期范围
+    if (dateRange.value && dateRange.value.length === 2) {
+      const startDate = dateRange.value[0]
+      const endDate = dateRange.value[1]
+      
+      if (startDate && endDate) {
+        params.startDate = startDate.toISOString().split('T')[0]
+        params.endDate = endDate.toISOString().split('T')[0]
+      }
+    }
     
-    const response = await dailySpendApi.getByUserIdAndDateRange(
-      searchForm.userId,
-      startStr,
-      endStr
-    )
+    const response = await dailySpendApi.getPage(params)
+    const data = response.data.content
     
-    const data = response.data
-    processData(data)
+    // 按日期分组汇总
+    const dailyData = groupByDate(data)
+    
+    // 前端分页
+    const startIndex = (currentPage.value - 1) * pageSize.value
+    const endIndex = startIndex + pageSize.value
+    tableData.value = dailyData.slice(startIndex, endIndex)
+    total.value = dailyData.length
+    
   } catch (error) {
     ElMessage.error('加载数据失败')
     console.error('加载数据失败:', error)
   }
 }
 
-const processData = (data) => {
-  const expenseData = data.filter(item => item.type.type === 'EXPENSE')
-  const incomeData = data.filter(item => item.type.type === 'INCOME')
-  
-  // 计算汇总数据
-  summary.totalExpense = expenseData.reduce((sum, item) => sum + item.amount, 0)
-  summary.totalIncome = incomeData.reduce((sum, item) => sum + item.amount, 0)
-  summary.netIncome = summary.totalIncome - summary.totalExpense
-  
-  // 按类别分组
-  const expenseByType = groupByType(expenseData)
-  const incomeByType = groupByType(incomeData)
-  
-  // 更新表格数据
-  tableData.value = [
-    ...expenseByType.map(item => ({ ...item, type: `${item.type} (支出)` })),
-    ...incomeByType.map(item => ({ ...item, type: `${item.type} (收入)` }))
-  ]
-  
-  // 更新图表
-  updateCharts(expenseByType, incomeByType)
-}
 
-const groupByType = (data) => {
+
+const groupByDate = (data) => {
   const groups = {}
   data.forEach(item => {
-    if (!groups[item.type.name]) {
-      groups[item.type.name] = {
-        type: item.type.name,
+    const date = item.date
+    if (!groups[date]) {
+      groups[date] = {
+        date: date,
         totalAmount: 0,
         count: 0
       }
     }
-    groups[item.type.name].totalAmount += item.amount
-    groups[item.type.name].count += 1
+    groups[date].totalAmount += item.amount
+    groups[date].count += 1
   })
   
-  const total = Object.values(groups).reduce((sum, item) => sum + item.totalAmount, 0)
-  return Object.values(groups).map(item => ({
-    ...item,
-    percentage: total > 0 ? ((item.totalAmount / total) * 100).toFixed(2) : 0
-  }))
+  // 按日期排序（倒序）
+  return Object.values(groups).sort((a, b) => new Date(b.date) - new Date(a.date))
 }
 
-const updateCharts = (expenseData, incomeData) => {
-  // 支出饼图
-  if (expenseChart) {
-    expenseChart.dispose()
-  }
-  expenseChart = echarts.init(document.getElementById('expense-chart'))
-  expenseChart.setOption({
-    tooltip: {
-      trigger: 'item',
-      formatter: '{a} <br/>{b}: ¥{c} ({d}%)'
-    },
-    legend: {
-      orient: 'vertical',
-      left: 'left'
-    },
-    series: [
-      {
-        name: '支出',
-        type: 'pie',
-        radius: '50%',
-        data: expenseData.map(item => ({
-          name: item.type,
-          value: item.totalAmount
-        })),
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
-          }
-        }
-      }
-    ]
-  })
-  
-  // 收入饼图
-  if (incomeChart) {
-    incomeChart.dispose()
-  }
-  incomeChart = echarts.init(document.getElementById('income-chart'))
-  incomeChart.setOption({
-    tooltip: {
-      trigger: 'item',
-      formatter: '{a} <br/>{b}: ¥{c} ({d}%)'
-    },
-    legend: {
-      orient: 'vertical',
-      left: 'left'
-    },
-    series: [
-      {
-        name: '收入',
-        type: 'pie',
-        radius: '50%',
-        data: incomeData.map(item => ({
-          name: item.type,
-          value: item.totalAmount
-        })),
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
-          }
-        }
-      }
-    ]
-  })
+const formatDate = (dateStr) => {
+  const date = new Date(dateStr)
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
 }
+
+
 
 const handleSearch = () => {
+  currentPage.value = 1
   loadData()
 }
 
 const handleReset = () => {
   dateRange.value = []
+  currentPage.value = 1
+  loadData()
+}
+
+const handlePageChange = (page) => {
+  currentPage.value = page
   loadData()
 }
 
@@ -273,13 +157,6 @@ onMounted(() => {
 // 监听日期范围变化
 watch(dateRange, () => {
   loadData()
-})
-
-onMounted(() => {
-  window.addEventListener('resize', () => {
-    if (expenseChart) expenseChart.resize()
-    if (incomeChart) incomeChart.resize()
-  })
 })
 </script>
 
@@ -295,37 +172,6 @@ onMounted(() => {
 }
 
 .search-form {
-  margin-bottom: 20px;
-}
-
-.summary-cards {
-  margin-bottom: 20px;
-}
-
-.summary-card {
-  text-align: center;
-}
-
-.card-title {
-  font-size: 14px;
-  color: #909399;
-  margin-bottom: 10px;
-}
-
-.card-value {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.text-success {
-  color: #67c23a;
-}
-
-.text-danger {
-  color: #ff4949;
-}
-
-.charts {
   margin-bottom: 20px;
 }
 </style>
