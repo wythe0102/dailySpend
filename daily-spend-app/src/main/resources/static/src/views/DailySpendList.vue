@@ -24,7 +24,7 @@
           ref="cascaderRef"
           v-model="searchForm.typeIds"
           :options="types"
-          :props="cascaderProps"
+          :props="searchCascaderProps"
           placeholder="选择类别"
           clearable
           multiple
@@ -84,7 +84,7 @@
           <el-cascader
             v-model="form.typeId"
             :options="types"
-            :props="cascaderProps"
+            :props="dialogCascaderProps"
             placeholder="选择类别"
             clearable
           />
@@ -129,11 +129,23 @@ const dialogVisible = ref(false)
 const dialogType = ref('add')
 const formRef = ref()
 
-const cascaderProps = {
+// 搜索表单的级联选择器配置（多选）
+const searchCascaderProps = {
   value: 'typeId',
   label: 'name',
   children: 'children',
   multiple: true, // 启用多选
+  checkStrictly: true, // 允许选择任意级别的节点
+  emitPath: false, // 只返回选中的节点值，而不是路径数组
+  expandTrigger: 'hover' // 鼠标悬停展开子节点，无需点击
+}
+
+// 新增/编辑对话框的级联选择器配置（单选）
+const dialogCascaderProps = {
+  value: 'typeId',
+  label: 'name',
+  children: 'children',
+  multiple: false, // 单选
   checkStrictly: true, // 允许选择任意级别的节点
   emitPath: false, // 只返回选中的节点值，而不是路径数组
   expandTrigger: 'hover' // 鼠标悬停展开子节点，无需点击
