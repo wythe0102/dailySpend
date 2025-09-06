@@ -8,17 +8,32 @@
         </div>
       </template>
       
-      <el-table :data="tableData" style="width: 100%" row-key="typeId" lazy>
-        <el-table-column prop="name" label="类别名称" />
-        <el-table-column prop="code" label="编码" />
-        <el-table-column prop="sequence" label="顺序" />
-        <el-table-column label="父类别">
+      <el-table 
+        :data="treeData" 
+        style="width: 100%" 
+        row-key="typeId" 
+        default-expand-all
+        :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
+      >
+        <el-table-column prop="name" label="类别名称" width="200">
           <template #default="{ row }">
-            {{ getParentName(row.parentId) }}
+            <span :style="{ paddingLeft: (row.level * 20) + 'px' }">
+              <i v-if="row.children && row.children.length > 0" class="el-icon-folder"></i>
+              <i v-else class="el-icon-document"></i>
+              {{ row.name }}
+            </span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="code" label="编码" width="120" />
+        <el-table-column prop="sequence" label="顺序" width="80" />
+
+        <el-table-column label="创建时间" width="120">
+          <template #default="{ row }">
+            {{ row.addDate ? formatDate(row.addDate) : '-' }}
           </template>
         </el-table-column>
 
-        <el-table-column label="操作" width="150">
+        <el-table-column label="操作" width="150" fixed="right">
           <template #default="{ row }">
             <el-button type="primary" size="small" @click="handleEdit(row)">编辑</el-button>
             <el-button type="danger" size="small" @click="handleDelete(row)">删除</el-button>
@@ -46,7 +61,7 @@
         <el-form-item label="父类别" prop="parentId">
           <el-select v-model="form.parentId" placeholder="选择父类别" clearable>
             <el-option
-              v-for="type in allTypes"
+              v-for="type in getAvailableParents()"
               :key="type.typeId"
               :label="type.name"
               :value="type.typeId"
@@ -68,7 +83,7 @@ import { ref, reactive, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { typeApi } from '../api'
 
-const tableData = ref([])
+const treeData = ref([])
 const allTypes = ref([])
 const dialogVisible = ref(false)
 const dialogType = ref('add')
@@ -93,10 +108,53 @@ const loadData = async () => {
   try {
     const response = await typeApi.getAll()
     allTypes.value = response.data
-    tableData.value = response.data.filter(type => type.name !== '类型') // 过滤掉"类型"类别
+    const filteredData = response.data.filter(type => type.name !== '类型') // 过滤掉"类型"类别
+    treeData.value = buildTreeData(filteredData)
   } catch (error) {
     ElMessage.error('加载数据失败')
   }
+}
+
+const buildTreeData = (data) => {
+  const map = {}
+  const roots = []
+  
+  // 初始化所有节点
+  data.forEach(item => {
+    map[item.typeId] = { ...item, children: [], level: 0 }
+  })
+  
+  // 构建树形结构
+  data.forEach(item => {
+    if (item.parentId && map[item.parentId] && item.parentId !== item.typeId) {
+      // 设置层级
+      map[item.typeId].level = map[item.parentId].level + 1
+      map[item.parentId].children.push(map[item.typeId])
+    } else {
+      // 根节点
+      map[item.typeId].level = 0
+      roots.push(map[item.typeId])
+    }
+  })
+  
+  // 按sequence排序
+  const sortBySequence = (nodes) => {
+    nodes.sort((a, b) => a.sequence - b.sequence)
+    nodes.forEach(node => {
+      if (node.children && node.children.length > 0) {
+        sortBySequence(node.children)
+      }
+    })
+  }
+  
+  sortBySequence(roots)
+  return roots
+}
+
+const formatDate = (dateString) => {
+  if (!dateString) return ''
+  const date = new Date(dateString)
+  return date.toLocaleDateString('zh-CN')
 }
 
 const handleAdd = () => {
@@ -146,6 +204,32 @@ const getParentName = (parentId) => {
   return parent ? parent.name : ''
 }
 
+const getAvailableParents = () => {
+  // 在编辑模式下，过滤掉当前节点及其子节点
+  if (dialogType.value === 'edit') {
+    const currentId = form.typeId
+    const excludeIds = new Set()
+    
+    // 递归获取所有子节点ID
+    const getAllChildrenIds = (parentId) => {
+      excludeIds.add(parentId)
+      const children = allTypes.value.filter(type => type.parentId === parentId)
+      children.forEach(child => {
+        getAllChildrenIds(child.typeId)
+      })
+    }
+    
+    if (currentId) {
+      getAllChildrenIds(currentId)
+    }
+    
+    return allTypes.value.filter(type => !excludeIds.has(type.typeId))
+  }
+  
+  // 新增模式下返回所有类别
+  return allTypes.value
+}
+
 const handleSubmit = async () => {
   try {
     await formRef.value.validate()
@@ -155,6 +239,7 @@ const handleSubmit = async () => {
       sequence: form.sequence,
       parentId: form.parentId,
       type: form.type
+      // 不设置addDate，让后端自动填充
     }
     
     if (dialogType.value === 'add') {
@@ -186,5 +271,23 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+:deep(.el-table__row) {
+  transition: all 0.3s ease;
+}
+
+:deep(.el-table__row:hover) {
+  background-color: #f5f7fa;
+}
+
+.tree-node {
+  display: flex;
+  align-items: center;
+}
+
+.tree-icon {
+  margin-right: 8px;
+  color: #909399;
 }
 </style>
