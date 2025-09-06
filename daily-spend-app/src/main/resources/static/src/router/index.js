@@ -21,11 +21,6 @@ const routes = [
     component: () => import('../views/DailyWeightList.vue')
   },
   {
-    path: '/budgets',
-    name: 'Budgets',
-    component: () => import('../views/BudgetList.vue')
-  },
-  {
     path: '/types',
     name: 'Types',
     component: () => import('../views/TypeList.vue')

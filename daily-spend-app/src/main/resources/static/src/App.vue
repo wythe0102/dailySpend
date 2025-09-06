@@ -52,10 +52,6 @@
               <el-icon><User /></el-icon>
               <template #title>体重记录</template>
             </el-menu-item>
-            <el-menu-item index="/budgets">
-              <el-icon><Wallet /></el-icon>
-              <template #title>预算管理</template>
-            </el-menu-item>
             <el-menu-item index="/types">
               <el-icon><Collection /></el-icon>
               <template #title>类别维护</template>
