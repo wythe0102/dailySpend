@@ -35,9 +35,8 @@ public class Type {
     @Column(name = "sequence")
     private Integer sequence = 0;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "parentId", insertable = false, updatable = false)
-    @JsonIgnore
     private Type parent;
     
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

@@ -10,7 +10,7 @@
       
       <el-table :data="tableData" style="width: 100%" row-key="typeId" lazy>
         <el-table-column prop="name" label="类别名称" />
-        <el-table-column prop="parentType.name" label="父类别" />
+        <el-table-column prop="parent.name" label="父类别" />
         <el-table-column label="类型" width="100">
           <template #default="{ row }">
             <el-tag :type="row.type === 'INCOME' ? 'success' : 'danger'">
@@ -40,7 +40,7 @@
         <el-form-item label="父类别" prop="parentTypeId">
           <el-select v-model="form.parentTypeId" placeholder="选择父类别" clearable>
             <el-option
-              v-for="type in rootTypes"
+              v-for="type in allTypes"
               :key="type.typeId"
               :label="type.name"
               :value="type.typeId"
@@ -68,7 +68,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import { typeApi } from '../api'
 
 const tableData = ref([])
-const rootTypes = ref([])
+const allTypes = ref([])
 const dialogVisible = ref(false)
 const dialogType = ref('add')
 const formRef = ref()
@@ -89,17 +89,9 @@ const loadData = async () => {
   try {
     const response = await typeApi.getAll()
     tableData.value = response.data
+    allTypes.value = response.data.filter(type => type.name !== '类型') // 过滤掉"类型"类别
   } catch (error) {
     ElMessage.error('加载数据失败')
-  }
-}
-
-const loadRootTypes = async () => {
-  try {
-    const response = await typeApi.getRootTypes()
-    rootTypes.value = response.data
-  } catch (error) {
-    ElMessage.error('加载根类别失败')
   }
 }
 
@@ -119,7 +111,7 @@ const handleEdit = (row) => {
   Object.assign(form, {
     typeId: row.typeId,
     name: row.name,
-    parentTypeId: row.parentType?.typeId || null,
+    parentTypeId: row.parent?.typeId || null,
     type: row.type
   })
   dialogVisible.value = true
@@ -152,7 +144,6 @@ const handleSubmit = async () => {
     }
     dialogVisible.value = false
     loadData()
-    loadRootTypes()
   } catch (error) {
     ElMessage.error('操作失败')
   }
@@ -160,7 +151,6 @@ const handleSubmit = async () => {
 
 onMounted(() => {
   loadData()
-  loadRootTypes()
 })
 </script>
 
