@@ -5,6 +5,7 @@ import com.dailyspend.entity.DailySpend;
 import com.dailyspend.entity.Type;
 import com.dailyspend.entity.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,7 +23,16 @@ public class SyncService {
     private final DailySpendService dailySpendService;
     private final TypeService typeService;
     private final UserService userService;
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate = createRestTemplate();
+    
+    private RestTemplate createRestTemplate() {
+        RestTemplate template = new RestTemplate();
+        SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+        factory.setConnectTimeout(600000); // 10分钟连接超时
+        factory.setReadTimeout(600000);    // 10分钟读取超时
+        template.setRequestFactory(factory);
+        return template;
+    }
     
     private static final String SYNC_DOMAIN = "52tool.net";
     
