@@ -4,7 +4,12 @@
       <template #header>
         <div class="card-header">
           <span>日常记账</span>
-          <el-button type="primary" @click="handleAdd">新增记账</el-button>
+          <div>
+            <el-button type="success" @click="handleSync" :loading="syncLoading">
+              同步数据
+            </el-button>
+            <el-button type="primary" @click="handleAdd">新增记账</el-button>
+          </div>
         </div>
       </template>
       
@@ -134,7 +139,7 @@
 import { ref, reactive, onMounted, watch, nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { dailySpendApi, typeApi, userApi } from '../api'
+import { dailySpendApi, typeApi, userApi, syncApi } from '../api'
 
 const route = useRoute()
 const router = useRouter()
@@ -148,6 +153,7 @@ const total = ref(0)
 const dialogVisible = ref(false)
 const dialogType = ref('add')
 const formRef = ref()
+const syncLoading = ref(false)
 
 // 搜索表单的级联选择器配置（多选）
 const searchCascaderProps = {
@@ -386,6 +392,34 @@ const handleSubmit = async () => {
 const handlePageChange = (page) => {
   currentPage.value = page
   loadData()
+}
+
+const handleSync = async () => {
+  try {
+    syncLoading.value = true
+    ElMessage.info('正在同步数据...')
+    
+    // 调用同步API
+    const response = await syncApi.syncDailySpends()
+    const syncedIds = response.data
+    
+    if (syncedIds && syncedIds.length > 0) {
+      // 确认同步完成
+      await syncApi.confirmSync(syncedIds)
+      
+      ElMessage.success(`成功同步 ${syncedIds.length} 条数据`)
+      
+      // 重新加载数据以显示同步结果
+      await loadData()
+    } else {
+      ElMessage.info('暂无新数据需要同步')
+    }
+  } catch (error) {
+    console.error('同步数据失败:', error)
+    ElMessage.error('同步数据失败: ' + (error.response?.data?.message || error.message))
+  } finally {
+    syncLoading.value = false
+  }
 }
 
 const handleRouteQuery = () => {

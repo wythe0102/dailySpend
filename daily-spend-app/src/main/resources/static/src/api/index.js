@@ -58,3 +58,9 @@ export const userApi = {
   getAll: () => api.get('/users'),
   getById: (id) => api.get(`/users/${id}`)
 }
+
+// 同步API
+export const syncApi = {
+  syncDailySpends: () => api.post('/daily-spends/sync'),
+  confirmSync: (ids) => api.post('/daily-spends/confirm-sync', ids)
+}
