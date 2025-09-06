@@ -29,7 +29,13 @@
       <el-table :data="tableData" style="width: 100%">
         <el-table-column prop="date" label="日期" width="120">
           <template #default="{ row }">
-            {{ formatDate(row.date) }}
+            <el-button 
+              type="text" 
+              @click="handleDateClick(row.date)"
+              style="color: #409eff; text-decoration: underline; cursor: pointer;"
+            >
+              {{ formatDate(row.date) }}
+            </el-button>
           </template>
         </el-table-column>
         <el-table-column prop="totalAmount" label="总金额" width="150">
@@ -53,8 +59,11 @@
 
 <script setup>
 import { ref, reactive, onMounted, watch } from 'vue'
+import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { dailySpendApi } from '../api'
+
+const router = useRouter()
 
 const tableData = ref([])
 const currentPage = ref(1)
@@ -148,6 +157,17 @@ const handleReset = () => {
 const handlePageChange = (page) => {
   currentPage.value = page
   loadData()
+}
+
+const handleDateClick = (date) => {
+  // 跳转到日常记账界面，并传递选中的日期
+  router.push({
+    name: 'DailySpends',
+    query: {
+      date: date,
+      from: 'summary'
+    }
+  })
 }
 
 onMounted(() => {

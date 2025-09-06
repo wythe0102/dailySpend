@@ -37,17 +37,17 @@
         </el-form-item>
         <el-form-item label="类别" prop="typeIds">
           <el-cascader
-          ref="cascaderRef"
-          v-model="searchForm.typeIds"
-          :options="types"
-          :props="searchCascaderProps"
-          placeholder="选择类别"
-          clearable
-          multiple
-          collapse-tags
-          :show-all-levels="false"
-          @visible-change="handleCascaderVisibleChange"
-        />
+            ref="cascaderRef"
+            v-model="searchForm.typeIds"
+            :options="types"
+            :props="searchCascaderProps"
+            placeholder="选择类别"
+            clearable
+            multiple
+            collapse-tags
+            :show-all-levels="false"
+            @change="handleSearch"
+          />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="handleSearch">搜索</el-button>
@@ -131,9 +131,13 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted, watch, nextTick } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { dailySpendApi, typeApi, userApi } from '../api'
+
+const route = useRoute()
+const router = useRouter()
 
 const tableData = ref([])
 const types = ref([])
@@ -210,8 +214,17 @@ const loadData = async () => {
       const endDate = dateRange.value[1]
       
       if (startDate && endDate) {
-        params.startDate = startDate.toISOString().split('T')[0]
-        params.endDate = endDate.toISOString().split('T')[0]
+        // 确保日期格式为YYYY-MM-DD，避免时区问题
+        const formatDate = (date) => {
+          const d = new Date(date)
+          const year = d.getFullYear()
+          const month = String(d.getMonth() + 1).padStart(2, '0')
+          const day = String(d.getDate()).padStart(2, '0')
+          return `${year}-${month}-${day}`
+        }
+        
+        params.startDate = formatDate(startDate)
+        params.endDate = formatDate(endDate)
       }
     }
     
@@ -233,8 +246,10 @@ const loadTypes = async () => {
     const response = await typeApi.getAll()
     const allTypes = response.data
     types.value = buildTree(allTypes)
+    console.log('类别数据加载完成:', types.value.length, '个类别')
   } catch (error) {
     ElMessage.error('加载类别失败')
+    console.error('加载类别失败:', error)
   }
 }
 
@@ -299,12 +314,8 @@ const handleReset = () => {
 }
 
 const handleCascaderVisibleChange = (visible) => {
-  if (visible && cascaderRef.value) {
-    // 当下拉框显示时，展开所有节点
-    nextTick(() => {
-      cascaderRef.value.togglePopperVisible()
-    })
-  }
+  // 暂时移除有问题的展开逻辑，让下拉框正常工作
+  console.log('级联选择器可见性变化:', visible)
 }
 
 const handleAdd = () => {
@@ -377,10 +388,58 @@ const handlePageChange = (page) => {
   loadData()
 }
 
+const handleRouteQuery = () => {
+  // 检查路由参数中的日期
+  const queryDate = route.query.date
+  const fromSummary = route.query.from === 'summary'
+  
+  if (queryDate && fromSummary) {
+    try {
+      // 确保日期格式正确，避免时区问题
+      const date = new Date(queryDate + 'T00:00:00')
+      if (!isNaN(date.getTime())) {
+        // 设置日期范围为单一天
+        dateRange.value = [date, date]
+        
+        // 清除其他查询参数
+        searchForm.typeIds = []
+        searchForm.userId = null
+        
+        // 显示提示信息
+        ElMessage.info(`正在按 ${queryDate} 过滤数据`)
+        
+        // 重新加载数据
+        loadData()
+        
+        // 清理URL参数，但保留当前页面状态，避免触发新的路由变化
+        nextTick(() => {
+          router.replace({ 
+            name: 'DailySpends',
+            query: {}
+          }).catch(() => {
+            // 忽略路由重复错误
+          })
+        })
+      } else {
+        console.error('无效的日期格式:', queryDate)
+        ElMessage.warning(`无效的日期格式: ${queryDate}`)
+      }
+    } catch (error) {
+      console.error('日期格式错误:', error)
+      ElMessage.error('日期格式错误: ' + error.message)
+    }
+  }
+}
+
 onMounted(() => {
   loadData()
   loadTypes()
   loadUsers()
+  
+  // 处理路由参数
+  nextTick(() => {
+    handleRouteQuery()
+  })
 })
 </script>
 
