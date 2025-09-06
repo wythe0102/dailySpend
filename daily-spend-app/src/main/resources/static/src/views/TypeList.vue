@@ -10,14 +10,14 @@
       
       <el-table :data="tableData" style="width: 100%" row-key="typeId" lazy>
         <el-table-column prop="name" label="类别名称" />
-        <el-table-column prop="parent.name" label="父类别" />
-        <el-table-column label="类型" width="100">
+        <el-table-column prop="code" label="编码" />
+        <el-table-column prop="sequence" label="顺序" />
+        <el-table-column label="父类别">
           <template #default="{ row }">
-            <el-tag :type="row.type === 'INCOME' ? 'success' : 'danger'">
-              {{ row.type === 'INCOME' ? '收入' : '支出' }}
-            </el-tag>
+            {{ getParentName(row.parentId) }}
           </template>
         </el-table-column>
+
         <el-table-column label="操作" width="150">
           <template #default="{ row }">
             <el-button type="primary" size="small" @click="handleEdit(row)">编辑</el-button>
@@ -37,8 +37,14 @@
         <el-form-item label="类别名称" prop="name">
           <el-input v-model="form.name" placeholder="请输入类别名称" />
         </el-form-item>
-        <el-form-item label="父类别" prop="parentTypeId">
-          <el-select v-model="form.parentTypeId" placeholder="选择父类别" clearable>
+        <el-form-item label="编码" prop="code">
+          <el-input v-model="form.code" placeholder="请输入类别编码" />
+        </el-form-item>
+        <el-form-item label="顺序" prop="sequence">
+          <el-input-number v-model="form.sequence" :min="0" placeholder="请输入顺序" />
+        </el-form-item>
+        <el-form-item label="父类别" prop="parentId">
+          <el-select v-model="form.parentId" placeholder="选择父类别" clearable>
             <el-option
               v-for="type in allTypes"
               :key="type.typeId"
@@ -47,12 +53,7 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="类型" prop="type">
-          <el-select v-model="form.type" placeholder="选择类型">
-            <el-option label="收入" value="INCOME" />
-            <el-option label="支出" value="EXPENSE" />
-          </el-select>
-        </el-form-item>
+
       </el-form>
       <template #footer>
         <el-button @click="dialogVisible = false">取消</el-button>
@@ -76,20 +77,23 @@ const formRef = ref()
 const form = reactive({
   typeId: null,
   name: '',
-  parentTypeId: null,
+  code: '',
+  sequence: 0,
+  parentId: null,
   type: 'EXPENSE'
 })
 
 const rules = {
   name: [{ required: true, message: '请输入类别名称', trigger: 'blur' }],
-  type: [{ required: true, message: '请选择类型', trigger: 'change' }]
+  code: [{ required: true, message: '请输入类别编码', trigger: 'blur' }],
+  sequence: [{ required: true, message: '请输入顺序', trigger: 'blur' }]
 }
 
 const loadData = async () => {
   try {
     const response = await typeApi.getAll()
-    tableData.value = response.data
-    allTypes.value = response.data.filter(type => type.name !== '类型') // 过滤掉"类型"类别
+    allTypes.value = response.data
+    tableData.value = response.data.filter(type => type.name !== '类型') // 过滤掉"类型"类别
   } catch (error) {
     ElMessage.error('加载数据失败')
   }
@@ -100,7 +104,9 @@ const handleAdd = () => {
   Object.assign(form, {
     typeId: null,
     name: '',
-    parentTypeId: null,
+    code: '',
+    sequence: 0,
+    parentId: null,
     type: 'EXPENSE'
   })
   dialogVisible.value = true
@@ -111,7 +117,9 @@ const handleEdit = (row) => {
   Object.assign(form, {
     typeId: row.typeId,
     name: row.name,
-    parentTypeId: row.parent?.typeId || null,
+    code: row.code,
+    sequence: row.sequence,
+    parentId: row.parentId || null,
     type: row.type
   })
   dialogVisible.value = true
@@ -132,14 +140,29 @@ const handleDelete = async (row) => {
   }
 }
 
+const getParentName = (parentId) => {
+  if (!parentId) return ''
+  const parent = allTypes.value.find(type => type.typeId === parentId)
+  return parent ? parent.name : ''
+}
+
 const handleSubmit = async () => {
   try {
     await formRef.value.validate()
+    const submitData = {
+      name: form.name,
+      code: form.code,
+      sequence: form.sequence,
+      parentId: form.parentId,
+      type: form.type
+    }
+    
     if (dialogType.value === 'add') {
-      await typeApi.create(form)
+      await typeApi.create(submitData)
       ElMessage.success('添加成功')
     } else {
-      await typeApi.update(form.typeId, form)
+      submitData.typeId = form.typeId
+      await typeApi.update(form.typeId, submitData)
       ElMessage.success('更新成功')
     }
     dialogVisible.value = false
