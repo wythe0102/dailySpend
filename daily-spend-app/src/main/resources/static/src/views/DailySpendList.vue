@@ -341,7 +341,9 @@ const handleEdit = (row) => {
   dialogType.value = 'edit'
   Object.assign(form, {
     ...row,
-    date: new Date(row.date)
+    date: new Date(row.date),
+    typeId: row.type?.typeId || row.typeId, // 确保使用typeId而不是type对象
+    userId: row.user?.userId || row.userId  // 确保使用userId而不是user对象
   })
   dialogVisible.value = true
 }
@@ -425,9 +427,8 @@ const handleSync = async () => {
 const handleRouteQuery = () => {
   // 检查路由参数中的日期
   const queryDate = route.query.date
-  const fromSummary = route.query.from === 'summary'
   
-  if (queryDate && fromSummary) {
+  if (queryDate) {
     try {
       // 确保日期格式正确，避免时区问题
       const date = new Date(queryDate + 'T00:00:00')

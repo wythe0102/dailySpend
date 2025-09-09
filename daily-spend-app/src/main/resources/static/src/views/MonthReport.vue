@@ -3,7 +3,7 @@
     <el-card>
       <template #header>
         <div class="card-header">
-          <span>月度报表</span>
+          <span>月报表</span>
         </div>
       </template>
       
@@ -13,112 +13,44 @@
             v-model="searchForm.month"
             type="month"
             placeholder="选择月份"
+            format="YYYY年MM月"
+            value-format="YYYY-MM"
             @change="handleSearch"
           />
         </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="handleSearch">搜索</el-button>
-        </el-form-item>
       </el-form>
       
-      <el-row :gutter="20" class="summary-cards">
-        <el-col :span="6">
-          <el-card class="summary-card">
-            <div class="card-content">
-              <div class="card-title">总支出</div>
-              <div class="card-value">¥{{ summary.totalExpense }}</div>
-            </div>
-          </el-card>
-        </el-col>
-        <el-col :span="6">
-          <el-card class="summary-card">
-            <div class="card-content">
-              <div class="card-title">总收入</div>
-              <div class="card-value">¥{{ summary.totalIncome }}</div>
-            </div>
-          </el-card>
-        </el-col>
-        <el-col :span="6">
-          <el-card class="summary-card">
-            <div class="card-content">
-              <div class="card-title">净收入</div>
-              <div class="card-value" :class="{ 'text-success': summary.netIncome >= 0, 'text-danger': summary.netIncome < 0 }">
-                ¥{{ summary.netIncome }}
-              </div>
-            </div>
-          </el-card>
-        </el-col>
-        <el-col :span="6">
-          <el-card class="summary-card">
-            <div class="card-content">
-              <div class="card-title">日均支出</div>
-              <div class="card-value">¥{{ summary.dailyExpense }}</div>
-            </div>
-          </el-card>
-        </el-col>
-      </el-row>
-      
-      <el-row :gutter="20" class="charts">
-        <el-col :span="12">
-          <el-card>
-            <template #header>
-              <span>每日支出趋势</span>
-            </template>
-            <div id="daily-expense-chart" style="height: 300px;"></div>
-          </el-card>
-        </el-col>
-        <el-col :span="12">
-          <el-card>
-            <template #header>
-              <span>类别支出占比</span>
-            </template>
-            <div id="category-chart" style="height: 300px;"></div>
-          </el-card>
-        </el-col>
-      </el-row>
-      
-      <el-table :data="tableData" style="width: 100%">
-        <el-table-column prop="date" label="日期" />
-        <el-table-column prop="type" label="类别" />
-        <el-table-column prop="amount" label="金额">
-          <template #default="{ row }">
-            <span :class="{ 'text-danger': row.amount < 0, 'text-success': row.amount >= 0 }">
-              ¥{{ Math.abs(row.amount) }}
-            </span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="demo" label="备注" />
-      </el-table>
+      <el-card>
+        <template #header>
+          <span>当月每日消费汇总</span>
+        </template>
+        <div id="daily-expense-chart" style="height: 400px;"></div>
+      </el-card>
     </el-card>
   </div>
 </template>
 
 <script setup>
 import { ref, reactive, onMounted, watch } from 'vue'
+import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { dailySpendApi } from '../api'
 import * as echarts from 'echarts'
 
-const tableData = ref([])
-const summary = reactive({
-  totalExpense: 0,
-  totalIncome: 0,
-  netIncome: 0,
-  dailyExpense: 0
-})
-
 const searchForm = reactive({
   userId: 1, // 默认用户ID
-  month: new Date()
+  month: new Date().toISOString().slice(0, 7) // 格式化为 YYYY-MM
 })
 
+const router = useRouter()
 let dailyExpenseChart = null
-let categoryChart = null
 
 const loadData = async () => {
   try {
-    const year = searchForm.month.getFullYear()
-    const month = searchForm.month.getMonth()
+    if (!searchForm.month) return
+    
+    const [year, monthNum] = searchForm.month.split('-')
+    const month = parseInt(monthNum) - 1 // JavaScript月份从0开始
     const startDate = new Date(year, month, 1)
     const endDate = new Date(year, month + 1, 0)
     
@@ -129,113 +61,122 @@ const loadData = async () => {
     )
     
     const data = response.data
-    processData(data, startDate, endDate)
+    processDailyData(data, startDate, endDate)
   } catch (error) {
     ElMessage.error('加载数据失败')
   }
 }
 
-const processData = (data, startDate, endDate) => {
+const processDailyData = (data, startDate, endDate) => {
   const daysInMonth = endDate.getDate()
   const dailyData = Array(daysInMonth).fill(0)
   
-  // 计算汇总数据
-  const expenseData = data.filter(item => item.type.type === 'EXPENSE')
-  const incomeData = data.filter(item => item.type.type === 'INCOME')
-  
-  summary.totalExpense = expenseData.reduce((sum, item) => sum + item.amount, 0)
-  summary.totalIncome = incomeData.reduce((sum, item) => sum + item.amount, 0)
-  summary.netIncome = summary.totalIncome - summary.totalExpense
-  summary.dailyExpense = (summary.totalExpense / daysInMonth).toFixed(2)
-  
-  // 计算每日支出
-  expenseData.forEach(item => {
+  // 计算每日消费汇总
+  data.forEach(item => {
     const date = new Date(item.date)
     const day = date.getDate() - 1
     dailyData[day] += item.amount
   })
   
-  // 更新表格数据
-  tableData.value = data.map(item => ({
-    ...item,
-    type: item.type.name,
-    amount: item.type.type === 'EXPENSE' ? -item.amount : item.amount
-  }))
-  
   // 更新图表
-  updateCharts(dailyData, expenseData)
+  updateDailyChart(dailyData, startDate)
 }
 
-const updateCharts = (dailyData, expenseData) => {
-  // 每日支出趋势图
+const updateDailyChart = (dailyData, startDate) => {
   if (dailyExpenseChart) {
     dailyExpenseChart.dispose()
   }
   dailyExpenseChart = echarts.init(document.getElementById('daily-expense-chart'))
+  
+  const year = startDate.getFullYear()
+  const month = startDate.getMonth() + 1
+  const monthStr = `${year}年${month}月`
+  
+  const xAxisData = Array.from({ length: dailyData.length }, (_, i) => `${i + 1}日`)
+  
   dailyExpenseChart.setOption({
+    title: {
+      text: `${monthStr}每日消费汇总`,
+      left: 'center'
+    },
     tooltip: {
-      trigger: 'axis'
+      trigger: 'axis',
+      formatter: function(params) {
+        const day = params[0].axisValue
+        const amount = params[0].value
+        return `${monthStr}${day}<br/>消费: ¥${amount.toFixed(2)}`
+      }
+    },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true
     },
     xAxis: {
       type: 'category',
-      data: Array.from({ length: dailyData.length }, (_, i) => `${i + 1}日`)
+      boundaryGap: false,
+      data: xAxisData
     },
     yAxis: {
       type: 'value',
-      name: '金额'
+      name: '消费金额',
+      axisLabel: {
+        formatter: '¥{value}'
+      }
     },
     series: [
       {
-        name: '支出',
+        name: '每日消费',
         type: 'line',
         data: dailyData,
         smooth: true,
-        areaStyle: {}
+        symbol: 'circle',
+        symbolSize: 6,
+        lineStyle: {
+          width: 3,
+          color: '#409EFF'
+        },
+        areaStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: 'rgba(64, 158, 255, 0.3)' },
+            { offset: 1, color: 'rgba(64, 158, 255, 0.1)' }
+          ])
+        },
+        itemStyle: {
+          color: '#409EFF'
+        }
       }
-    ]
-  })
-  
-  // 类别支出占比图
-  if (categoryChart) {
-    categoryChart.dispose()
-  }
-  categoryChart = echarts.init(document.getElementById('category-chart'))
-  
-  const categoryData = {}
-  expenseData.forEach(item => {
-    if (!categoryData[item.type.name]) {
-      categoryData[item.type.name] = 0
-    }
-    categoryData[item.type.name] += item.amount
-  })
-  
-  categoryChart.setOption({
-    tooltip: {
-      trigger: 'item',
-      formatter: '{a} <br/>{b}: ¥{c} ({d}%)'
-    },
-    legend: {
-      orient: 'vertical',
-      left: 'left'
-    },
-    series: [
+    ],
+    // 添加点击事件提示
+    graphic: [
       {
-        name: '支出',
-        type: 'pie',
-        radius: '50%',
-        data: Object.entries(categoryData).map(([name, value]) => ({
-          name,
-          value
-        })),
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
-          }
+        type: 'text',
+        left: 'center',
+        bottom: 10,
+        style: {
+          text: '点击数据点查看当天详细记录',
+          textAlign: 'center',
+          fill: '#999',
+          fontSize: 12
         }
       }
     ]
+  })
+  
+  // 添加点击事件监听
+  dailyExpenseChart.on('click', function(params) {
+    if (params.componentType === 'series') {
+      const day = params.dataIndex + 1
+      const [year, month] = searchForm.month.split('-')
+      const dateStr = `${year}-${month.padStart(2, '0')}-${day.toString().padStart(2, '0')}`
+      
+      // 跳转到日常记账页面，并传递日期参数
+      router.push({
+        path: '/daily-spends',
+        query: { date: dateStr }
+      })
+    }
   })
 }
 
@@ -243,19 +184,11 @@ const handleSearch = () => {
   loadData()
 }
 
-const handleReset = () => {
-  searchForm.month = new Date()
-  loadData()
-}
-
 onMounted(() => {
   loadData()
-})
-
-onMounted(() => {
+  
   window.addEventListener('resize', () => {
     if (dailyExpenseChart) dailyExpenseChart.resize()
-    if (categoryChart) categoryChart.resize()
   })
 })
 </script>
@@ -272,37 +205,6 @@ onMounted(() => {
 }
 
 .search-form {
-  margin-bottom: 20px;
-}
-
-.summary-cards {
-  margin-bottom: 20px;
-}
-
-.summary-card {
-  text-align: center;
-}
-
-.card-title {
-  font-size: 14px;
-  color: #909399;
-  margin-bottom: 10px;
-}
-
-.card-value {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.text-success {
-  color: #67c23a;
-}
-
-.text-danger {
-  color: #ff4949;
-}
-
-.charts {
   margin-bottom: 20px;
 }
 </style>
