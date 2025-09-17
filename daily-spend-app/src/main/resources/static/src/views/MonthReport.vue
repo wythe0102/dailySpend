@@ -185,6 +185,12 @@ const handleSearch = () => {
 }
 
 onMounted(() => {
+  // 检查URL参数中是否有月份参数
+  const routeParams = router.currentRoute.value.query
+  if (routeParams.month) {
+    searchForm.month = routeParams.month
+  }
+  
   loadData()
   
   window.addEventListener('resize', () => {

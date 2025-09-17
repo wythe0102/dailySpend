@@ -21,107 +21,34 @@
         </el-form-item>
       </el-form>
       
-      <el-row :gutter="20" class="summary-cards">
-        <el-col :span="6">
-          <el-card class="summary-card">
-            <div class="card-content">
-              <div class="card-title">年度总支出</div>
-              <div class="card-value">¥{{ summary.totalExpense }}</div>
-            </div>
-          </el-card>
-        </el-col>
-        <el-col :span="6">
-          <el-card class="summary-card">
-            <div class="card-content">
-              <div class="card-title">年度总收入</div>
-              <div class="card-value">¥{{ summary.totalIncome }}</div>
-            </div>
-          </el-card>
-        </el-col>
-        <el-col :span="6">
-          <el-card class="summary-card">
-            <div class="card-content">
-              <div class="card-title">年度净收入</div>
-              <div class="card-value" :class="{ 'text-success': summary.netIncome >= 0, 'text-danger': summary.netIncome < 0 }">
-                ¥{{ summary.netIncome }}
-              </div>
-            </div>
-          </el-card>
-        </el-col>
-        <el-col :span="6">
-          <el-card class="summary-card">
-            <div class="card-content">
-              <div class="card-title">月均支出</div>
-              <div class="card-value">¥{{ summary.monthlyExpense }}</div>
-            </div>
+      <el-row class="charts">
+        <el-col :span="24">
+          <el-card>
+            <template #header>
+              <span>{{ searchForm.year.getFullYear() }}年月度消费汇总走势</span>
+            </template>
+            <div id="monthly-expense-chart" style="height: 400px;"></div>
           </el-card>
         </el-col>
       </el-row>
-      
-      <el-row :gutter="20" class="charts">
-        <el-col :span="12">
-          <el-card>
-            <template #header>
-              <span>月度收支趋势</span>
-            </template>
-            <div id="monthly-trend-chart" style="height: 300px;"></div>
-          </el-card>
-        </el-col>
-        <el-col :span="12">
-          <el-card>
-            <template #header>
-              <span>年度类别统计</span>
-            </template>
-            <div id="yearly-category-chart" style="height: 300px;"></div>
-          </el-card>
-        </el-col>
-      </el-row>
-      
-      <el-table :data="tableData" style="width: 100%">
-        <el-table-column prop="month" label="月份" />
-        <el-table-column prop="expense" label="支出">
-          <template #default="{ row }">
-            ¥{{ row.expense }}
-          </template>
-        </el-table-column>
-        <el-table-column prop="income" label="收入">
-          <template #default="{ row }">
-            ¥{{ row.income }}
-          </template>
-        </el-table-column>
-        <el-table-column prop="net" label="净收入">
-          <template #default="{ row }">
-            <span :class="{ 'text-success': row.net >= 0, 'text-danger': row.net < 0 }">
-              ¥{{ row.net }}
-            </span>
-          </template>
-        </el-table-column>
-      </el-table>
     </el-card>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, watch } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { dailySpendApi } from '../api'
 import * as echarts from 'echarts'
-
-const tableData = ref([])
-const summary = reactive({
-  totalExpense: 0,
-  totalIncome: 0,
-  netIncome: 0,
-  monthlyExpense: 0
-})
 
 const searchForm = reactive({
   userId: 1, // 默认用户ID
   year: new Date()
 })
 
-let monthlyTrendChart = null
-let yearlyCategoryChart = null
+const router = useRouter()
+let monthlyExpenseChart = null
 
 const loadData = async () => {
   try {
@@ -129,157 +56,170 @@ const loadData = async () => {
     const startDate = new Date(year, 0, 1)
     const endDate = new Date(year, 11, 31)
     
+    // 确保日期格式为YYYY-MM-DD，避免时区问题
+    const formatDate = (date) => {
+      const d = new Date(date)
+      const year = d.getFullYear()
+      const month = String(d.getMonth() + 1).padStart(2, '0')
+      const day = String(d.getDate()).padStart(2, '0')
+      return `${year}-${month}-${day}`
+    }
+    
+    const formattedStartDate = formatDate(startDate)
+    const formattedEndDate = formatDate(endDate)
+    
+    console.log('加载数据参数:', {
+      userId: searchForm.userId,
+      startDate: formattedStartDate,
+      endDate: formattedEndDate
+    })
+    
+    // 调用正确的API方法
     const response = await dailySpendApi.getByUserIdAndDateRange(
       searchForm.userId,
-      startDate.toISOString().split('T')[0],
-      endDate.toISOString().split('T')[0]
+      formattedStartDate,
+      formattedEndDate
     )
     
+    console.log('API返回数据数量:', response.data.length)
+    if (response.data.length > 0) {
+      console.log('API返回数据示例:', response.data.slice(0, 3))
+    }
+    
     const data = response.data
-    processData(data, year)
+    processData(data)
   } catch (error) {
-    ElMessage.error('加载数据失败')
+    console.error('加载数据失败:', error)
+    ElMessage.error('加载数据失败: ' + (error.response?.data?.message || error.message))
   }
 }
 
-const processData = (data, year) => {
-  const monthlyData = Array(12).fill(0).map(() => ({ expense: 0, income: 0 }))
+const processData = (data) => {
+  // 初始化12个月的数据
+  const monthlyExpenseData = Array(12).fill(0)
   
-  // 计算汇总数据
-  const expenseData = data.filter(item => item.type.type === 'EXPENSE')
-  const incomeData = data.filter(item => item.type.type === 'INCOME')
+  console.log('开始处理数据，共', data.length, '条记录')
   
-  summary.totalExpense = expenseData.reduce((sum, item) => sum + item.amount, 0)
-  summary.totalIncome = incomeData.reduce((sum, item) => sum + item.amount, 0)
-  summary.netIncome = summary.totalIncome - summary.totalExpense
-  summary.monthlyExpense = (summary.totalExpense / 12).toFixed(2)
-  
-  // 按月份分组
-  expenseData.forEach(item => {
-    const date = new Date(item.date)
-    const month = date.getMonth()
-    monthlyData[month].expense += item.amount
+  // 按月份统计消费金额
+  data.forEach(item => {
+    try {
+      // 确保item是有效的消费记录对象
+      if (item && item.amount !== undefined && item.date) {
+        // 计算月份（0-11）
+        const date = new Date(item.date)
+        const month = date.getMonth()
+        
+        // 添加到对应月份的总金额中
+        monthlyExpenseData[month] += Number(item.amount)
+      }
+    } catch (error) {
+      console.error('处理单条记录时出错:', error, '记录:', item)
+    }
   })
   
-  incomeData.forEach(item => {
-    const date = new Date(item.date)
-    const month = date.getMonth()
-    monthlyData[month].income += item.amount
-  })
-  
-  // 更新表格数据
-  tableData.value = monthlyData.map((data, index) => ({
-    month: `${year}年${index + 1}月`,
-    expense: data.expense.toFixed(2),
-    income: data.income.toFixed(2),
-    net: (data.income - data.expense).toFixed(2)
-  }))
+  // 显示统计结果
+  console.log('月度消费统计结果:', monthlyExpenseData)
   
   // 更新图表
-  updateCharts(monthlyData)
+  updateExpenseChart(monthlyExpenseData)
 }
 
-const updateCharts = (monthlyData) => {
-  // 月度收支趋势图
-  if (monthlyTrendChart) {
-    monthlyTrendChart.dispose()
+const updateExpenseChart = (monthlyExpenseData) => {
+  if (monthlyExpenseChart) {
+    monthlyExpenseChart.dispose()
   }
-  monthlyTrendChart = echarts.init(document.getElementById('monthly-trend-chart'))
-  monthlyTrendChart.setOption({
+  
+  monthlyExpenseChart = echarts.init(document.getElementById('monthly-expense-chart'))
+  
+  monthlyExpenseChart.setOption({
     tooltip: {
-      trigger: 'axis'
-    },
-    legend: {
-      data: ['支出', '收入']
+      trigger: 'axis',
+      formatter: '{b}: ¥{c}'
     },
     xAxis: {
       type: 'category',
-      data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+      data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+      name: '月份'
     },
     yAxis: {
       type: 'value',
-      name: '金额'
+      name: '支出金额（元）',
+      axisLabel: {
+        formatter: '¥{value}'
+      }
     },
     series: [
       {
-        name: '支出',
+        name: '月度支出',
         type: 'line',
-        data: monthlyData.map(item => item.expense),
+        data: monthlyExpenseData,
         smooth: true,
-        itemStyle: { color: '#ff4949' }
-      },
-      {
-        name: '收入',
-        type: 'line',
-        data: monthlyData.map(item => item.income),
-        smooth: true,
-        itemStyle: { color: '#67c23a' }
-      }
-    ]
-  })
-  
-  // 年度类别统计图
-  if (yearlyCategoryChart) {
-    yearlyCategoryChart.dispose()
-  }
-  yearlyCategoryChart = echarts.init(document.getElementById('yearly-category-chart'))
-  
-  const categoryData = {}
-  const data = tableData.value
-  
-  // 重新获取所有数据来计算类别统计
-  const loadCategoryData = async () => {
-    const year = searchForm.year.getFullYear()
-    const startDate = new Date(year, 0, 1)
-    const endDate = new Date(year, 11, 31)
-    
-    const response = await dailySpendApi.getByUserIdAndDateRange(
-      searchForm.userId,
-      startDate.toISOString().split('T')[0],
-      endDate.toISOString().split('T')[0]
-    )
-    
-    const expenseData = response.data.filter(item => item.type.type === 'EXPENSE')
-    const categoryGroups = {}
-    
-    expenseData.forEach(item => {
-      if (!categoryGroups[item.type.name]) {
-        categoryGroups[item.type.name] = 0
-      }
-      categoryGroups[item.type.name] += item.amount
-    })
-    
-    yearlyCategoryChart.setOption({
-      tooltip: {
-        trigger: 'item',
-        formatter: '{a} <br/>{b}: ¥{c} ({d}%)'
-      },
-      legend: {
-        orient: 'vertical',
-        left: 'left'
-      },
-      series: [
-        {
-          name: '支出',
-          type: 'pie',
-          radius: '50%',
-          data: Object.entries(categoryGroups).map(([name, value]) => ({
-            name,
-            value
-          })),
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)'
+        symbol: 'circle',
+        symbolSize: 8,
+        itemStyle: {
+          color: '#ff4949'
+        },
+        areaStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            {
+              offset: 0,
+              color: 'rgba(255, 73, 73, 0.3)'
+            },
+            {
+              offset: 1,
+              color: 'rgba(255, 73, 73, 0.05)'
             }
+          ])
+        },
+        lineStyle: {
+          width: 3
+        },
+        emphasis: {
+          focus: 'series',
+          itemStyle: {
+            shadowBlur: 10,
+            shadowColor: 'rgba(255, 73, 73, 0.5)'
           }
         }
-      ]
-    })
+      }
+    ],
+    // 添加点击事件提示
+    graphic: [
+      {
+        type: 'text',
+        left: 'center',
+        bottom: 10,
+        style: {
+          text: '点击数据点查看该月详细报表',
+          textAlign: 'center',
+          fill: '#999',
+          fontSize: 12
+        }
+      }
+    ],
+    grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
   }
+})
   
-  loadCategoryData()
+  // 添加点击事件监听
+  monthlyExpenseChart.on('click', function(params) {
+    if (params.componentType === 'series') {
+      const month = params.dataIndex + 1 // 月份从0开始，需要+1
+      const year = searchForm.year.getFullYear()
+      const monthStr = String(month).padStart(2, '0')
+      const dateStr = `${year}-${monthStr}`
+      
+      // 跳转到月报表页面，并传递月份参数
+      router.push({
+        path: '/reports/month',
+        query: { month: dateStr }
+      })
+    }
+  })
 }
 
 const handleSearch = () => {
@@ -288,12 +228,12 @@ const handleSearch = () => {
 
 onMounted(() => {
   loadData()
-})
-
-onMounted(() => {
+  
+  // 添加窗口大小调整事件监听
   window.addEventListener('resize', () => {
-    if (monthlyTrendChart) monthlyTrendChart.resize()
-    if (yearlyCategoryChart) yearlyCategoryChart.resize()
+    if (monthlyExpenseChart) {
+      monthlyExpenseChart.resize()
+    }
   })
 })
 </script>
@@ -313,34 +253,7 @@ onMounted(() => {
   margin-bottom: 20px;
 }
 
-.summary-cards {
-  margin-bottom: 20px;
-}
-
-.summary-card {
-  text-align: center;
-}
-
-.card-title {
-  font-size: 14px;
-  color: #909399;
-  margin-bottom: 10px;
-}
-
-.card-value {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.text-success {
-  color: #67c23a;
-}
-
-.text-danger {
-  color: #ff4949;
-}
-
 .charts {
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 </style>
