@@ -71,18 +71,20 @@ const processDailyData = (data, startDate, endDate) => {
   const daysInMonth = endDate.getDate()
   const dailyData = Array(daysInMonth).fill(0)
   
-  // 计算每日消费汇总
+  // 计算每日消费汇总和月消费总计
+  let monthlyTotal = 0
   data.forEach(item => {
     const date = new Date(item.date)
     const day = date.getDate() - 1
     dailyData[day] += item.amount
+    monthlyTotal += item.amount
   })
   
   // 更新图表
-  updateDailyChart(dailyData, startDate)
+  updateDailyChart(dailyData, startDate, monthlyTotal)
 }
 
-const updateDailyChart = (dailyData, startDate) => {
+const updateDailyChart = (dailyData, startDate, monthlyTotal) => {
   if (dailyExpenseChart) {
     dailyExpenseChart.dispose()
   }
@@ -96,7 +98,7 @@ const updateDailyChart = (dailyData, startDate) => {
   
   dailyExpenseChart.setOption({
     title: {
-      text: `${monthStr}每日消费汇总`,
+      text: `${monthStr}每日消费汇总（总计：¥${monthlyTotal.toFixed(2)}）`,
       left: 'center'
     },
     tooltip: {
