@@ -100,7 +100,8 @@ const processData = (data) => {
   
   console.log('开始处理数据，共', data.length, '条记录')
   
-  // 按月份统计消费金额
+  // 按月份统计消费金额和计算年度总计
+  let yearlyTotal = 0
   data.forEach(item => {
     try {
       // 确保item是有效的消费记录对象
@@ -109,8 +110,10 @@ const processData = (data) => {
         const date = new Date(item.date)
         const month = date.getMonth()
         
-        // 添加到对应月份的总金额中
-        monthlyExpenseData[month] += Number(item.amount)
+        // 添加到对应月份的总金额和年度总计中
+        const amount = Number(item.amount)
+        monthlyExpenseData[month] += amount
+        yearlyTotal += amount
       }
     } catch (error) {
       console.error('处理单条记录时出错:', error, '记录:', item)
@@ -119,19 +122,26 @@ const processData = (data) => {
   
   // 显示统计结果
   console.log('月度消费统计结果:', monthlyExpenseData)
+  console.log('年度消费总计:', yearlyTotal)
   
   // 更新图表
-  updateExpenseChart(monthlyExpenseData)
+  updateExpenseChart(monthlyExpenseData, yearlyTotal)
 }
 
-const updateExpenseChart = (monthlyExpenseData) => {
+const updateExpenseChart = (monthlyExpenseData, yearlyTotal) => {
   if (monthlyExpenseChart) {
     monthlyExpenseChart.dispose()
   }
   
   monthlyExpenseChart = echarts.init(document.getElementById('monthly-expense-chart'))
   
+  const year = searchForm.year.getFullYear()
+  
   monthlyExpenseChart.setOption({
+    title: {
+      text: `${year}年月度消费汇总走势（总计：¥${yearlyTotal.toFixed(2)}）`,
+      left: 'center'
+    },
     tooltip: {
       trigger: 'axis',
       formatter: '{b}: ¥{c}'
@@ -198,12 +208,12 @@ const updateExpenseChart = (monthlyExpenseData) => {
       }
     ],
     grid: {
-    left: '3%',
-    right: '4%',
-    bottom: '3%',
-    containLabel: true
-  }
-})
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true
+    }
+  })
   
   // 添加点击事件监听
   monthlyExpenseChart.on('click', function(params) {
